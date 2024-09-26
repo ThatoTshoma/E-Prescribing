@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Confirmation";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Prescription</li>
+        <li class="active">Confirmation</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6 offset-3 alert alert-success text-center">
+            <h2>Medication Administered successfully</h2>
+            <p>You can check all your Administered medication on Administered section</p>
+            <hr />
+            <p>Thank you!</p>
+        </div>
+
+    </div>
+    <div class="text-center">
+        <div class="btn-group">
+            <a class="btn btn-outline-primary" asp-action="ListAdministeredMedication">
+                View Administerd Medication
+            </a>
+            <div id="paypal-btn"></div>
+            <span style="padding:5px"></span>
+            <a class="btn btn-outline-success" asp-controller="Nurse" asp-action="ListMedication">
+                Back to Medication
+            </a>
+        </div>
+    </div>
+</div>

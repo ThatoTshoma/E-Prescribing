@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PatientMedication>
+@{
+    ViewData["Title"] = "Patient Medications";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Mediaction</li>
+        <li class="active">Patient Medications</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                <b>Patient Name:</b> @Model.FirstOrDefault()?.Patient.Name
+            </dt>
+            <dd>
+
+            </dd>
+
+        </dl>
+
+
+    </div>
+    <hr style="border: 0; height: 4px; background: black;">
+
+
+
+    <div class="col-6 text-end mb-4">
+        <a asp-action="AddPatientMedication" asp-route-id="@ViewBag.PatientId" class="btn btn-primary">
+
+            <i class="bi bi-plus-circle"></i> &nbsp; Add New Medication
+        </a>
+    </div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Medication Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patientMedication in Model)
+        {
+            <tr>
+                <td>@patientMedication.Medication.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

@@ -1,0 +1,349 @@
+﻿@model E_Prescribing.Models.PatientOnboardingModel
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .header {
+        background-color: #009688;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .progress-container {
+        margin: 20px 0;
+    }
+
+    .progress-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+        .progress-labels div {
+            width: 20%;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+    .progress {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .progress div {
+            width: 20%;
+            height: 8px;
+            /*                 background: #e0e0e0;
+     */ position: relative;
+        }
+
+            .progress div.active {
+                background: #009688;
+            }
+
+            .progress div::before {
+                content: '';
+                position: absolute;
+                /*                     top: -5px;
+     */ left: 50%;
+                transform: translateX(-50%);
+                width: 12px;
+                height: 12px;
+                background: #fff;
+                border: 2px solid #009688;
+                border-radius: 50%;
+            }
+
+    .form-step {
+        display: none;
+    }
+
+        .form-step.active {
+            display: block;
+        }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+            .form-group input[type="text"] {
+                border: 1px solid #ccc;
+            }
+
+    .form-buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+        .form-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            background: #009688;
+            color: #fff;
+            cursor: pointer;
+        }
+
+            .form-buttons button.cancel {
+                background: #f44336;
+            }
+
+            .form-buttons button.prev {
+                background: #9e9e9e;
+            }
+
+    .help {
+        font-size: 14px;
+        color: #666;
+    }
+
+    .footer {
+        background: #009688;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: 20px;
+    }
+
+        .footer a {
+            color: #fff;
+            text-decoration: underline;
+            margin: 0 10px;
+        }
+
+        .footer img {
+            vertical-align: middle;
+        }
+</style>
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Medical History</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+      
+        </div>
+<div class="progress-container">
+    <div class="progress-labels">
+        <div id="label-step1">Step 1<br>Assign Bed</div>
+        <div id="label-step2">Step 2<br>Allergies</div>
+        <div id="label-step3">Step 3<br>Current Medication</div>
+        <div id="label-step4">Step 4<br>Chronic Condition</div>
+                <div id="label-step5">Step 5<br>Admit Patient</div>
+
+    </div>
+    <div class="progress">
+        <div class="active" id="step1"></div>
+        <div id="step2"></div>
+        <div id="step3"></div>
+        <div id="step4"></div>
+                <div id="step5"></div>
+
+    </div>
+</div>
+
+<form id="recruitmentForm" asp-action="MedicationHistoryPage" method="post">
+    <input type="hidden" id="currentStep" name="CurrentStep" value="@Model.CurrentStep" />
+
+    <div class="form-step active" id="step-1">
+        <h2>Step 1: Assign Bed</h2>
+        <input asp-for="PatientBed.PatientId" type="hidden" />
+
+        <div class="form-control-lg">
+            <label>Ward</label>
+            <select for="Ward" asp-items="@ViewBag.WardList" class="form-control" id="Ward">
+                <option disabled selected value="">Select Ward</option>
+            </select>
+        </div>
+                <div class="form-control-lg">
+                    <label asp-for="PatientBed.BedId"></label>
+            <select asp-for="PatientBed.SelectedBeds" class="form-control" id="Bed">
+            </select>
+            <span asp-validation-for="PatientBed.BedId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-2">
+        <h2>Step 2: Allergies</h2>
+        <input asp-for="PatientAllergy.PatientId" type="hidden" />
+
+                <div class="form-control-lg">
+                    <label asp-for="PatientAllergy.ActiveIngredientId"></label>
+            <select asp-for="PatientAllergy.SelectedActiveIngredient" asp-items="@ViewBag.ActiveIngredientList" class="form-control" id="Ingredient" multiple>
+            </select>
+            <span asp-validation-for="PatientAllergy.ActiveIngredientId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-3">
+        <h2>Step 3: Current Medication</h2>
+        <input asp-for="PatientMedication.PatientId" type="hidden" />
+
+                <div class="form-control-lg">
+                    <label asp-for="PatientMedication.MedicationId"></label>
+            <select asp-for="PatientMedication.SelectedMedication" asp-items="@ViewBag.MedicationList" class="form-control" id="Medication" multiple>
+            </select>
+            <span asp-validation-for="PatientMedication.MedicationId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-4">
+        <h2>Step 4: Chronic Condition</h2>
+        <input asp-for="PatientCondition.PatientId" type="hidden" />
+
+                <div class="form-control-lg">
+                    <label asp-for="PatientCondition.ConditionId"></label>
+            <select asp-for="PatientCondition.SelectedCondition" asp-items="@ViewBag.ConditionList" class="form-control" id="Condition" multiple>
+            </select>
+            <span asp-validation-for="PatientCondition.ConditionId" class="text-danger"></span>
+        </div>
+    </div>
+
+            <div class="form-step" id="step-5">
+                <h2>Step 5: Admit Patient</h2>
+                <input asp-for="Patient.PatientId" type="hidden" />
+
+                <div class="form-control-lg">
+                    <label asp-for="Patient.AdmissionDate">Admission Date</label>
+                    <input asp-for="Patient.AdmissionDate" type="date" class="form-control" />
+                    <span asp-validation-for="Patient.AdmissionDate" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+
+    <div class="form-buttons">
+        <button type="button" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
+                <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+                <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</div>
+
+
+@section scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+
+    <script>
+        let currentStep = 1;
+
+        function nextStep() {
+            const currentFormStep = document.getElementById(`step-${currentStep}`);
+            const currentProgressStep = document.getElementById(`step${currentStep}`);
+            const currentLabelStep = document.getElementById(`label-step${currentStep}`);
+
+            if (currentStep < 5) {
+                currentFormStep.classList.remove('active');
+                currentProgressStep.classList.remove('active');
+                currentLabelStep.style.fontWeight = 'normal';
+
+                currentStep++;
+
+                const nextFormStep = document.getElementById(`step-${currentStep}`);
+                const nextProgressStep = document.getElementById(`step${currentStep}`);
+                const nextLabelStep = document.getElementById(`label-step${currentStep}`);
+
+                nextFormStep.classList.add('active');
+                nextProgressStep.classList.add('active');
+                nextLabelStep.style.fontWeight = 'bold';
+            }
+        }
+
+        function prevStep() {
+            const currentFormStep = document.getElementById(`step-${currentStep}`);
+            const currentProgressStep = document.getElementById(`step${currentStep}`);
+            const currentLabelStep = document.getElementById(`label-step${currentStep}`);
+
+            if (currentStep > 1) {
+                currentFormStep.classList.remove('active');
+                currentProgressStep.classList.remove('active');
+                currentLabelStep.style.fontWeight = 'normal';
+
+                currentStep--;
+
+                const prevFormStep = document.getElementById(`step-${currentStep}`);
+                const prevProgressStep = document.getElementById(`step${currentStep}`);
+                const prevLabelStep = document.getElementById(`label-step${currentStep}`);
+
+                prevFormStep.classList.add('active');
+                prevProgressStep.classList.add('active');
+                prevLabelStep.style.fontWeight = 'bold';
+            }
+        }
+
+        function cancelForm() {
+            document.getElementById('recruitmentForm').reset();
+            window.location.reload();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.form-step').forEach((step, index) => {
+                if (index !== 0) step.classList.add('hidden');
+            });
+            document.getElementById('label-step1').style.fontWeight = 'bold';
+        });
+
+        $(document).ready(function () {
+            var wardDropdown = $("#Ward");
+            var bedDropdown = $("#Bed");
+
+            wardDropdown.on("change", function () {
+                var selectedWardId = $(this).val();
+                bedDropdown.empty();
+
+                if (selectedWardId) {
+                    $.ajax({
+                        url: "/Nurse/LoadBed",
+                        method: "GET",
+                        data: { wardId: selectedWardId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                bedDropdown.append($('<option>', {
+                                    value: item.bedId,
+                                    text: item.bedNumber
+                                }));
+                            });
+                            bedDropdown.trigger("chosen:updated"); 
+                        }
+                    });
+                } else {
+                    bedDropdown.trigger("chosen:updated"); 
+                }
+            });
+
+            $("#Ward, #Bed, #Ingredient, #Medication, #Condition").chosen({
+                width: "50%"
+            });
+        });
+    </script>
+}

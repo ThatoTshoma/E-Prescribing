@@ -1,0 +1,146 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using E_Prescribing.Data
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Patient | DashBoard</title>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/css/datepicker3.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/datatables/css/datatables.bootstrap.css">
+    <link rel="stylesheet" href="~/Content/Chosen/chosen.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/Layout/resources/img/logo.jpg" />
+    <link href="~/Content/css/styles.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <strong class="d-block">E-Prescribing System</strong>
+                </a>
+            </div>
+            <ul class="nav navbar-top-links navbar-right" style="display: inline-block;">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item" style="display: inline-block;">
+                        <a class="nav-link" style="color: white;" href="#">
+                            <i class="fa fa-bell" style="margin-right: 5px;"></i><span class="badge">5</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="display: inline-block;">
+                        <a class="nav-link" style="color: white; font-weight: bold;" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Hello @User.Identity.Name!</a>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+        <div class="profile-sidebar">
+            <div class="profile-userpic">
+                <img src="~/content/img/administrator.png" class="img-responsive" alt="">
+            </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name" style="font-weight: bold;">@User.Identity.Name</div>
+                <div class="profile-usertitle-status"><span class="indicator label-success"></span>Nurse</div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="divider"></div>
+        <ul class="nav menu">
+            <li class="active" style="font-weight: bold;"><a asp-area="" asp-controller="Nurse" asp-action="Index"><em class="fa fa-dashboard">&nbsp;</em> DashBoard</a></li>
+
+
+            <li>
+                <button class="collapsible" style="font-weight: bold;"><em class="fa fa-user">&nbsp; &nbsp;</em>Patients</button>
+                <div style="width: 100% !important" class="children content">
+                    <a asp-area="" asp-controller="Nurse" asp-action="ListPatient" class="list-group-item" style="margin: 0px -20px; font-size: 13px">View Patients</a>
+
+                </div>
+            </li>
+            <li>
+                <button class="collapsible" style="font-weight: bold;"><em class="fa fa-user">&nbsp; &nbsp;</em>Admitted Patients</button>
+                <div style="width: 100% !important" class="children content">
+                    <a asp-area="" asp-controller="Nurse" asp-action="ListAdmittedPatient" class="list-group-item" style="margin: 0px -20px; font-size: 13px">View Patients</a>
+
+                </div>
+            </li>
+    
+        
+
+
+            <li>
+                <button class="collapsible" style="font-weight: bold;"><em class="fa fa-user">&nbsp; &nbsp;</em>Profile</button>
+                <div style="width: 100% !important" class="children content">
+                    <a asp-area="" asp-controller="Nurse" asp-action="UpdateProfile" class="list-group-item" style="margin: 0px -20px; font-size: 13px">Update Profile</a>
+                </div>
+            </li>
+            <li>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button class="collapsible" style="background: none; border: none; color: inherit; font-weight: bold;"><em class="fa fa-power-off">&nbsp;</em> Logout</button>
+                </form>
+            </li>
+        
+
+
+
+        </ul>
+    </div>
+
+    <div class="col-sm-7 col-sm-offset-3 col-lg-10 col-lg-offset-2 ">
+        @RenderBody()
+    </div>
+
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click",
+                function () {
+                    this.classList.toggle("actives");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+        }
+    </script>
+    <script>
+        $('.count').each(function () {
+            $(this).prop('Counter', 0).animate({
+                Counter: $(this).text()
+            }, {
+                duration: 1500,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text(Math.ceil(now));
+                }
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

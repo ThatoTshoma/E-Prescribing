@@ -1,0 +1,55 @@
+﻿@model E_Prescribing.Models.Patient
+<style>
+    .border {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .p-3 {
+        padding: 1rem;
+    }
+
+    .mt-3 {
+        margin-top: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: #fff;
+    }
+</style>
+<div class="border p-3">
+    <h2><b>Medical History</b></h2>
+
+    <h3>Chronic Conditions</h3>
+    <ul>
+        @foreach (var condition in Model.PatientConditions)
+        {
+            <li>@condition.Condition.Name</li>
+        }
+    </ul>
+
+    <h3>Vital Ranges</h3>
+    <ul>
+        @foreach (var condition in Model.PatientVitals)
+        {
+            <li>@condition.Vital.Name</li>
+        }
+        <a asp-action="AddPatientVital" asp-route-id="@ViewBag.PatientId">Add Vital</a>
+    </ul>
+
+    <h3>Allergies</h3>
+    <ul>
+        @foreach (var condition in Model.PatientAllergies)
+        {
+            <li>@condition.ActiveIngredient.Name</li>
+        }
+    </ul>
+</div>

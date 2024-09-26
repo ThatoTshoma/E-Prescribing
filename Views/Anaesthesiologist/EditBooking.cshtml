@@ -1,0 +1,74 @@
+﻿@model E_Prescribing.CollectionModel.BookingCollection
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> @(Model.Booking.BookingId != 0 ? "Approve" : "Add") Booking</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <input asp-for="Booking.BookingId" type="hidden" />
+
+
+            <div class="border p-3">
+
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.Patient.FullName"></label>
+                    <input asp-for="Booking.Patient.FullName" class="form-control" aria-required="true" placeholder="Name" disabled />
+                    <span asp-validation-for="Booking.Patient.FullName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.Patient.Gender"></label>
+                    <input asp-for="Booking.Patient.Gender" class="form-control" aria-required="true" placeholder="Name" disabled />
+                    <span asp-validation-for="Booking.Patient.Gender" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.Date"></label>
+                    <input asp-for="Booking.Date" class="form-control" aria-required="true" placeholder="Name" disabled />
+                    <span asp-validation-for="Booking.Date" class="text-danger"></span>
+                </div>
+       
+                <div class="form-floating py-2 col-12">
+                    <div class="form-check">
+                        <label asp-for="Booking.Status" class="form-check-label">Tick to approve</label>
+                        <input asp-for="Booking.Status" class="form-check-input" type="checkbox" aria-required="true" />
+
+                    </div>
+                    <span asp-validation-for="Booking.Status" class="text-danger"></span>
+                </div>
+
+       
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        @if (Model.Booking.BookingId != 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Submit</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Add</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Anaesthesiologist" asp-action="PendingBooking" class="btn btn-outline-primary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

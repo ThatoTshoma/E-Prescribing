@@ -1,0 +1,121 @@
+﻿@using E_Prescribing.Data;
+@model E_Prescribing.CollectionModel.MedicationCollection
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Update Medication</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form asp-action="UpdateMedication" method="post">
+            <input asp-for="Medication.MedicationId" hidden />
+
+
+            <div class="border p-3">
+
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Medication.Name"></label>
+                    <input asp-for="Medication.Name" class="form-control" aria-required="true" placeholder="Medication Name" />
+                    <span asp-validation-for="Medication.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Medication.Schedule"></label>
+                    <input asp-for="Medication.Schedule" class="form-control" aria-required="true" placeholder="Schedule" type="text" />
+                    <span asp-validation-for="Medication.Schedule" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Medication.DosageFormId"></label>
+                    <select asp-for="Medication.DosageFormId" asp-items="@ViewBag.DosageFormList" class="form-control">
+                        <option value="">Select Dosage Form</option>
+                    </select>
+                    <span asp-validation-for="Medication.DosageFormId" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-floating mb-3" id="ingredientInputs">
+                    <h4>Ingredients:</h4>
+                    <div class="ingredient-group" style="display: none;">
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="MedicationIngredient.SelectedIngredient" asp-items="@ViewBag.IngredientList" class="form-control mb-2">
+                                <option value="">Select Ingredient</option>
+                            </select>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control mb-2" placeholder="Strength" />
+                            <label>Strength</label>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary mt-2" onclick="addIngredientField()"><i class="bi bi-plus-square-fill"></i> Add Ingredient</button>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Submit</button>
+
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Pharmacist" asp-action="ListMedication" class="btn btn-outline-primary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        function addIngredientField() {
+            var ingredientGroup = document.createElement("div");
+            ingredientGroup.classList.add("ingredient-group", "mb-3");
+
+            var ingredientSelect = document.createElement("select");
+            ingredientSelect.name = "MedicationIngredient.SelectedIngredient";
+            ingredientSelect.classList.add("form-select", "mb-2", "form-control");
+            ingredientSelect.innerHTML = document.querySelector('#ingredientInputs select').innerHTML;
+            ingredientSelect.addEventListener('change', function () {
+                strengthInput.name = "Strengths[" + this.value + "]";
+            });
+
+            var strengthInput = document.createElement("input");
+            strengthInput.type = "text";
+            strengthInput.name = "Strengths[" + ingredientSelect.value + "]";
+            strengthInput.classList.add("form-control", "mb-2");
+            strengthInput.placeholder = "Strength";
+
+            var strengthLabel = document.createElement("label");
+            strengthLabel.textContent = "Strength";
+
+            var removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.classList.add("btn", "btn-danger", "mb-2");
+            removeButton.innerHTML = '<i class="bi bi-dash-circle"></i> Remove';
+            removeButton.onclick = function () {
+                ingredientGroup.remove();
+            };
+
+            ingredientGroup.appendChild(ingredientSelect);
+            ingredientGroup.appendChild(strengthLabel);
+            ingredientGroup.appendChild(strengthInput);
+            ingredientGroup.appendChild(removeButton);
+            document.getElementById("ingredientInputs").appendChild(ingredientGroup);
+
+            ingredientGroup.style.display = "block";
+        }
+    </script>
+}
+
+
+

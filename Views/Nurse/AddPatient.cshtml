@@ -1,0 +1,145 @@
+﻿@model Patient
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+
+            <div class="form-floating mb-3">
+                <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" />
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                <label asp-for="Surname"></label>
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="IdNumber" class="form-control" aria-required="true" onchange="calculateDateOfBirth()" id="IdNumber" placeholder="Surname" type="text" />
+                <label asp-for="IdNumber"></label>
+                <span asp-validation-for="IdNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="DateOfBirth" class="form-control" aria-required="true" placeholder="Date Of Birth" type="date" />
+                <label asp-for="DateOfBirth"></label>
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="Gender" class="form-control">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <label asp-for="Gender"></label>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+
+
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="ContactNumber" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                <label asp-for="ContactNumber"></label>
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="EmailAddress" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                <label asp-for="EmailAddress"></label>
+                <span asp-validation-for="EmailAddress" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="AddressLine1" class="form-control" aria-required="true" placeholder="AddressLine 1" type="text" />
+                <label asp-for="AddressLine1"></label>
+                <span asp-validation-for="AddressLine1" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="AddressLine2" class="form-control" aria-required="true" placeholder="AddressLine 2" type="text" />
+                <label asp-for="AddressLine2"></label>
+                <span asp-validation-for="AddressLine2" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <select for="City" asp-items="@ViewBag.CityList" class="form-control" id="City">
+                    <option value="">Select City</option>
+                </select>
+                <label for="City"></label>
+                <span validation-for="City" class="text-danger"></span>
+
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="SuburbId"  class="form-control" id="Suburb">
+                    <option value="">Select Suburb</option>
+                </select>
+                <label asp-for="SuburbId"></label>
+                <span asp-validation-for="SuburbId" class="text-danger"></span>
+
+            </div>
+         
+   
+    
+     
+    
+
+            <div class="form-floating mb-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+
+
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            var cityDropdown = $("#City");
+            var suburbDropdown = $("#Suburb");
+
+            cityDropdown.on("change", function () {
+                var selectedCityId = $(this).val();
+                suburbDropdown.empty();
+
+                if (selectedCityId) {
+                    $.ajax({
+                        url: "/Nurse/LoadSuburbs",
+                        method: "GET",
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                suburbDropdown.append($('<option> ', {
+                                    value: item.suburbID,
+                                    text: item.suburbName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        function calculateDateOfBirth() {
+            var idNumber = document.getElementById('IdNumber').value;
+            var dateOfBirthInput = document.getElementById('DateOfBirth');
+            if (idNumber.length === 13) {
+                var year = idNumber.substring(0, 2);
+                var month = idNumber.substring(2, 4);
+                var day = idNumber.substring(4, 6);
+
+                if (parseInt(month) > 12) {
+                    year = '20' + year;
+                    month = (parseInt(month) - 20).toString();
+                } else {
+                    year = '19' + year;
+                }
+
+                var dateOfBirth = year + '-' + month + '-' + day;
+
+                if (dateOfBirth !== dateOfBirthInput.value) {
+                    alert('Date of birth does not match the ID number.');
+                    dateOfBirthInput.value = dateOfBirth;
+                }
+
+            }
+        }
+    </script>
+}

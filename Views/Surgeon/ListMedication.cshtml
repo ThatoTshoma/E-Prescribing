@@ -1,0 +1,213 @@
+﻿@model E_Prescribing.Models.MedicationPrescriptionViewModel
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Prescription</h2>
+            </div>
+        </div>
+    </div>
+        @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["error"]
+        </div>
+    }
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patient.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patient.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientGender" value="@Model.Patient.Gender" disabled />
+                            <label for="patientGender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="contactNumber" value="@Model.Patient.ContactNumber" disabled />
+                            <label for="contactNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form asp-controller="Surgeon" asp-action="ProcessPrescription" method="post">
+            <input type="hidden" name="patientId" value="@Model.Patient.PatientId" />
+
+            <div class="form-floating py-2 col-12">
+                <label for="isUrgent">Is Urgent?</label><br />
+                <input type="radio" name="isUrgent" value="Yes" /> Yes<br />
+                <input type="radio" name="isUrgent" value="No" checked="checked" /> No
+            </div>
+            <div class="form-floating py-2 col-12">
+                <textarea class="form-control" id="note" name="note" rows="3" placeholder="Enter note" required></textarea>
+                <label for="note">Additional Notes</label>
+                <span asp-validation-for="Prescription.Note" class="text-danger"></span>
+
+            </div>
+
+      
+
+            <table id="medicationTable" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Medication Name</th>
+                        <th>Dosage Form</th>
+                        <th>Active Ingredient</th>
+                        <th>Strength</th>
+                        <th>Instruction</th>
+                        <th>Quantity</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#medicationTable').DataTable({
+                "ajax": {
+                    "url": '@Url.Action("getMedication", "surgeon", new { id = Model.Patient.PatientId })',
+                    "dataSrc": "data",
+                    "error": function (jqXHR, textStatus, errorThrown) {
+                        console.error("Error: ", textStatus, errorThrown);
+                        alert("An error occurred while loading the table data: " + errorThrown);
+                    }
+                },
+                "columns": [
+                    {
+                        "data": "medicationId",
+                        "render": function (data) {
+                            return `<input type="checkbox" name="selectedItems[${data}]" value="${data}" />`;
+                        },
+                        "width": "10%"
+                    },
+                    { "data": 'name', "width": "15%" },
+                    { "data": 'dosageForm.name', "width": "15%" },
+                    {
+                        "data": 'activeIngredients',
+                        "render": function (data) {
+                            return data.map(item => item.name).join('<br>');
+                        },
+                        "width": "15%"
+                    },
+                    {
+                        "data": 'activeIngredients',
+                        "render": function (data) {
+                            return data.map(item => item.strength).join('<br>');
+                        },
+                        "width": "10%"
+                    },
+                    {
+                        "data": "medicationId",
+                        "render": function (data) {
+                            return `<textarea class="form-control" type="text" name="instructions[${data}]" ></textarea>`;
+                        },
+                        "width": "25%"
+                    },
+                    {
+                        "data": "medicationId",
+                        "render": function (data) {
+                            return `<input class="form-control" type="number" name="quantities[${data}]" />`;
+                        },
+                        "width": "10%"
+                    }
+                ]
+            });
+
+            $('form').on('submit', function (e) {
+                e.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.interactionMessage) {
+                            handleInteractionAlert(response.interactionMessage);
+                        }
+                        else if (response.contraIndicationMessage) {
+                            handleContraIndicationAlert(response.contraIndicationMessage);
+                        }
+                        else if (response.errorMessage) {
+                            handleAllergenAlert(response.errorMessage);
+                        }
+                        else if (response.success) {
+                            window.location.href = '@Url.Action("ListPatientPrescription", "Surgeon", new { id = Model.Patient.PatientId })';
+                        }
+                        else {
+                            window.location.href = '@Url.Action("ListPatientPrescription", "Surgeon", new { id = Model.Patient.PatientId })';
+                        }
+                    },
+                    error: function () {
+                        window.location.href = '@Url.Action("ListPatientPrescription", "Surgeon", new { id = Model.Patient.PatientId })';
+                    }
+                });
+            });
+
+
+
+            function handleAllergenAlert(errorMessage) {
+                Swal.fire({
+                    title: 'Alert',
+                    text: errorMessage,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ignore',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Reason for Ignoring',
+                            input: 'textarea',
+                            inputPlaceholder: 'Enter the reason...',
+                            inputAttributes: {
+                                'aria-label': 'Enter the reason'
+                            },
+                            showCancelButton: true,
+                            confirmButtonText: 'Submit'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $('<input>').attr({
+                                    type: 'hidden',
+                                    name: 'reasonForIgnoring',
+                                    value: result.value
+                                }).appendTo('form');
+
+                                $('form').off('submit').submit();
+                            }
+                        });
+                    }
+                });
+            }
+
+        });
+    </script>
+}

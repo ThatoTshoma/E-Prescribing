@@ -1,0 +1,147 @@
+﻿@model E_Prescribing.CollectionModel.BookingCollection
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Booking</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Booking.PatientId)?.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Booking.PatientId)?.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Booking.PatientId)?.Gender" disabled />
+                            <label for="patientName">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Booking.PatientId)?.ContactNumber" disabled />
+                            <label for="idNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <input asp-for="Booking.PatientId" type="hidden" />
+
+            <div class="border p-3">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-floating py-2 col-12">
+                    <label>Ward</label>
+                    <select for="Ward" asp-items=@(new SelectList(Model.Wards.OrderBy(w =>w.WardNumber), "WardId", "WardNumber")) class="form-control" id="Ward">
+                        <option value="">Select Ward</option>
+                    </select>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.TheatreId"></label>
+                    <select asp-for="Booking.TheatreId" class="form-control" id="Theatre">
+                        <option value="">Select Theatre</option>
+                    </select>
+                    <span asp-validation-for="Booking.TheatreId" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.AnaesthesiologistId"></label>
+                    <select asp-for="Booking.AnaesthesiologistId" asp-items=@(new SelectList(Model.Anaesthesiologists.OrderBy(a => a.Name), "AnaesthesiologistId", "FullName")) class="form-control">
+                        <option value="">Select Anaesthesiologist</option>
+                    </select>
+                    <span asp-validation-for="Booking.AnaesthesiologistId" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.Date"></label>
+                        <input asp-for="Booking.Date" class="form-control" aria-required="true" placeholder="Date Of Surgery" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                        <span asp-validation-for="Booking.Date" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Booking.Session"></label>
+                    <select asp-for="Booking.Session" class="form-control">
+                        <option value="">Select Session</option>
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select>
+                    <span asp-validation-for="Booking.Session" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="PatientTreatment.SelectedTreaments" asp-items=@ViewBag.TreatmentList class="form-control select2" id="Treatment" multiple>
+                    </select>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Add</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Admin" asp-action="ListActiveIngredient" class="btn btn-outline-primary border form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            // Initialize Select2 for the treatment dropdown
+            $('.select2').select2({
+                placeholder: "Select Treatment Code",
+                allowClear: true
+            });
+
+            var wardDropdown = $("#Ward");
+            var theatreDropdown = $("#Theatre");
+
+            wardDropdown.on("change", function () {
+                var selectedWardId = $(this).val();
+                theatreDropdown.empty();
+
+                if (selectedWardId) {
+                    $.ajax({
+                        url: "/Surgeon/LoadTheatre",
+                        method: "GET",
+                        data: { wardId: selectedWardId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                theatreDropdown.append($('<option>', {
+                                    value: item.theatreId,
+                                    text: item.theatreName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

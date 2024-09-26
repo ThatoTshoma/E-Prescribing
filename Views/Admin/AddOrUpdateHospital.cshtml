@@ -1,0 +1,129 @@
+﻿@model Hospital
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> @(Model.HospitalId != 0 ? "Update" : "Add") Hospital</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+
+            <div class="border p-3">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="ContactNumber"></label>
+                    <input asp-for="ContactNumber" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="EmailAddress"></label>
+                    <input asp-for="EmailAddress" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="HospitalNumber"></label>
+                    <input asp-for="HospitalNumber" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="HospitalNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="AddressLine1"></label>
+                    <input asp-for="AddressLine1" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="AddressLine2"></label>
+                    <input asp-for="AddressLine2" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="PurchaseManagerEmailAddress"></label>
+                    <input asp-for="PurchaseManagerEmailAddress" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="PurchaseManagerEmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label>City</label>
+                    <select asp-items="@ViewBag.CityList" class="form-control" id="City">
+                        <option value="">Select City</option>
+                    </select>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="SuburbId"></label>
+                    <select asp-for="SuburbId" class="form-control" id="Suburb">
+                        <option value="">Select Suburb</option>
+                    </select>
+                    <span asp-validation-for="SuburbId" class="text-danger"></span>
+
+
+                </div>
+  
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        @if (Model.HospitalId != 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Add</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Admin" asp-action="ListHospital" class="btn btn-outline-primary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+
+    <script>
+        $(document).ready(function () {
+            var cityDropdown = $("#City");
+            var suburbDropdown = $("#Suburb");
+
+            cityDropdown.on("change", function () {
+                var selectedCityId = $(this).val();
+                suburbDropdown.empty();
+
+                if (selectedCityId) {
+                    $.ajax({
+                        url: "/Admin/LoadSuburbs",
+                        method: "GET",
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                suburbDropdown.append($('<option> ', {
+                                    value: item.suburbID,
+                                    text: item.suburbName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+
+    </script>
+}

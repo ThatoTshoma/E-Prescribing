@@ -1,0 +1,233 @@
+﻿@model IEnumerable<Prescription>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Prescription List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+
+
+        <div class="row pb-3">
+            <div class="col-6"></div>
+            <div class="col-6 text-end">
+             
+            </div>
+            <div class="col-md-4">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <button id="searchBtn" class="btn btn-primary mt-4">
+                    <i class="bi bi-search"></i>
+
+                </button>
+                <button id="generateReportBtn" class="btn btn-success mt-4">
+                    <i class="bi bi-file-earmark-pdf"></i> Download Pdf
+                </button>
+            </div>
+
+        </div>
+
+        <div class="card-body p-4">
+
+
+            <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                    <th>Patient Name</th>
+                        <th>Medication</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                        <th>Urgent?</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+
+            loadDataTable();
+            $('#searchBtn').click(function () {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                loadDataTable(startDate, endDate);
+            });
+            $('#generateReportBtn').click(function () {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+
+                window.location.href = `/pharmacist/GenerateReport?startDate=${startDate}&endDate=${endDate}`;
+            });
+        });
+
+
+        function loadDataTable(startDate = '', endDate = '') {
+            if ($.fn.dataTable.isDataTable('#tblData')) {
+                dataTable.destroy();
+            }
+
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/pharmacist/GetPrescription',
+                    type: 'GET',
+                    data: {
+                        startDate: startDate,
+                        endDate: endDate
+                    },
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'date', "width": "10%" },
+                    { data: 'patient', "width": "25%" },
+
+                    { data: 'medications', "width": "20%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'status', "width": "10%" },
+                    { data: 'urgent', "width": "10%" },
+                    {
+                        data: 'prescriptionId',
+                        "render": function (data, type, row) {
+                            let viewButton = `<a href="/pharmacist/Prescription/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
+                            let dispenseButton = row.status != "Dispensed" && row.status != "Rejected"
+                                ? `<a href="#" class="btn btn-primary mx-1 dispense-medication" data-prescription-id="${data}"> <i class="bi bi-pencil-square"></i> Dispense</a>`
+                                : '';
+                            let rejectButton = row.status == "Prescribed"
+                                ? `<a href="/pharmacist/RejectPrescription?id=${data}" class="btn btn-danger mx-1"> <i class="bi bi-trash-fill"></i> Reject</a>`
+                                : '';
+
+                            return `<div class="btn-group" role="group">${viewButton}${dispenseButton}${rejectButton}</div>`;
+                        },
+                        "width": "20%"
+                    }
+                ]
+            });
+            $('#tblData').on('click', '.dispense-medication', function (e) {
+                e.preventDefault();
+
+                var prescriptionId = $(this).data('prescription-id');
+
+                $.ajax({
+                    url: '/pharmacist/DispenseMedication',
+                    type: 'POST',
+                    data: { prescriptionId: prescriptionId },
+                    success: function (response) {
+                        if (response.interactionMessage) {
+                            handleInteractionAlert(response.interactionMessage);
+                        }
+                        else if (response.contraIndicationMessage) {
+                            handleContraIndicationAlert(response.contraIndicationMessage);
+                        }
+                        else if (response.errorMessage) {
+                            handleAllergenAlert(response.errorMessage, prescriptionId);
+                        }
+                        else {
+                            window.location.href = `/pharmacist/DispenseMedication?prescriptionId=${prescriptionId}`;
+                        }
+                    },
+                    error: function () {
+                        toastr.error("Error checking medication conflicts.");
+                    }
+                });
+            });
+        }
+
+
+        function handleAllergenAlert(errorMessage, prescriptionId) {
+            Swal.fire({
+                title: 'Alert',
+                text: errorMessage,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ignore',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Reason for Ignoring',
+                        input: 'textarea',
+                        inputPlaceholder: 'Enter the reason...',
+                        inputAttributes: {
+                            'aria-label': 'Enter the reason'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: 'Submit'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: '/pharmacist/DispenseMedication',
+                                type: 'POST',
+                                data: {
+                                    prescriptionId: prescriptionId,
+                                    reasonForIgnoring: result.value
+                                },
+                                success: function () {
+                                    window.location.href = `/pharmacist/ListDispancedMedication`;
+                                },
+                                error: function () {
+                                    toastr.error("Error while dispensing medication.");
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+
+
+
+
+
+        function Delete(url) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while deleting");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

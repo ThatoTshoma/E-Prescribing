@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Order Confirmation";
+    Layout = "~/Views/Shared/_AnaesthesiologistLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Confirmation</li>
+        <li class="active">Order Confirmation</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-6 offset-3 alert alert-success text-center">
+            <h2>Order completed successfully</h2>
+            <p>You can check all your orders in the Orders section</p>
+            <hr />
+            <p>Thank you!</p>
+        </div>
+
+    </div>
+    <div class="text-center">
+        <div class="btn-group">
+            <a class="btn btn-outline-primary" asp-action="ListOrder">
+                View orders
+            </a>
+            <div id="paypal-btn"></div>
+            <span style="padding:5px"></span>
+            <a class="btn btn-outline-success" asp-controller="Anaesthesiologist" asp-action="ListMedicationToOrder">
+                Back to Medication
+            </a>
+        </div>
+    </div>
+</div>

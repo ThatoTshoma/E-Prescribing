@@ -1,0 +1,72 @@
+﻿@model E_Prescribing.CollectionModel.PatientConditionCollection
+@{
+    ViewData["Title"] = "Add Patient Chronic";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Chronic Condition</li>
+        <li class="active">Add Patient Chronic</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+
+
+        <form asp-controller="Nurse" asp-action="AddPatientCondition" method="post">
+            <input asp-for="PatientCondition.PatientId" type="hidden" />
+
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PatientCondition.Patient.Name)
+                    </dt>
+                    <dd>
+                        <span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientCondition.PatientId)?.Name</span>
+                    </dd>
+
+
+                </dl>
+            </div>
+            <hr style="border: 0; height: 4px; background: black;">
+
+
+            <div class="form-floating mb-3">
+            <label asp-for="PatientCondition.ConditionId"></label>
+
+                <select asp-for="PatientCondition.SelectedCondition" asp-items=@ViewBag.CondtionList class="form-control" id="Chronic" multiple>
+                    <option value="">Select Chronic Condition</option>
+                </select>
+                <span asp-validation-for="PatientCondition.ConditionId" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-floating mb-3">
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+        </form>
+</div>
+
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#Chronic").chosen({
+                width: "100%"
+            });
+
+        });
+
+    </script>
+}

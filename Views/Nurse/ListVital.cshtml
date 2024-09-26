@@ -1,0 +1,83 @@
+﻿@model IEnumerable<VitalRange>
+@{
+    ViewData["Title"] = "Patient Vitals";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Vitals</li>
+        <li class="active">Patient Vitals</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                <b>Patient Name:</b> @Model.FirstOrDefault()?.Patient.Name
+            </dt>
+            <dd>
+
+            </dd>
+
+        </dl>
+
+
+    </div>
+    <hr style="border: 0; height: 4px; background: black;">
+
+
+
+    <div class="col-6 text-end mb-4">
+        <a asp-action="AddVital" asp-route-id="@ViewBag.PatientId" class="btn btn-primary">
+
+            <i class="bi bi-plus-circle"></i> &nbsp; Add New Vitals
+        </a>
+    </div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Blood Pressure</th>
+            <th>Blood Glucose Level</th>
+            <th>Blood Oxegen Level</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Pulse Rate</th>
+            <th>Respiratory Rate</th>
+            <th>Temperature</th>
+                <th>Time</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patientBed in Model)
+        {
+            <tr>
+                <td>@patientBed.BloodPressure</td>
+                <td>@patientBed.BloodGlucoseLevel</td>
+                <td>@patientBed.BloodOxegenLevel</td>
+                <td>@patientBed.Height</td>
+                <td>@patientBed.Weight</td>
+                <td>@patientBed.PulseRate</td>
+                <td>@patientBed.RespiratoryRate</td>
+                <td>@patientBed.Temperature</td>
+                    <td>@patientBed.Time.ToString("HH:mm:ss")</td>
+                    <td>
+                        <a asp-action="Prescription" asp-route-id="@patientBed.VitalId">Re-Take Vitals</a>
+                    </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+</div>

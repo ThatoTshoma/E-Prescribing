@@ -1,0 +1,42 @@
+﻿@* @model Order
+
+@{
+    ViewData["Title"] = "Order Note";
+     Layout = "~/Views/Shared/_AnaesthesiologistLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Order</li>
+        <li class="active">Order Note</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <form asp-action="AddOrderNote" method="post">
+        <input type="hidden" asp-for="OrderId" />
+
+     
+        <div class="form-group">
+            <label asp-for="Note" class="control-label"></label>
+            <textarea asp-for="Note" class="form-control"></textarea>
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Note</button>
+    </form>
+
+
+
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+ *@

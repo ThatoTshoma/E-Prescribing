@@ -1,0 +1,93 @@
+﻿@using E_Prescribing.Models;
+@model CartModel
+
+@{
+    ViewData["Title"] = "Medication Summary";
+    Layout = "~/Views/Shared/_AnaesthesiologistLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Medication</li>
+        <li class="active">Medication Summary</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-8 offset-2">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Medication</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var medication in Model.Cart.Medications)
+                    {
+                        <tr>
+                            <td class="align-middle">@medication.Quantity</td>
+                            <td class="align-middle">@medication.Medication.Name</td>
+                            <td class="align-middle">
+                                <a asp-controller="Order" asp-action="RemoveMedicationFromCart"
+                                   asp-route-id="@medication.Medication.MedicationId">
+                                    <i class="btn btn-outline-success">-</i>
+                                </a>
+                                |
+                                <a asp-controller="Order" asp-action="AddMedicationToCart"
+                                   asp-route-id="@medication.Medication.MedicationId">
+                                    <i class="btn btn-outline-success">+</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="form-group">
+                <label>Urgent</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="IsPriority" id="priorityYes" value="true"  />
+                    <label class="form-check-label" for="priorityYes">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="IsPriority" id="priorityNo" value="false"  />
+                    <label class="form-check-label" for="priorityNo">
+                        No
+                    </label>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" asp-action="PlaceOrder" asp-route-id="@ViewBag.PatientId">
+                        <input type="hidden" name="patientId" value="@ViewBag.PatientId" />
+
+                        Place order
+                    </a>
+                    <div id="paypal-btn"></div>
+                    <span style="padding:5px"></span>
+                    <a class="btn btn-outline-success" asp-controller="Anaesthesiologist" asp-action="ListMedication">
+                        Add more Medication
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @section Scripts {
+        <!-- Add any additional scripts here if needed -->
+    }
+</div>

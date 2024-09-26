@@ -1,0 +1,201 @@
+﻿@using E_Prescribing.Data;
+@model E_Prescribing.CollectionModel.UserCollection
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Add User</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+            <div class="border p-3">
+
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="ApplicationUser.UserRole" class="form-control" id="userRole">
+                    <option value="">Select Medical Professional</option>
+                    <option value="Anaesthesiologist">Anaesthesiologist</option>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Pharmacist">Pharmacist</option>
+                    <option value="Surgeon">Surgeon</option>
+                </select>
+                <label asp-for="ApplicationUser.UserRole"></label>
+                <span asp-validation-for="ApplicationUser.UserRole" class="text-danger"></span>
+
+            </div>
+
+            <div id="nurseFields" style="display:none;">
+                <div class="form-floating mb-3">
+                    <input asp-for="Nurse.Name" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="Nurse.Name"></label>
+                    <span asp-validation-for="Nurse.Name" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Nurse.Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Nurse.Surname"></label>
+                    <span asp-validation-for="Nurse.Surname" class="text-danger"></span>
+                </div>
+
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Nurse.RegistrationNumber" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Nurse.RegistrationNumber"></label>
+                    <span asp-validation-for="Nurse.RegistrationNumber" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Nurse.ContactNumber" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                    <label asp-for="Nurse.ContactNumber"></label>
+                    <span asp-validation-for="Nurse.ContactNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div id="surgeonFields" style="display:none;">
+                <div class="form-floating mb-3">
+                    <input asp-for="Surgeon.Name" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="Surgeon.Name"></label>
+                    <span asp-validation-for="Nurse.Name" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Surgeon.Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Surgeon.Surname"></label>
+                    <span asp-validation-for="Nurse.Surname" class="text-danger"></span>
+                </div>
+
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Surgeon.RegistrationNumber" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Surgeon.RegistrationNumber"></label>
+                    <span asp-validation-for="Surgeon.RegistrationNumber" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Surgeon.ContactNumber" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                    <label asp-for="Surgeon.ContactNumber"></label>
+                    <span asp-validation-for="Surgeon.ContactNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div id="pharmacistFields" style="display:none;">
+                <div class="form-floating mb-3">
+                    <input asp-for="Pharmacist.Name" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="Pharmacist.Name"></label>
+                    <span asp-validation-for="Nurse.Name" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Pharmacist.Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Pharmacist.Surname"></label>
+                    <span asp-validation-for="Nurse.Surname" class="text-danger"></span>
+                </div>
+
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Pharmacist.RegistrationNumber" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Pharmacist.RegistrationNumber"></label>
+                    <span asp-validation-for="Pharmacist.RegistrationNumber" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Pharmacist.ContactNumber" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                    <label asp-for="Pharmacist.ContactNumber"></label>
+                    <span asp-validation-for="Pharmacist.ContactNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="anaethesiologistFields" style="display:none;">
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Anaesthesiologist.Name" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="Anaesthesiologist.Name"></label>
+                    <span asp-validation-for="Anaesthesiologist.Name" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Anaesthesiologist.Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Anaesthesiologist.Surname"></label>
+                    <span asp-validation-for="Anaesthesiologist.Surname" class="text-danger"></span>
+                </div>
+
+
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Anaesthesiologist.RegistrationNumber" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <label asp-for="Anaesthesiologist.RegistrationNumber"></label>
+                    <span asp-validation-for="Anaesthesiologist.RegistrationNumber" class="text-danger"></span>
+                </div>
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="Anaesthesiologist.ContactNumber" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                    <label asp-for="Anaesthesiologist.ContactNumber"></label>
+                    <span asp-validation-for="Anaesthesiologist.ContactNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div id="userCredentials" style="display:none;">
+                    <div class="form-floating py-2 col-12">
+                        <input asp-for="ApplicationUser.Email" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                    <label asp-for="ApplicationUser.Email"></label>
+                    <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
+                </div>
+               @* <div class="form-floating mb-3">
+                    <input asp-for="ApplicationUser.UserName" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="ApplicationUser.UserName"></label>
+                    <span asp-validation-for="ApplicationUser.UserName" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="ApplicationUser.Password" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="ApplicationUser.Password"></label>
+                    <span asp-validation-for="ApplicationUser.Password" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="ApplicationUser.ConfirmPassword" class="form-control" aria-required="true" placeholder="Name" />
+                    <label asp-for="ApplicationUser.ConfirmPassword"></label>
+                    <span asp-validation-for="ApplicationUser.ConfirmPassword" class="text-danger"></span>
+                </div>*@
+                    <div class="form-floating py-2 col-12">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('userRole').addEventListener('change', function () {
+            var nurseFields = document.getElementById('nurseFields');
+            var pharmacistFields = document.getElementById('pharmacistFields');
+            var surgeonFields = document.getElementById('surgeonFields');
+            var anaethesiologistFields = document.getElementById('anaethesiologistFields');
+            var userCredentials = document.getElementById('userCredentials');
+
+            if (this.value === 'Nurse') {
+                nurseFields.style.display = 'block';
+                pharmacistFields.style.display = 'none';
+                surgeonFields.style.display = 'none';
+                anaethesiologistFields.style.display = 'none';
+                userCredentials.style.display = 'block';
+            } 
+            else if (this.value === 'Pharmacist') {
+                pharmacistFields.style.display = 'block';
+                nurseFields.style.display = 'none';
+                surgeonFields.style.display = 'none';
+                anaethesiologistFields.style.display = 'none';
+                userCredentials.style.display = 'block';
+            }
+            else if (this.value === 'Surgeon') {
+                surgeonFields.style.display = 'block';
+                pharmacistFields.style.display = 'none';
+                nurseFields.style.display = 'none';
+                anaethesiologistFields.style.display = 'none';
+                userCredentials.style.display = 'block';
+            }
+            else if (this.value === 'Anaesthesiologist') {
+                anaethesiologistFields.style.display = 'block';
+                surgeonFields.style.display = 'none';
+                pharmacistFields.style.display = 'none';
+                nurseFields.style.display = 'none';
+                userCredentials.style.display = 'block';
+            }
+            else {
+                nurseFields.style.display = 'none';
+                pharmacistFields.style.display = 'none';
+                surgeonFields.style.display = 'none';
+                anaethesiologistFields.style.display = 'none';
+                userCredentials.style.display = 'none';
+            }
+        });
+    </script>
+}

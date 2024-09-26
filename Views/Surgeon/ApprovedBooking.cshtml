@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Booking>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Approved Booking List</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+
+
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Patient</th>
+                    <th>Theatre</th>
+                    <th>Ward</th>
+                    <th>Status</th>
+                    <th>Session</th>
+                    <th>Treatments</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/surgeon/getApprovedBooking',
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'date', "width": "15%" },
+                    { data: 'patient.fullName', "width": "15%" },
+                    { data: 'theatre', "width": "15%" },
+                    { data: 'ward', "width": "15%" },
+                    {
+                        data: 'status',
+                        render: function (data) {
+                            return data ? 'Approved' : 'Pending';
+                        },
+                        "width": "10%"
+                    },
+                    { data: 'session', "width": "15%" },
+
+                    {
+                        data: 'treatments',
+                        render: function (data) {
+                            return data.join("<br>");
+                        },
+                        "width": "15%"
+                    },
+
+                ]
+            });
+        }
+        function Approve(bookingId) {
+            Swal.fire({
+                icon: "success",
+                title: "Booking has been Approved",
+                showConfirmButton: true,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/anaesthesiologist/EditBooking',
+                        type: 'POST',
+                        data: {
+                            bookingId: bookingId,
+                            status: true,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while approving booking");
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}
+

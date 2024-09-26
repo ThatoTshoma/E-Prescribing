@@ -1,0 +1,199 @@
+﻿@model E_Prescribing.Models.PatientOnboardingModel
+
+
+
+<form id="recruitmentForm" asp-action="PatientOnboarding" method="post">
+    <input type="hidden" id="currentStep" name="CurrentStep" value="@Model.CurrentStep" />
+
+    <div class="form-step active" id="step-1">
+        <h2>Step 1: Assign Bed</h2>
+        <input asp-for="PatientBed.PatientId" type="hidden" />
+
+        <div class="form-floating mb-3">
+            <label>Ward</label>
+            <select for="Ward" asp-items="@ViewBag.WardList" class="form-control" id="Ward">
+                <option value="">Select Ward</option>
+            </select>
+            <label for="Ward"></label>
+        </div>
+        <div class="form-floating mb-3">
+            <label asp-for="PatientBed.BedId"></label>
+            <select asp-for="PatientBed.SelectedBeds" class="form-control" id="Bed" multiple>
+                <option value="">Select Bed</option>
+            </select>
+            <span asp-validation-for="PatientBed.BedId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-2">
+        <h2>Step 2: Allergies</h2>
+        <input asp-for="PatientAllergy.PatientId" type="hidden" />
+        <div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.PatientAllergy.Patient.Name)</dt>
+                <dd><span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientAllergy.PatientId)?.Name</span></dd>
+                <dt>@Html.DisplayNameFor(model => model.PatientAllergy.Patient.IdNumber)</dt>
+                <dd><span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientAllergy.PatientId)?.IdNumber</span></dd>
+            </dl>
+        </div>
+        <hr style="border: 0; height: 4px; background: black;">
+        <div class="form-floating mb-3">
+            <label asp-for="PatientAllergy.ActiveIngredientId"></label>
+            <select asp-for="PatientAllergy.SelectedActiveIngredient" asp-items="@ViewBag.ActiveIngredientList" class="form-control" id="Ingredient" multiple>
+                <option value="">Select Active Ingredient</option>
+            </select>
+            <span asp-validation-for="PatientAllergy.ActiveIngredientId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-3">
+        <h2>Step 3: Current Medication</h2>
+        <input asp-for="PatientMedication.PatientId" type="hidden" />
+        <div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.PatientMedication.Patient.Name)</dt>
+                <dd><span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientMedication.PatientId)?.Name</span></dd>
+                <dt>@Html.DisplayNameFor(model => model.PatientMedication.Patient.IdNumber)</dt>
+                <dd><span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientMedication.PatientId)?.IdNumber</span></dd>
+            </dl>
+        </div>
+        <hr style="border: 0; height: 4px; background: black;">
+        <div class="form-floating mb-3">
+            <label asp-for="PatientMedication.MedicationId"></label>
+            <select asp-for="PatientMedication.SelectedMedication" asp-items="@ViewBag.MedicationList" class="form-control" id="Medication" multiple>
+                <option value="">Select Medication</option>
+            </select>
+            <span asp-validation-for="PatientMedication.MedicationId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-4">
+        <h2>Step 4: Chronic Condition</h2>
+        <input asp-for="PatientCondition.PatientId" type="hidden" />
+        <div>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.PatientCondition.Patient.Name)</dt>
+                <dd><span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientCondition.PatientId)?.Name</span></dd>
+                <dt>@Html.DisplayNameFor(model => model.PatientCondition.Patient.IdNumber)</dt>
+                <dd><span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientCondition.PatientId)?.IdNumber</span></dd>
+            </dl>
+        </div>
+        <hr style="border: 0; height: 4px; background: black;">
+        <div class="form-floating mb-3">
+            <label asp-for="PatientCondition.ConditionId"></label>
+            <select asp-for="PatientCondition.SelectedCondition" asp-items="@ViewBag.ConditionList" class="form-control" id="Condition" multiple>
+                <option value="">Select Condition</option>
+            </select>
+            <span asp-validation-for="PatientCondition.ConditionId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-step" id="step-5">
+        <h2>Step 5: Prescription</h2>
+        <!-- Add Prescription -->
+    </div>
+
+    <div class="form-buttons">
+        <button type="button" class="cancel" onclick="cancelForm()">Cancel</button>
+        <button type="button" class="prev" onclick="prevStep()">Previous</button>
+        <button type="button" onclick="nextStep()">Next</button>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="~/css/chosen.min.css" rel="stylesheet" />
+    <script src="~/js/chosen.jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#Ingredient, #Medication, #Condition").chosen({ width: "100%" });
+        });
+
+        let currentStep = parseInt(document.getElementById('currentStep').value) || 1;
+
+        function nextStep() {
+            const currentFormStep = document.getElementById(`step-${currentStep}`);
+            const currentProgressStep = document.getElementById(`step${currentStep}`);
+            const currentLabelStep = document.getElementById(`label-step${currentStep}`);
+
+            if (currentStep < 5) {
+                currentFormStep.classList.remove('active');
+                currentProgressStep.classList.remove('active');
+                currentLabelStep.style.fontWeight = 'normal';
+
+                currentStep++;
+                document.getElementById('currentStep').value = currentStep;
+
+                const nextFormStep = document.getElementById(`step-${currentStep}`);
+                const nextProgressStep = document.getElementById(`step${currentStep}`);
+                const nextLabelStep = document.getElementById(`label-step${currentStep}`);
+
+                nextFormStep.classList.add('active');
+                nextProgressStep.classList.add('active');
+                nextLabelStep.style.fontWeight = 'bold';
+            }
+        }
+
+        function prevStep() {
+            const currentFormStep = document.getElementById(`step-${currentStep}`);
+            const currentProgressStep = document.getElementById(`step${currentStep}`);
+            const currentLabelStep = document.getElementById(`label-step${currentStep}`);
+
+            if (currentStep > 1) {
+                currentFormStep.classList.remove('active');
+                currentProgressStep.classList.remove('active');
+                currentLabelStep.style.fontWeight = 'normal';
+
+                currentStep--;
+                document.getElementById('currentStep').value = currentStep;
+
+                const prevFormStep = document.getElementById(`step-${currentStep}`);
+                const prevProgressStep = document.getElementById(`step${currentStep}`);
+                const prevLabelStep = document.getElementById(`label-step${currentStep}`);
+
+                prevFormStep.classList.add('active');
+                prevProgressStep.classList.add('active');
+                prevLabelStep.style.fontWeight = 'bold';
+            }
+        }
+
+        function cancelForm() {
+            document.getElementById('recruitmentForm').reset();
+            window.location.reload();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.form-step').forEach((step, index) => {
+                if (index !== 0) step.classList.add('hidden');
+            });
+            document.getElementById('label-step1').style.fontWeight = 'bold';
+        });
+
+        $(document).ready(function () {
+            var wardDropdown = $("#Ward");
+            var bedDropdown = $("#Bed");
+
+            wardDropdown.on("change", function () {
+                var selectedWardId = $(this).val();
+                bedDropdown.empty();
+
+                if (selectedWardId) {
+                    $.ajax({
+                        url: "/Nurse/LoadBed",
+                        method: "GET",
+                        data: { wardId: selectedWardId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                bedDropdown.append($('<option> ', {
+                                    value: item.bedId,
+                                    text: item.bedNumber
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

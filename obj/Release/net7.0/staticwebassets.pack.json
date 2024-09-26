@@ -1,0 +1,2221 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\obj\\Release\\net7.0\\scopedcss\\projectbundle\\E_Prescribing.bundle.scp.css",
+      "PackagePath": "staticwebassets\\E_Prescribing.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Chosen\\chosen-sprite.png",
+      "PackagePath": "staticwebassets\\Content\\Chosen\\chosen-sprite.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Chosen\\chosen.min.css",
+      "PackagePath": "staticwebassets\\Content\\Chosen\\chosen.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\autoFill.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\autoFill.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\buttons.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\buttons.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\colReorder.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\colReorder.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\common.scss",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\common.scss"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.material.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.material.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.material.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.material.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.uikit.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.uikit.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\dataTables.uikit.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\dataTables.uikit.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedColumns.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedColumns.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\fixedHeader.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\fixedHeader.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\jquery.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\jquery.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\jquery.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\jquery.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\jquery.dataTables_themeroller.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\jquery.dataTables_themeroller.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\keyTable.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\keyTable.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\mixins.scss",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\mixins.scss"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\responsive.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\responsive.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowGroup.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowGroup.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\rowReorder.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\rowReorder.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\scroller.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\scroller.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.bootstrap4.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.bootstrap4.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.bootstrap4.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.bootstrap4.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.dataTables.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.dataTables.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.dataTables.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.dataTables.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.foundation.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.foundation.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.foundation.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.foundation.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.jqueryui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.jqueryui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.jqueryui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.jqueryui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.semanticui.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.semanticui.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\select.semanticui.min.css",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\select.semanticui.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\css\\semanticui.scss",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\css\\semanticui.scss"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\details_close.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\details_close.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\details_open.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\details_open.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\sort_asc.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\sort_asc.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\sort_asc_disabled.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\sort_asc_disabled.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\sort_both.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\sort_both.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\sort_desc.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\sort_desc.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\images\\sort_desc_disabled.png",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\images\\sort_desc_disabled.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\DataTables\\swf\\flashExport.swf",
+      "PackagePath": "staticwebassets\\Content\\DataTables\\swf\\flashExport.swf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\Administrator.png",
+      "PackagePath": "staticwebassets\\Content\\Layout\\Administrator.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\resources\\css\\img\\banner1.jpg",
+      "PackagePath": "staticwebassets\\Content\\Layout\\resources\\css\\img\\banner1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\resources\\css\\queries.css",
+      "PackagePath": "staticwebassets\\Content\\Layout\\resources\\css\\queries.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\resources\\css\\style.css",
+      "PackagePath": "staticwebassets\\Content\\Layout\\resources\\css\\style.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\resources\\img\\banner1.jpg",
+      "PackagePath": "staticwebassets\\Content\\Layout\\resources\\img\\banner1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\resources\\js\\script.js",
+      "PackagePath": "staticwebassets\\Content\\Layout\\resources\\js\\script.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\css\\animate.css",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\css\\animate.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\css\\grid.css",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\css\\grid.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\css\\ionicons.min.css",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\css\\ionicons.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\css\\normalize.css",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\css\\normalize.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\fonts\\ionicons.eot",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\fonts\\ionicons.eot"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\fonts\\ionicons.svg",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\fonts\\ionicons.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\fonts\\ionicons.ttf",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\fonts\\ionicons.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\fonts\\ionicons.woff",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\fonts\\ionicons.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\fonts\\ionicons.woff2",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\fonts\\ionicons.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Layout\\vendors\\js\\jquery.waypoints.min.js",
+      "PackagePath": "staticwebassets\\Content\\Layout\\vendors\\js\\jquery.waypoints.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\LogIn\\LoginStyle.css",
+      "PackagePath": "staticwebassets\\Content\\LogIn\\LoginStyle.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\css\\style.css",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\css\\style.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\css\\swipebox.css",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\css\\swipebox.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\Thumbs.db",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\Thumbs.db"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\banner-bg.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\banner-bg.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\banner1.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\banner1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\banner2.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\banner2.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\bg2.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\bg2.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\bg8.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\bg8.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\e.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\e.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon1.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon1.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon10.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon10.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon11.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon11.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon12.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon12.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon2.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon2.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon3.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon3.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon4.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon4.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon5.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon5.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon6.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon6.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon7.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon7.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon8.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon8.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icon9.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icon9.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icons-sprite.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icons-sprite.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\icons.svg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\icons.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img1.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img10.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img10.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img11.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img11.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img12.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img12.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img14.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img14.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img15.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img15.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img16.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img16.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img17.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img17.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img18.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img18.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img19.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img19.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img2.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img2.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img20.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img20.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img21.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img21.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img22.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img22.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img23.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img23.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img24.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img24.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img25.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img25.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img26.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img26.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img27.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img27.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img28.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img28.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img29.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img29.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img3.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img3.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img30.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img30.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img31.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img31.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img32.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img32.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img33.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img33.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img34.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img34.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img35.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img35.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img36.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img36.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img37.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img37.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img4.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img4.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img5.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img5.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img6.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img6.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img7.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img7.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img8.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img8.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\img9.jpg",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\img9.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\menu-icon.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\menu-icon.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\images\\move-up.png",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\images\\move-up.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\classie.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\classie.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\easing.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\easing.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\easyResponsiveTabs.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\easyResponsiveTabs.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\jquery.mixitup.min.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\jquery.mixitup.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\jquery.swipebox.min.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\jquery.swipebox.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\main.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\main.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\modernizr.custom.53451.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\modernizr.custom.53451.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\modernizr.custom.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\modernizr.custom.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\modernizr.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\modernizr.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\move-top.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\move-top.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\MedHub\\js\\responsiveslides.min.js",
+      "PackagePath": "staticwebassets\\Content\\MedHub\\js\\responsiveslides.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\css\\style.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\css\\style.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\about.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\about.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\apple-touch-icon.png",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\apple-touch-icon.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\departments-1.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\departments-1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\departments-2.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\departments-2.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\departments-3.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\departments-3.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\departments-4.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\departments-4.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\departments-5.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\departments-5.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\doctors\\doctors-1.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\doctors\\doctors-1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\doctors\\doctors-2.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\doctors\\doctors-2.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\doctors\\doctors-3.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\doctors\\doctors-3.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\doctors\\doctors-4.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\doctors\\doctors-4.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\favicon.png",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\favicon.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-1.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-2.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-2.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-3.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-3.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-4.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-4.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-5.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-5.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-6.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-6.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-7.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-7.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\gallery\\gallery-8.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\gallery\\gallery-8.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\hero-bg.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\hero-bg.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\testimonials\\testimonials-1.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\testimonials\\testimonials-1.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\testimonials\\testimonials-2.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\testimonials\\testimonials-2.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\testimonials\\testimonials-3.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\testimonials\\testimonials-3.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\testimonials\\testimonials-4.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\testimonials\\testimonials-4.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\img\\testimonials\\testimonials-5.jpg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\img\\testimonials\\testimonials-5.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\js\\main.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\js\\main.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\scss\\Readme.txt",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\scss\\Readme.txt"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\animate.css\\animate.compat.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\animate.css\\animate.compat.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\animate.css\\animate.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\animate.css\\animate.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\animate.css\\animate.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\animate.css\\animate.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.json",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap-icons\\bootstrap-icons.json"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap-icons\\fonts\\bootstrap-icons.woff",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap-icons\\fonts\\bootstrap-icons.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap-icons\\fonts\\bootstrap-icons.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap-icons\\fonts\\bootstrap-icons.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap-icons\\index.html",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap-icons\\index.html"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\bootstrap\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\css\\animations.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\css\\animations.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\css\\boxicons.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\css\\boxicons.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\css\\boxicons.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\css\\boxicons.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\css\\transformations.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\css\\transformations.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.eot",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.eot"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.svg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.ttf",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.woff",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\boxicons\\fonts\\boxicons.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\all.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\all.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\all.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\all.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\brands.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\brands.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\brands.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\brands.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\fontawesome.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\fontawesome.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\fontawesome.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\fontawesome.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\regular.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\regular.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\regular.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\regular.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\solid.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\solid.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\solid.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\solid.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\svg-with-js.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\svg-with-js.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\svg-with-js.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\svg-with-js.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-font-face.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-font-face.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-font-face.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-font-face.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-shims.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-shims.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-shims.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v4-shims.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v5-font-face.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v5-font-face.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v5-font-face.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\css\\v5-font-face.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-brands-400.ttf",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-brands-400.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-brands-400.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-brands-400.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-regular-400.ttf",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-regular-400.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-regular-400.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-regular-400.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-solid-900.ttf",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-solid-900.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-solid-900.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-solid-900.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-v4compatibility.ttf",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-v4compatibility.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-v4compatibility.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\fontawesome-free\\webfonts\\fa-v4compatibility.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\glightbox\\css\\glightbox.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\glightbox\\css\\glightbox.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\glightbox\\css\\glightbox.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\glightbox\\css\\glightbox.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\glightbox\\css\\plyr.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\glightbox\\css\\plyr.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\glightbox\\css\\plyr.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\glightbox\\css\\plyr.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\glightbox\\js\\glightbox.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\glightbox\\js\\glightbox.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\glightbox\\js\\glightbox.min.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\glightbox\\js\\glightbox.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\php-email-form\\validate.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\php-email-form\\validate.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\purecounter\\purecounter_vanilla.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\purecounter\\purecounter_vanilla.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.eot",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.eot"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.less",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.less"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.svg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.symbol.svg",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.symbol.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.ttf",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.woff",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.woff2",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\remixicon\\remixicon.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\swiper\\swiper-bundle.min.css",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\swiper\\swiper-bundle.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\swiper\\swiper-bundle.min.js",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\swiper\\swiper-bundle.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\assets\\vendor\\swiper\\swiper-bundle.min.js.map",
+      "PackagePath": "staticwebassets\\Content\\Med\\assets\\vendor\\swiper\\swiper-bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\forms\\Readme.txt",
+      "PackagePath": "staticwebassets\\Content\\Med\\forms\\Readme.txt"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\forms\\appointment.php",
+      "PackagePath": "staticwebassets\\Content\\Med\\forms\\appointment.php"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Med\\forms\\contact.php",
+      "PackagePath": "staticwebassets\\Content\\Med\\forms\\contact.php"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\Site.css",
+      "PackagePath": "staticwebassets\\Content\\Site.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap-table.css",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap-table.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap-theme.css",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap-theme.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap-theme.css.map",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap-theme.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap-theme.min.css",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap-theme.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap-theme.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap-theme.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\Content\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\datepicker.css",
+      "PackagePath": "staticwebassets\\Content\\css\\datepicker.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\datepicker3.css",
+      "PackagePath": "staticwebassets\\Content\\css\\datepicker3.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\font-awesome.min.css",
+      "PackagePath": "staticwebassets\\Content\\css\\font-awesome.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\css\\styles.css",
+      "PackagePath": "staticwebassets\\Content\\css\\styles.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\FontAwesome.otf",
+      "PackagePath": "staticwebassets\\Content\\fonts\\FontAwesome.otf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets\\Content\\fonts\\fontawesome-webfont.eot"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets\\Content\\fonts\\fontawesome-webfont.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets\\Content\\fonts\\fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets\\Content\\fonts\\fontawesome-webfont.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets\\Content\\fonts\\fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\glyphicons-halflings-regular.eot",
+      "PackagePath": "staticwebassets\\Content\\fonts\\glyphicons-halflings-regular.eot"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\glyphicons-halflings-regular.svg",
+      "PackagePath": "staticwebassets\\Content\\fonts\\glyphicons-halflings-regular.svg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\glyphicons-halflings-regular.ttf",
+      "PackagePath": "staticwebassets\\Content\\fonts\\glyphicons-halflings-regular.ttf"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\glyphicons-halflings-regular.woff",
+      "PackagePath": "staticwebassets\\Content\\fonts\\glyphicons-halflings-regular.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\fonts\\glyphicons-halflings-regular.woff2",
+      "PackagePath": "staticwebassets\\Content\\fonts\\glyphicons-halflings-regular.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\img\\Administrator.png",
+      "PackagePath": "staticwebassets\\Content\\img\\Administrator.png"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\img\\Logo.jpg",
+      "PackagePath": "staticwebassets\\Content\\img\\Logo.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\bootstrap-datepicker.js",
+      "PackagePath": "staticwebassets\\Content\\js\\bootstrap-datepicker.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\Content\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\Content\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\chart-data.js",
+      "PackagePath": "staticwebassets\\Content\\js\\chart-data.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\chart.min.js",
+      "PackagePath": "staticwebassets\\Content\\js\\chart.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\custom.js",
+      "PackagePath": "staticwebassets\\Content\\js\\custom.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\easypiechart-data.js",
+      "PackagePath": "staticwebassets\\Content\\js\\easypiechart-data.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\easypiechart.js",
+      "PackagePath": "staticwebassets\\Content\\js\\easypiechart.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\html5shiv.min.js",
+      "PackagePath": "staticwebassets\\Content\\js\\html5shiv.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\jquery-1.11.1.min.js",
+      "PackagePath": "staticwebassets\\Content\\js\\jquery-1.11.1.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\lumino.glyphs.js",
+      "PackagePath": "staticwebassets\\Content\\js\\lumino.glyphs.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\npm.js",
+      "PackagePath": "staticwebassets\\Content\\js\\npm.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\js\\respond.min.js",
+      "PackagePath": "staticwebassets\\Content\\js\\respond.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\resume.css",
+      "PackagePath": "staticwebassets\\Content\\resume.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\Content\\sass\\styles.scss",
+      "PackagePath": "staticwebassets\\Content\\sass\\styles.scss"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\css\\chosen.min.css",
+      "PackagePath": "staticwebassets\\css\\chosen.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\js\\chosen.jquery.min.js",
+      "PackagePath": "staticwebassets\\js\\chosen.jquery.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\.gitattributes",
+      "PackagePath": "staticwebassets\\medic-care\\.gitattributes"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\css\\bootstrap-icons.css",
+      "PackagePath": "staticwebassets\\medic-care\\css\\bootstrap-icons.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\medic-care\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\css\\owl.carousel.min.css",
+      "PackagePath": "staticwebassets\\medic-care\\css\\owl.carousel.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\css\\owl.theme.default.min.css",
+      "PackagePath": "staticwebassets\\medic-care\\css\\owl.theme.default.min.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\css\\templatemo-medic-care.css",
+      "PackagePath": "staticwebassets\\medic-care\\css\\templatemo-medic-care.css"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\fonts\\bootstrap-icons.woff",
+      "PackagePath": "staticwebassets\\medic-care\\fonts\\bootstrap-icons.woff"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\fonts\\bootstrap-icons.woff2",
+      "PackagePath": "staticwebassets\\medic-care\\fonts\\bootstrap-icons.woff2"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\gallery\\female-doctor-with-presenting-hand-gesture.jpg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\gallery\\female-doctor-with-presenting-hand-gesture.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\gallery\\medium-shot-man-getting-vaccine.jpg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\gallery\\medium-shot-man-getting-vaccine.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\reviews\\beautiful-woman-face-portrait-brown-background.jpeg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\reviews\\beautiful-woman-face-portrait-brown-background.jpeg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\reviews\\portrait-british-woman.jpeg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\reviews\\portrait-british-woman.jpeg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\reviews\\senior-man-wearing-white-face-mask-covid-19-campaign-with-design-space.jpeg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\reviews\\senior-man-wearing-white-face-mask-covid-19-campaign-with-design-space.jpeg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\reviews\\woman-wearing-mask-face-closeup-covid-19-green-background.jpeg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\reviews\\woman-wearing-mask-face-closeup-covid-19-green-background.jpeg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\slider\\portrait-successful-mid-adult-doctor-with-crossed-arms.jpg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\slider\\portrait-successful-mid-adult-doctor-with-crossed-arms.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\images\\slider\\young-asian-female-dentist-white-coat-posing-clinic-equipment.jpg",
+      "PackagePath": "staticwebassets\\medic-care\\images\\slider\\young-asian-female-dentist-white-coat-posing-clinic-equipment.jpg"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\index.html",
+      "PackagePath": "staticwebassets\\medic-care\\index.html"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\medic-care\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\js\\custom.js",
+      "PackagePath": "staticwebassets\\medic-care\\js\\custom.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\js\\jquery.min.js",
+      "PackagePath": "staticwebassets\\medic-care\\js\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\js\\owl.carousel.min.js",
+      "PackagePath": "staticwebassets\\medic-care\\js\\owl.carousel.min.js"
+    },
+    {
+      "Id": "D:\\HomeSpace\\E_Prescribing\\wwwroot\\medic-care\\js\\scrollspy.min.js",
+      "PackagePath": "staticwebassets\\medic-care\\js\\scrollspy.min.js"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.E_Prescribing.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.build.E_Prescribing.props",
+      "PackagePath": "build\\E_Prescribing.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.E_Prescribing.props",
+      "PackagePath": "buildMultiTargeting\\E_Prescribing.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\staticwebassets\\msbuild.buildTransitive.E_Prescribing.props",
+      "PackagePath": "buildTransitive\\E_Prescribing.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,160 @@
+﻿@model List<Order>
+
+
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">List Orders</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+    
+
+        <div class="row pb-3">
+            <div class="col-6"></div>
+            <div class="col-6 text-end">
+                <a asp-controller="Anaesthesiologist" asp-action="ListPatient" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Add New Order
+                </a>
+            </div>
+            <div class="col-md-4">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <button id="searchBtn" class="btn btn-primary mt-4">
+                    <i class="bi bi-search"></i>
+
+                </button>
+                <button id="generateReportBtn" class="btn btn-success mt-4">
+                    <i class="bi bi-file-earmark-pdf"></i> Download Pdf
+                </button>
+            </div>
+ 
+        </div>
+
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Order Number</th>
+                    <th>Patient</th>
+                    <th>Medication</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>IsUrgent</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+
+            $('#searchBtn').click(function () {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                loadDataTable(startDate, endDate);
+            });
+            $('#generateReportBtn').click(function () {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+
+                window.location.href = `/anaesthesiologist/GenerateReport?startDate=${startDate}&endDate=${endDate}`;
+            });
+        });
+
+
+        function loadDataTable(startDate = '', endDate = '') {
+            if ($.fn.dataTable.isDataTable('#tblData')) {
+                dataTable.destroy();
+            }
+
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/anaesthesiologist/GetOrder',
+                    type: 'GET',
+                    data: {
+                        startDate: startDate,
+                        endDate: endDate
+                    },
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'date', "width": "10%" },
+                    { data: 'orderId', "width": "10%" },
+                    { data: 'patient', "width": "15%" },
+                    {
+                        data: 'medicationOrders', "width": "20%", "render": function (data) {
+                            return data.map(order => order.name).join('<br>');
+                        }
+                    },
+                    {
+                        data: 'medicationOrders', "width": "10%", "render": function (data) {
+                            return data.map(order => order.quantity).join('<br>');
+                        }
+                    },
+                    { data: 'status', "width": "10%" },
+                    {
+                        data: 'isUrgent', "width": "10%", "render": function (data) {
+                            return data === "Yes" ? `<span class="text-danger">${data}</span>` : data;
+                        }
+                    },
+                    {
+                        data: 'orderId', "width": "10%", "render": function (data, type, row) {
+                            if (row.status == "Dispensed") {
+                                return `<a href="#" class="btn btn-success" onclick="recieveOrder(${data})"><i class="bi bi-check2-circle"></i>Recieve</a>`;
+                            }
+                            return '';
+                        }
+                    }
+                ]
+            });
+        }
+
+        function recieveOrder(orderId) {
+            Swal.fire({
+                icon: "success",
+                title: "Order has been Recieved",
+                showConfirmButton: true,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/anaesthesiologist/ReceiveOrder',
+                        type: 'POST',
+                        data: {
+                            orderId: orderId,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while receiving order");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

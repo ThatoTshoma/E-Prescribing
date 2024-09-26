@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Order>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Medications Note</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.FirstOrDefault()?.Patient.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.FirstOrDefault()?.Patient.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientGender" value="@Model.FirstOrDefault()?.Patient.Gender" disabled />
+                            <label for="patientGender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="contactNumber" value="@Model.FirstOrDefault()?.Patient.ContactNumber" disabled />
+                            <label for="contactNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @foreach (var prescription in Model)
+            {
+
+                <table class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Medication Name</th>
+                            <th>Dosage Form</th>
+
+                            <th>Quantity</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var administeredMedication in prescription.MedicationOrders)
+                        {
+                            <tr>
+                                <td>@administeredMedication.Medication.Name</td>
+                                <td>@administeredMedication.Medication.DosageForm.Name</td>
+
+
+                                <td>@administeredMedication.Quantity</td>
+                                <td>@administeredMedication.Note</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.table').DataTable();
+            });
+        </script>
+    }

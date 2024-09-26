@@ -1,0 +1,166 @@
+﻿@model List<Order>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">List Orders</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.FirstOrDefault()?.Patient.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.FirstOrDefault()?.Patient.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientGender" value="@Model.FirstOrDefault()?.Patient.Gender" disabled />
+                            <label for="patientGender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="contactNumber" value="@Model.FirstOrDefault()?.Patient.ContactNumber" disabled />
+                            <label for="contactNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row pb-3">
+                <div class="col-6">
+                </div>
+                <div class="col-6 text-end">
+                    <a asp-controller="Anaesthesiologist" asp-action="ListMedicationToOrder" asp-route-id="@ViewBag.PatientId" class="btn btn-primary">
+                        <i class="bi bi-plus-circle"></i> Add New Order
+                    </a>
+                </div>
+            </div>
+
+
+            <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+@*                         <th>Anaesthesiologist</th>
+ *@                        <th>Medication</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                        <th>IsUrgent</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            var patientId = @Html.Raw(ViewBag.PatientId);
+
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/anaesthesiologist/getPatientOrder/' + patientId,  
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'orderId', "width": "10%" },
+                    // { data: 'anaesthesiologist', "width": "15%" },
+                    {
+                        data: 'medicationOrders', "width": "20%", "render": function (data) {
+                            return data.map(order => order.name).join('<br>');
+                        }
+                    },
+                    {
+                        data: 'medicationOrders', "width": "10%", "render": function (data) {
+                            return data.map(order => order.quantity).join('<br>');
+                        }
+                    },
+                    { data: 'status', "width": "10%" },
+                    {
+                        data: 'isUrgent', "width": "10%", "render": function (data) {
+                            return data === "Yes" ? `<span class="text-danger">${data}</span>` : data;
+                        }
+                    },
+                    {
+                        data: 'orderId', "width": "25%", "render": function (data, type, row) {
+                            let buttons = '';
+
+                            if (row.status == "Dispensed") {
+                                buttons += `<a href="#" class="btn btn-success" onclick="recieveOrder(${data})"><i class="bi bi-check2-circle"></i> Recieve</a>`;
+                            }
+                            if (row.status == "Received") {
+
+                                buttons += ` <a href="/anaesthesiologist/ListMedicationToANote/${data}" class="btn btn-info"><i class="bi bi-file-earmark-medical"></i> Note</a>`;
+                                buttons += `<a href="/anaesthesiologist/ListNotedication/${data}" class="btn btn-info mx-1"> <i class="bi bi-list-check"></i> Medication Note</a>`;
+
+
+                            }
+
+
+                            return buttons;
+                        }
+                    }
+
+                ]
+            });
+        }
+
+        function recieveOrder(orderId) {
+            Swal.fire({
+                icon: "success",
+                title: "Order has been Recieved",
+                showConfirmButton: true,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/anaesthesiologist/ReceiveOrder',
+                        type: 'POST',
+                        data: {
+                            orderId: orderId,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            } else {
+                                // toastr.error(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while receiving order");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

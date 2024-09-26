@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\ThatoTs\Desktop\Publish</_PublishTargetUrl>
+    <History>True|2024-08-28T13:09:43.3826028Z||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Server=soit-sql.mandela.ac.za%3bDatabase=GRP-04-21-EPrescribing%3bTrusted_Connection=False%3bTrustServerCertificate=true%3b User ID=GRP-04-21%3b Password=grp-04-21-2024#</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="E_Prescribing.Data.ApplicationDbContext">
+      <Value>Server=soit-sql.mandela.ac.za%3bDatabase=GRP-04-21-EPrescribing%3bTrusted_Connection=False%3bTrustServerCertificate=true%3b User ID=GRP-04-21%3b Password=grp-04-21-2024#</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

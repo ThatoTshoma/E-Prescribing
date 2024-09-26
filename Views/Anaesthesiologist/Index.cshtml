@@ -1,0 +1,69 @@
+﻿<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Anaesthesiologist Dashboard</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-primary bg-gradient py-3 text-center">
+                        <h5 class="text-white mb-0">
+                            <i class="bi bi-people-fill"></i> Patients
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("ListPatient", "Anaesthesiologist")" class="btn btn-success">
+                            <i class="bi bi-people-fill"></i> View Patients
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-success bg-gradient py-3 text-center">
+                        <h5 class="text-white mb-0">
+                            <i class="bi bi-capsule-pill"></i> Order
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("ListOrder", "Anaesthesiologist")" class="btn btn-success">
+                            <i class="bi bi-capsule-pill"></i> View Orders
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-info bg-gradient py-3 text-center">
+                        <h5 class="text-white mb-0">
+                            <i class="bi bi-clipboard2-pulse-fill"></i> Bookings
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("PendingBooking", "Anaesthesiologist")" class="btn btn-success">
+                            <i class="bi bi-clipboard2-pulse-fill"></i> View Bookings
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow border-0">
+                    <div class="card-header bg-danger bg-gradient py-3 text-center">
+                        <h5 class="text-white mb-0">
+                            <i class="bi bi-capsule"></i> Vitals
+                        </h5>
+                    </div>
+                    <div class="card-body text-center">
+                        <a href="@Url.Action("ListVitalRange", "Anaesthesiologist")" class="btn btn-success">
+                            <i class="bi bi-capsule"></i> View Vitals
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

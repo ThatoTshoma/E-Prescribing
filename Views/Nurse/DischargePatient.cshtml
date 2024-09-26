@@ -1,0 +1,84 @@
+﻿@model Patient
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Discharge Patient</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="FullName" class="form-control" aria-required="true" placeholder="Name" disabled />
+                            <label asp-for="FullName"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="IdNumber" class="form-control" aria-required="true" placeholder="Name" disabled />
+                            <label asp-for="IdNumber"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Gender" class="form-control" aria-required="true" placeholder="Name" disabled />
+                            <label asp-for="Gender"></label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="ContactNumber" class="form-control" aria-required="true" placeholder="Name" disabled />
+                            <label asp-for="ContactNumber"></label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        </div>
+    <div class="card-body p-4">
+        <form method="post">
+                <input asp-for="PatientId" hidden />
+
+
+            <div class="border p-3">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-floating py-2 col-12">
+                        <label asp-for="DischargeDate"></label>
+                    <input asp-for="DischargeDate" class="form-control" aria-required="true" placeholder="Admission Date" type="datetime-local" />
+                    <span asp-validation-for="DischargeDate" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                  
+                            <button type="submit" class="btn btn-primary form-control">Submit</button>
+                  
+                    </div>
+                    <div class="col-6 col-md-3">
+                            <a asp-controller="Nurse" asp-action="ListAdmittedPatient" class="btn btn-outline-primary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+      
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

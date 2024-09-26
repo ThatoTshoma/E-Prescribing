@@ -1,0 +1,99 @@
+﻿@model E_Prescribing.CollectionModel.PatientBedCollection
+@{
+    ViewData["Title"] = "Assign Bed";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Bed</li>
+        <li class="active">Assign Bed</li>
+    </ol>
+    <div class="container px-6 mx-auto grid">
+
+        <h2><b>@ViewData["Title"]</b></h2>
+        <hr />
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.PatientBed.Patient.Name)
+                </dt>
+                <dd>
+                    <span>@Model.Patients.FirstOrDefault(c => c.PatientId == Model.PatientBed.PatientId)?.Name</span>
+                </dd>
+
+
+            </dl>
+        </div>
+        <hr style="border: 0; height: 4px; background: black;">
+
+
+                <form asp-controller="Nurse" asp-action="AssignBed" method="post">
+                    <input asp-for="PatientBed.PatientId" type="hidden" />
+
+             
+
+
+                    <div class="form-floating mb-3">
+                        <label>Ward</label>
+                        <select for="Ward" asp-items="@ViewBag.WardList" class="form-control" id="Ward">
+                            <option value="">Select Ward</option>
+                        </select>
+                        <label for="Ward"></label>
+
+                    </div>
+                    <div class="form-floating mb-3">
+                        <label asp-for="PatientBed.BedId"></label>
+
+                        <select asp-for="PatientBed.SelectedBeds" class="form-control" id="Bed" multiple>
+                            <option value="">Select Bed</option>
+                        </select>
+                        <span asp-validation-for="PatientBed.BedId" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            var wardDropdown = $("#Ward");
+            var bedDropdown = $("#Bed");
+
+            wardDropdown.on("change", function () {
+                var selectedWardId = $(this).val();
+                bedDropdown.empty();
+
+                if (selectedWardId) {
+                    $.ajax({
+                        url: "/Nurse/LoadBed",
+                        method: "GET",
+                        data: { wardId: selectedWardId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                bedDropdown.append($('<option> ', {
+                                    value: item.bedId,
+                                    text: item.bedNumber
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

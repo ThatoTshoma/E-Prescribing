@@ -1,0 +1,107 @@
+﻿@model Patient
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Add Patient</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post">
+
+            <div class="border p-3">
+
+               <div class="form-floating py-2 col-12">
+                    <label asp-for="Name"></label>
+
+                    <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Surname"></label>
+                    <input asp-for="Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="IdNumber"></label>
+                    <input asp-for="IdNumber" class="form-control" aria-required="true" onchange="calculateDateOfBirth()" id="IdNumber" placeholder="ID Number" type="text" />
+                    <span asp-validation-for="IdNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="DateOfBirth"></label>
+                    <input asp-for="DateOfBirth" class="form-control" aria-required="true" placeholder="Date Of Birth" type="date" />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Gender"></label>
+
+                    <select asp-for="Gender" class="form-control">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+
+
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="EmailAddress"></label>
+                    <input asp-for="EmailAddress" class="form-control" aria-required="true" placeholder="Email Address" type="email" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+              
+               
+                            <button type="submit" class="btn btn-primary form-control">Add</button>
+            
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Admin" asp-action="ListActiveIngredient" class="btn btn-outline-primary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+
+        function calculateDateOfBirth() {
+            var idNumber = document.getElementById('IdNumber').value;
+            var dateOfBirthInput = document.getElementById('DateOfBirth');
+            if (idNumber.length === 13) {
+                var year = idNumber.substring(0, 2);
+                var month = idNumber.substring(2, 4);
+                var day = idNumber.substring(4, 6);
+
+                if (parseInt(month) > 12) {
+                    year = '20' + year;
+                    month = (parseInt(month) - 20).toString();
+                } else {
+                    year = '19' + year;
+                }
+
+                var dateOfBirth = year + '-' + month + '-' + day;
+
+                if (dateOfBirth !== dateOfBirthInput.value) {
+                    alert('Date of birth does not match the ID number.');
+                    dateOfBirthInput.value = dateOfBirth;
+                }
+
+            }
+        }
+    </script>
+}

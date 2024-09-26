@@ -1,0 +1,78 @@
+﻿@model List<E_Prescribing.Models.Prescription>
+@{
+    ViewData["Title"] = "List Medication";
+    Layout = "~/Views/Shared/_NurseLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Medication</li>
+        <li class="active">List Medication</li>
+    </ol>
+</div>
+
+<div class="container px-6 mx-auto grid">
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                <b>Patient Name:</b> @Model.FirstOrDefault()?.Patient.FullName
+            </dt>
+            <dt>
+                <b>Id Number:</b> @Model.FirstOrDefault()?.Patient.IdNumber
+            </dt>
+            <dd>
+
+            </dd>
+
+        </dl>
+
+
+    </div>
+    <hr style="border: 0; height: 4px; background: black;">
+
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Medication Name</th>
+                        <th>Patient Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var administeredMedication in Model)
+                    {
+                        <tr>
+
+                            <td class="align-middle">
+                                <ul style="list-style-type:none; padding-right:0;">
+                                    @foreach (var item in administeredMedication.AdministeredMedications)
+                                    {
+                                        <li>@item.Medication.Name</li>
+                                    }
+                                </ul>
+                            </td>
+                            <td class="align-middle">@administeredMedication.Patient.FullName</td>
+                            <td class="align-middle">
+                                <ul style="list-style-type:none; padding-right:0;">
+                                    @foreach (var item in administeredMedication.AdministeredMedications)
+                                    {
+                                        <li>@item.Quantity</li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

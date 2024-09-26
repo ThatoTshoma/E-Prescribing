@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Patient>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Patient List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Surgeon" asp-action="AddPatient" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Add New Patient
+                </a>
+            </div>
+        </div>
+
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>ID Number</th>
+                    <th>Date Of Birth</th>
+                    <th>Contact Number</th>
+                    <th>Email Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/surgeon/getPatient',
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'fullName', "width": "25%" },
+                    { data: 'idNumber', "width": "25%" },
+                    { data: 'dateOfBirth', "width": "25%" },
+                    { data: 'contactNumber', "width": "25%" },
+                    { data: 'emailAddress', "width": "25%" },
+                    {
+                        data: 'patientId',
+                        "render": function (data) {
+                            return `<div class="w-75 btn-group" role="group">
+                                       <a href="/surgeon/patientDetails?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-eye-fill"></i> More</a>
+                                                        <a onClick=Delete('/surgeon/deletePatient/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                   </div>`;
+                        },
+                        "width": "25%"
+                    }
+                ]
+            });
+        }
+        function Delete(url) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while deleting");
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}

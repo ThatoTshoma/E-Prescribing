@@ -1,0 +1,99 @@
+﻿@using E_Prescribing.Models;
+@model CartModel
+@{
+    ViewData["Title"] = "Medication Prescription Summary";
+    Layout = "~/Views/Shared/_PharmacistLayout.cshtml";
+}
+@{
+    List<MedicationPrescription> prescribedMedications = new List<MedicationPrescription>();
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Prescription</li>
+        <li class="active">Medication Prescription Summary</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+
+    <div>
+        <dl class="dl-horizontal">
+       
+            <ul>
+                @foreach (var medication in Model.Cart.Medications)
+                {
+                    <li>@medication.Medication.Name - Quantity: @medication.Quantity</li>
+                }
+            </ul>
+        
+
+
+        </dl>
+    </div>
+    <hr style="border: 0; height: 4px; background: black;">
+
+
+    <div class="row">
+        <div class="col-md-8 offset-2">
+         
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Medication</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var medication in Model.Cart.Medications)
+                    {
+                        <tr>
+                            <td class="align-middle">@medication.Quantity</td>
+                            <td class="align-middle">@medication.Medication.Name</td>
+                            <td class="align-middle">
+                                <a  asp-action="RemoveMedicationFromCart"
+                                   asp-route-id="@medication.Medication.MedicationId">
+                                    <i class="btn btn-outline-success">-</i>
+                                </a>
+                                |
+                                <a  asp-action="AddMedicationToCart"
+                                   asp-route-id="@medication.Medication.MedicationId">
+                                    <i class="btn btn-outline-success">+</i>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+            <div class="text-right">
+                <div class="btn-group">
+                    <a class="btn btn-outline-primary" asp-action="DispenseMedication">
+                        Prescribe Medication
+                    </a>
+                    <div id="paypal-btn"></div>
+                    <span style="padding:5px"></span>
+                    <a class="btn btn-outline-success" asp-action="ListMedication">
+                        Add more Medication
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+    @section Scripts {
+
+
+    }

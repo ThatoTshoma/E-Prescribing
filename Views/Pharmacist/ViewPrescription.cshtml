@@ -1,0 +1,46 @@
+﻿@model E_Prescribing.Models.Prescription
+
+<h1>Prescription Details</h1>
+
+<table class="table">
+    <tr>
+        <th>Patient</th>
+        <td>@Model.Patient.Name</td>
+    </tr>
+    <tr>
+        <th>Surgeon</th>
+        <td>@Model.Surgeon.Name</td>
+    </tr>
+    <tr>
+        <th>Date</th>
+        <td>@Model.Date.ToShortDateString()</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>@Model.Status</td>
+    </tr>
+</table>
+
+<h2>Medications Prescribed</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Medication</th>
+            <th>Instructions</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var medicationPrescription in Model.MedicationPrescriptions)
+        {
+            <tr>
+                <td>@medicationPrescription.Medication.Name</td>
+                <td>@medicationPrescription.Instructions</td>
+                <td>@medicationPrescription.Quantity</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Prescription" asp-action="Index" class="btn btn-primary">Back to List</a>

@@ -1,0 +1,171 @@
+﻿@model E_Prescribing.Models.Prescription
+@{
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" media="all" />
+    <link rel="stylesheet" href="~/Content/resume.css">
+</head>
+<body>
+    <div id="doc2" class="yui-t7">
+        <div id="inner">
+
+            <div id="hd">
+                <div class="yui-gc">
+                    <div class="yui-u first">
+                        <h2>E-Prescribing System</h2>
+                        <br>
+                        <h3>Address: 81 Govan Mbeki Ave, Port Elizabeth</h3>
+                        <h3>Contact: 011 885 7500</h3>
+                        <h3>Date: @(Model.Date.ToShortDateString())</h3>
+                    </div>
+
+                    <div class="yui-u">
+                        <div class="contact-info">
+                        </div><!--// .contact-info -->
+                    </div>
+                </div><!--// .yui-gc -->
+            </div><!--// hd -->
+
+            <div id="bd">
+                <div id="yui-main">
+                    <div class="yui-b">
+
+
+                        <div class="yui-gf">
+                            <div class="yui-u first">
+                                <h2>Patient Details</h2>
+                            </div>
+                            <div class="yui-u">
+                                <p class="enlarge">
+                                    Name: @Model.Patient.Name
+                                </p>
+                                @if (Model.Patient.IdNumber != null)
+                                {
+                                    <p class="enlarge">
+                                        Id Number: @Model.Patient.IdNumber
+                                    </p>
+                                }
+                                @if (Model.Patient.Gender != null)
+                                {
+                                    <p class="enlarge">
+                                        Gender: @Model.Patient.Gender
+                                    </p>
+                                }
+
+                            </div>
+                        </div><!--// .yui-gf -->
+
+
+
+                        <div class="yui-gf">
+                            <div class="yui-u first">
+                                <h2>Pharmacist Details</h2>
+                            </div>
+                            <div class="yui-u">
+                                <p class="enlarge">
+                                    Name: @Model.Pharmacist.FullName
+                                </p>
+                                @if (Model.Pharmacist.ContactNumber != null)
+                                {
+                                    <p class="enlarge">
+                                        Contact Number: @Model.Pharmacist.ContactNumber
+                                    </p>
+                                }
+                                @if (Model.Pharmacist.EmailAddress != null)
+                                {
+                                    <p class="enlarge">
+                                        Email Address: @Model.Pharmacist.EmailAddress
+                                    </p>
+                                }
+
+                            </div>
+                        </div><!--// .yui-gf -->
+
+
+                        <div class="yui-gf">
+
+                            <div class="yui-u first">
+                                <h2>Medications Prescribed</h2>
+                            </div><!--// .yui-u -->
+
+                            <div class="yui-u">
+
+
+                                @if (@Model.MedicationPrescriptions != null)
+                                {
+                                    @foreach (var medicationPrescription in Model.MedicationPrescriptions)
+                                    {
+
+                                        <div class="job">
+                                            <h2>Medication: @medicationPrescription.Medication.Name</h2>
+                                            <h2>Instructions: @medicationPrescription.Instructions</h2>
+                                            <h2>Quantity: @medicationPrescription.Quantity</h2>
+
+
+                                            <br />
+                                        </div>
+
+                                    }
+
+
+
+
+
+
+                                }
+
+
+
+
+
+
+
+
+
+                            </div><!--// .yui-u -->
+                        </div><!--// .yui-gf -->
+
+
+
+
+
+                    </div><!--// .yui-b -->
+                </div><!--// yui-main -->
+            </div><!--// bd -->
+
+
+            <div id="ft">
+                <p>Date: <span id="currentDateTime"></span></p>
+            </div><!--// footer --><!--// footer -->
+
+        </div><!-- // inner -->
+
+
+    </div>
+</body>
+
+<script>
+    // Function to update the current date and time
+    function updateDateTime() {
+        var currentDate = new Date();
+        document.getElementById('currentDateTime').innerHTML = currentDate.toLocaleString();
+    }
+
+    // Function to update the counter
+    function updateCounter() {
+        var counterElement = document.getElementById('counter');
+        var counterValue = parseInt(counterElement.innerHTML);
+        counterElement.innerHTML = counterValue + 1;
+    }
+
+    // Update date and time initially
+    updateDateTime();
+
+    // Update date and time every second
+    setInterval(updateDateTime, 1000);
+
+    // Update counter every second
+    setInterval(updateCounter, 1000);
+</script>

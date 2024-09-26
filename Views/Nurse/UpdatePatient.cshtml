@@ -1,0 +1,169 @@
+﻿@model Patient
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2"> Update Patient</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form  method="post">
+            <input asp-for="PatientId" hidden />
+
+
+            <div class="border p-3">
+
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+
+
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" aria-required="true" placeholder="Name" disabled />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Surname"></label>
+                    <input asp-for="Surname" class="form-control" aria-required="true" placeholder="Surname" type="text" disabled />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="IdNumber"></label>
+                    <input asp-for="IdNumber" class="form-control" aria-required="true" onchange="calculateDateOfBirth()" id="IdNumber" placeholder="Surname" type="text" disabled />
+                    <span asp-validation-for="IdNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="DateOfBirth"></label>
+                    <input asp-for="DateOfBirth" class="form-control" aria-required="true" placeholder="Date Of Birth" type="date" disabled />
+                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="Gender"></label>
+                    <select asp-for="Gender" class="form-control" disabled>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="ContactNumber"></label>
+                    <input asp-for="ContactNumber" class="form-control" aria-required="true" placeholder="Contact Number" type="text" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="EmailAddress"></label>
+                    <input asp-for="EmailAddress" class="form-control" aria-required="true" placeholder="Surname" type="text" />
+                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="AddressLine1"></label>
+                    <input asp-for="AddressLine1" class="form-control" aria-required="true" placeholder="AddressLine 1" type="text" />
+                    <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="AddressLine2"></label>
+                    <input asp-for="AddressLine2" class="form-control" aria-required="true" placeholder="AddressLine 2" type="text" />
+                    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label for="City">City</label>
+                    <select for="City" asp-items="@ViewBag.CityList" class="form-control" id="City">
+                        <option value="">Select City</option>
+                    </select>
+                    <span validation-for="City" class="text-danger"></span>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label asp-for="SuburbId"></label>
+
+                    <select asp-for="SuburbId" class="form-control" id="Suburb">
+                        <option value="">Select Suburb</option>
+                    </select>
+                    <span asp-validation-for="SuburbId" class="text-danger"></span>
+
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                    
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                  
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Nurse" asp-action="ListAdmittedPatient" class="btn btn-outline-primary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var cityDropdown = $("#City");
+            var suburbDropdown = $("#Suburb");
+
+            cityDropdown.on("change", function () {
+                var selectedCityId = $(this).val();
+                suburbDropdown.empty();
+
+                if (selectedCityId) {
+                    $.ajax({
+                        url: "/Nurse/LoadSuburbs",
+                        method: "GET",
+                        data: { cityId: selectedCityId },
+                        success: function (data) {
+                            $.each(data, function (index, item) {
+                                suburbDropdown.append($('<option> ', {
+                                    value: item.suburbID,
+                                    text: item.suburbName
+                                }));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        function calculateDateOfBirth() {
+            var idNumber = document.getElementById('IdNumber').value;
+            var dateOfBirthInput = document.getElementById('DateOfBirth');
+            if (idNumber.length === 13) {
+                var year = idNumber.substring(0, 2);
+                var month = idNumber.substring(2, 4);
+                var day = idNumber.substring(4, 6);
+
+                if (parseInt(month) > 12) {
+                    year = '20' + year;
+                    month = (parseInt(month) - 20).toString();
+                } else {
+                    year = '19' + year;
+                }
+
+                var dateOfBirth = year + '-' + month + '-' + day;
+
+                if (dateOfBirth !== dateOfBirthInput.value) {
+                    alert('Date of birth does not match the ID number.');
+                    dateOfBirthInput.value = dateOfBirth;
+                }
+
+            }
+        }
+    </script>
+}

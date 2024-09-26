@@ -1,0 +1,146 @@
+﻿@model E_Prescribing.Models.PatientMedicationHistoryViewModel
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Medication History</h2>
+            </div>
+        </div>
+    </div>
+    <div class="border p-3">
+
+
+        <div class="card-body">
+            <div class="card mb-4">
+                <div class="border p-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="patientName" value="@Model.Patient.FullName" disabled />
+                                    <label for="patientName">Name</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="idNumber" value="@Model.Patient.IdNumber" disabled />
+                                    <label for="idNumber">ID Number</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="patientGender" value="@Model.Patient.Gender" disabled />
+                                    <label for="patientGender">Gender</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="contactNumber" value="@Model.Patient.ContactNumber" disabled />
+                                    <label for="contactNumber">Contact Number</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="border p-3 mb-4">
+                            <h3>Beds</h3>
+                            @if (Model.Beds.Any())
+                            {
+                                <ul>
+                                    @foreach (var bed in Model.Beds)
+                                    {
+                                        <li>@bed.Bed.BedNumber</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No beds assigned.</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="border p-3 mb-4">
+                            <h3>Allergies</h3>
+                            @if (Model.Allergies.Any())
+                            {
+                                <ul>
+                                    @foreach (var allergy in Model.Allergies)
+                                    {
+                                        <li>@allergy.ActiveIngredient.Name</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No allergies recorded.</p>
+                            }
+                        </div>
+
+                        <div class="border p-3 mb-4">
+                            <h3>Medications</h3>
+                            @if (Model.Medications.Any())
+                            {
+                                <ul>
+                                    @foreach (var medication in Model.Medications)
+                                    {
+                                        <li>@medication.Medication.Name</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No medications recorded.</p>
+                            }
+                        </div>
+
+                        <div class="border p-3">
+                            <h3>Conditions</h3>
+                            @if (Model.Conditions.Any())
+                            {
+                                <ul>
+                                    @foreach (var condition in Model.Conditions)
+                                    {
+                                        <li>@condition.Condition.Name</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No conditions recorded.</p>
+                            }
+                        </div>
+
+
+                        @*                     <div class="border p-3">
+                        <h3>Treatment</h3>
+                        @if (Model.Treatments != null && Model.Treatments.Any())
+                        {
+                        <ul>
+                        @foreach (var condition in Model.Treatments)
+                        {
+                        <li>@condition.Treatment?.Code</li>
+                        }
+                        </ul>
+                        }
+                        else
+                        {
+                        <p>No conditions recorded.</p>
+                        }
+                        </div> *@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

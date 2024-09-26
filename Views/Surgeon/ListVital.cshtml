@@ -1,0 +1,124 @@
+﻿@model E_Prescribing.CollectionModel.VitalCollection
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Vital List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patient.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patient.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientGender" value="@Model.Patient.Gender" disabled />
+                            <label for="patientGender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="contactNumber" value="@Model.Patient.ContactNumber" disabled />
+                            <label for="contactNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+
+
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    @foreach (var vital in Model.SelectedVitals)
+                    {
+                        <th>@vital.Name</th>
+                    }
+                </tr>
+            </thead>
+        </table>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '@Url.Action("getPatientVital", "surgeon", new { id = Model.Patient.PatientId })',
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'time', "width": "20%" },
+        @foreach (var vital in Model.SelectedVitals)
+        {
+            <text>
+                        { data: '@vital.Name.ToLower()', "width": "10%" },
+            </text>
+        }
+                                 ]
+            });
+        }
+        function Delete(url) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while deleting");
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}

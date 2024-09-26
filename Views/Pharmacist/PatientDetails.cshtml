@@ -1,0 +1,148 @@
+﻿@model E_Prescribing.Models.Patient
+
+<style>
+    .border {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .p-3 {
+        padding: 1rem;
+    }
+
+    .mt-3 {
+        margin-top: 1rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: #fff;
+    }
+
+    .dl-horizontal dt {
+        float: left;
+        clear: left;
+        width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    .dl-horizontal dd {
+        margin-left: 180px;
+    }
+
+    .card-button {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Patient Details</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <div class="border p-3">
+            <div class="row">
+                <div class="col-md-8">
+                    <dl class="dl-horizontal">
+                        <!-- Patient details fields -->
+                        <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+                        <dd>@Html.DisplayFor(model => model.Name)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.Surname)</dt>
+                        <dd>@Html.DisplayFor(model => model.Surname)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.IdNumber)</dt>
+                        <dd>@Html.DisplayFor(model => model.IdNumber)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.DateOfBirth)</dt>
+                        <dd>@Html.DisplayFor(model => model.DateOfBirth)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.Gender)</dt>
+                        <dd>@Html.DisplayFor(model => model.Gender)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.ContactNumber)</dt>
+                        <dd>@Html.DisplayFor(model => model.ContactNumber)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.EmailAddress)</dt>
+                        <dd>@Html.DisplayFor(model => model.EmailAddress)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.AddressLine1)</dt>
+                        <dd>@Html.DisplayFor(model => model.AddressLine1)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.AddressLine2)</dt>
+                        <dd>@Html.DisplayFor(model => model.AddressLine2)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.Suburb)</dt>
+                        <dd>@Html.DisplayFor(model => model.Suburb.Name)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.Suburb.PostalCode)</dt>
+                        <dd>@Html.DisplayFor(model => model.Suburb.PostalCode)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.AdmissionDate)</dt>
+                        <dd>@Html.DisplayFor(model => model.AdmissionDate)</dd>
+                        <dt>@Html.DisplayNameFor(model => model.DischargeDate)</dt>
+                        <dd>@Html.DisplayFor(model => model.DischargeDate)</dd>
+                    </dl>
+                    <div></div>
+                    <div class="card-button">
+                        <a class="btn btn-secondary ml-2" asp-action="ViewVitals" asp-route-id="@Model.PatientId">Vital Readings</a>
+                        <a class="btn btn-primary ml-2" asp-action="ListPatientPrescription" asp-route-id="@Model.PatientId">Prescription</a>
+                        <a class="btn btn-primary ml-2" asp-action="ListPatientOrder" asp-route-id="@Model.PatientId">Orders</a>
+
+                        <a class="btn btn-primary ml-2" asp-action="ViewMedicationHistory" asp-route-id="@Model.PatientId">Midical Histoty</a>
+
+                        <a class="btn btn-secondary ml-2" asp-action="Index">Back to Home</a>
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="border p-3">
+                        <h2><b>Medical History</b></h2>
+
+                        <h3>Chronic Conditions</h3>
+                        <ul>
+                            @foreach (var condition in Model.PatientConditions)
+                            {
+                                <li>@condition.Condition.Name</li>
+                            }
+                        </ul>
+
+                        <h3>Vital Ranges</h3>
+                        <ul>
+                            @foreach (var condition in Model.PatientVitals)
+                            {
+                                <li>@condition.Vital.Name</li>
+                            }
+                        </ul>
+
+                        <h3>Allergies</h3>
+                        <ul>
+                            @foreach (var condition in Model.PatientAllergies)
+                            {
+                                <li>@condition.ActiveIngredient.Name</li>
+                            }
+                        </ul>
+
+                        <h3>Current Medication</h3>
+                        <ul>
+                            @foreach (var condition in Model.PatientMedications)
+                            {
+                                <li>@condition.Medication.Name</li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

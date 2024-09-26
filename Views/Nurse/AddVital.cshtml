@@ -1,0 +1,101 @@
+﻿@model E_Prescribing.CollectionModel.VitalCollection
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Vital</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Vital.PatientId)?.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Vital.PatientId)?.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Vital.PatientId)?.Gender" disabled />
+                            <label for="patientName">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patients.FirstOrDefault(c => c.PatientId == Model.Vital.PatientId)?.ContactNumber" disabled />
+                            <label for="idNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post">
+                <input asp-for="Vital.PatientId" type="hidden" />
+                <div class="border p-3">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    @foreach (var vital in Model.SelectedVitals)
+                    {
+                        <div class="form-floating py-2 col-12">
+                            <label>@vital.Name</label>
+                            <input type="text" name="VitalInputs[@vital.Name]" class="form-control" aria-required="true" placeholder="@vital.Name" />
+                        </div>
+                    }
+                    <div class="form-floating py-2 col-12">
+                        <label asp-for="Vital.Time"></label>
+                        <input asp-for="Vital.Time" class="form-control" aria-required="true" placeholder="Time" type="time" />
+                        <span asp-validation-for="Vital.Time" class="text-danger"></span>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-6 col-md-3">
+                            <button type="submit" class="btn btn-primary form-control">Submit</button>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-controller="Nurse" asp-action="ViewVitals" class="btn btn-outline-primary border form-control">
+                                Back to List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function () {
+            var outOfRangeVitals = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(TempData["OutOfRangeVitals"] ?? new List<string>()));
+
+            if (outOfRangeVitals.length > 0) {
+                var message = "The vitals are out of range:\n\n";
+                for (var i = 0; i < outOfRangeVitals.length; i++) {
+                    message += outOfRangeVitals[i] + "\n";
+                }
+
+                Swal.fire({
+                    title: 'Alert',
+                    text: message,
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    </script>
+
+
+}

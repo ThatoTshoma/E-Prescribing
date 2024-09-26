@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MedicationIngredient>
+
+@{
+    ViewData["Title"] = "List Medication";
+    Layout = "~/Views/Shared/_AnaesthesiologistLayout.cshtml";
+}
+<div class="row">
+    <ol class="breadcrumb">
+        <li>
+            <a href="#">
+                <em class="fa fa-home"></em>
+            </a>
+        </li>
+        <li class="active">Medication</li>
+        <li class="active">List Medication</li>
+    </ol>
+</div>
+<div class="container px-6 mx-auto grid">
+
+    <h2><b>@ViewData["Title"]</b></h2>
+    <hr />
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Medication Name</th>
+                <th>Dosage Form</th>
+                <th>Active Ingredient</th>
+                <th>Strength</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var medicationIngredient in Model)
+            {
+                <tr>
+                    <td>@medicationIngredient.Medication.Name</td>
+                    <td>@medicationIngredient.Medication.DosageForm.Name</td>
+                    <td>@medicationIngredient.ActiveIngredient.Name</td>
+                    <td>@medicationIngredient.ActiveIngredientStrength</td>
+
+
+                    <td>
+                        <a asp-controller ="Order" asp-action="AddMedicationToCart" asp-route-id="@medicationIngredient.MedicationId">Add</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

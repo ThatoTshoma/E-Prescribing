@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Booking>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Booking List</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Surgeon" asp-action="ListPatient" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Add New Booking
+                </a>
+            </div>
+            <div class="col-md-4">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" class="form-control" />
+            </div>
+            <div class="col-md-4">
+                <button id="searchBtn" class="btn btn-primary mt-4">
+                    <i class="bi bi-search"></i>
+
+                </button>
+                <button id="generateReportBtn" class="btn btn-success mt-4">
+                    <i class="bi bi-file-earmark-pdf"></i> Download Pdf
+                </button>
+            </div>
+        </div>
+  
+        <div class="card-body p-4">
+     
+
+            <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Patient</th>
+                        <th>Anaesthesiologist</th>
+                        <th>Theatre</th>
+                        <th>Ward</th>
+                        <th>Status</th>
+                        <th>Session</th>
+                        <th>Treatments</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            var patientId = @Html.Raw(ViewBag.PatientId);
+
+            loadDataTable(patientId);
+            $('#searchBtn').click(function () {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+                loadDataTable(startDate, endDate);
+            });
+            $('#generateReportBtn').click(function () {
+                var startDate = $('#startDate').val();
+                var endDate = $('#endDate').val();
+
+                window.location.href = `/surgeon/GenerateReport?startDate=${startDate}&endDate=${endDate}`;
+            });
+        });
+
+        function loadDataTable(startDate = '', endDate = '') {
+            if ($.fn.dataTable.isDataTable('#tblData')) {
+                dataTable.destroy();
+            }
+
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/surgeon/getBookedPatient',
+                    data: {
+                        startDate: startDate,
+                        endDate: endDate
+                    },
+
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'date', "width": "15%" },
+                    { data: 'patient.fullName', "width": "15%" },
+                    { data: 'fullName', "width": "15%" },
+                    { data: 'theatre', "width": "15%" },
+                    { data: 'ward', "width": "15%" },
+                    {
+                        data: 'status',
+                        render: function (data) {
+                            return data ? 'Approved' : 'Pending';
+                        },
+                        "width": "10%"
+                    },
+                    { data: 'session', "width": "15%" },
+
+                    {
+                        data: 'treatments',
+                        render: function (data) {
+                            return data.join("<br>");
+                        },
+                        "width": "15%"
+                    },
+                    {
+                        data: 'bookingId',
+                        "render": function (data) {
+                            return `<div class="btn-group" role="group">
+                                                                <a onClick=Delete('/surgeon/deleteBooking/${data}') class="btn btn-danger mx-1"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                                            </div>`;
+                        },
+                        "width": "30%"
+                    }
+                ]
+            });
+        }
+
+        function Delete(url) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                toastr.success(data.message);
+                            } else {
+                                toastr.error(data.message);
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error("Error while deleting");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

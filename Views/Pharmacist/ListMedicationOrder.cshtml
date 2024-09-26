@@ -1,0 +1,116 @@
+﻿@model List<Order2>
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Medication Order List</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Order Number</th>
+                    <th>Date</th>
+                    <th>Medication</th>
+                    <th>Dosage Form</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": {
+                    url: '/pharmacist/GetMedicationOrder',
+                    dataSrc: 'data'
+                },
+                "columns": [
+                    { data: 'orderId', "width": "10%" },
+                    { data: 'date', "width": "10%" },
+                    { data: 'medications', "width": "20%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'dosageForms', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'status', "width": "10%" },
+                    {
+                        data: null, "width": "10%", "render": function (data, type, row) {
+                            if (row.status === 'Delivered') {
+                                return `<button class="btn btn-success mx-1" onclick="receiveOrder(${row.orderId})"><i class="bi bi-check2-circle"></i>Receive</button>`;
+                            }
+                            return '';
+                        }
+                    }
+                ]
+            });
+        }
+        function receiveOrder(orderId) {
+
+            Swal.fire({
+                icon: "success",
+                title: "Your order has been recieved",
+                showConfirmButton: true,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/pharmacist/ReceiveOrder',
+                        type: 'POST',
+                        data: {
+                            orderId: orderId,
+                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                dataTable.ajax.reload();
+                                Swal.fire({
+                                    position: "top-end",
+                                    icon: "success",
+                                    title: "Order has been received",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } else {
+                                Swal.fire({
+                                    position: "top-end",
+                                    title: data.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            }
+                        },
+                        error: function (err) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                title: "Error while receiving order",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+
+    </script>
+}

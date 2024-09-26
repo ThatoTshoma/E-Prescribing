@@ -1,0 +1,92 @@
+﻿@model IEnumerable<MedicationIngredient>
+
+<div class="card shadow border-0 my-4">
+
+<div class="card-header bg-secondary bg-gradient py-3">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="text-white py-2">Order Medication</h2>
+        </div>
+    </div>
+</div>
+    <div class="card-body p-4">
+
+
+    <form asp-controller="Pharmacist" asp-action="ProcessOrder" method="post">
+
+    
+        <table id="medicationTable" class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Medication Name</th>
+                    <th>Dosage Form</th>
+                    <th>Active Ingredient</th>
+                    <th>Strength</th>
+                        <th>Stock On Hand</th>
+                        <th>Re-Order Level</th>
+                    <th>Quantity</th>
+               
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#medicationTable').DataTable({
+                "ajax": {
+                    "url": '@Url.Action("getMedicationStock", "pharmacist")',
+                    "dataSrc": "data",
+                    "error": function (jqXHR, textStatus, errorThrown) {
+                        console.error("Error: ", textStatus, errorThrown);
+                        alert("An error occurred while loading the table data: " + errorThrown);
+                    }
+                },
+                "columns": [
+                    {
+                        "data": "medicationId",
+                        "render": function (data) {
+                            return `<input type="checkbox" name="selectedItems[${data}]" value="${data}" />`;
+                        },
+                        "width": "5%"
+                    },
+                    { "data": 'name', "width": "15%" },
+                    { "data": 'dosageForm.name', "width": "15%" },
+                    {
+                        "data": 'activeIngredients',
+                        "render": function (data) {
+                            return data.map(item => item.name).join('<br>');
+                        },
+                        "width": "15%"
+                    },
+                    {
+                        "data": 'activeIngredients',
+                        "render": function (data) {
+                            return data.map(item => item.strength).join('<br>');
+                        },
+                        "width": "10%"
+                    },
+                    { "data": "stockOnHand", "width": "10%" },
+                    { "data": "reOrderLevel", "width": "10%" },
+
+                    {
+                        "data": "medicationId",
+                        "render": function (data) {
+                            return `<input class="form-control" type="number" name="quantities[${data}]" />`;
+                        },
+                        "width": "20%"
+                    }
+                ]
+            });
+        });
+    </script>
+}
+

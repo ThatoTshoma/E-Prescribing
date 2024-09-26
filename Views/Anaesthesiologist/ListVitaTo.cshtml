@@ -1,0 +1,107 @@
+﻿@model E_Prescribing.Models.VitalViewModel
+
+<div class="card shadow border-0 my-4">
+
+    <div class="card-header bg-secondary bg-gradient py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Vital</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientName" value="@Model.Patient.FullName" disabled />
+                            <label for="patientName">Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="idNumber" value="@Model.Patient.IdNumber" disabled />
+                            <label for="idNumber">ID Number</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="patientGender" value="@Model.Patient.Gender" disabled />
+                            <label for="patientGender">Gender</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="contactNumber" value="@Model.Patient.ContactNumber" disabled />
+                            <label for="contactNumber">Contact Number</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form asp-controller="Anaesthesiologist" asp-action="AddPatientVital" asp-route-prescriptionId="@Model.Patient.PatientId" method="post">
+
+
+            <table id="medicationTable" class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Minimum</th>
+                        <th>Maximum</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#medicationTable').DataTable({
+                "ajax": {
+                    "url": '@Url.Action("getVitaTo", "anaesthesiologist", new { id = Model.Patient.PatientId })',
+                    "dataSrc": "data",
+                    "error": function (jqXHR, textStatus, errorThrown) {
+                        console.error("Error: ", textStatus, errorThrown);
+                        alert("An error occurred while loading the table data: " + errorThrown);
+                    }
+                },
+                "columns": [
+                    {
+                        "data": "vitalId",
+                        "render": function (data) {
+                            return `<input type="checkbox" name="selectedItems[${data}]" value="${data}" />`;
+                        },
+                        "width": "10%"
+                    },
+                    { "data": "name", "width": "20%" },
+                    {
+                        "data": "vitalId",
+                        "render": function (data) {
+                            return `<input class="form-control" type="text" name="minimum[${data}]" />`;
+                        },
+                        "width": "20%"
+                    },
+                    {
+                        "data": "vitalId",
+                        "render": function (data) {
+                            return `<input class="form-control" type="text" name="maximum[${data}]" />`;
+                        },
+                        "width": "20%"
+                    }
+                ]
+            });
+        });
+
+    </script>
+}
