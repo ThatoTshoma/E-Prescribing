@@ -48,6 +48,7 @@
                         <th>Quantity</th>
                         <th>Status</th>
                         <th>Urgent?</th>
+                        <th>Ignore Reason</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -100,12 +101,14 @@
                 },
                 "columns": [
                     { data: 'date', "width": "10%" },
-                    { data: 'patient', "width": "25%" },
+                    { data: 'patient', "width": "20%" },
 
-                    { data: 'medications', "width": "20%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
-                    { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'medications', "width": "15%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'quantities', "width": "5%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'status', "width": "10%" },
-                    { data: 'urgent', "width": "10%" },
+                    { data: 'urgent', "width": "5%" },
+                    { data: 'ignoreReason', "width": "20%" },
+
                     {
                         data: 'prescriptionId',
                         "render": function (data, type, row) {

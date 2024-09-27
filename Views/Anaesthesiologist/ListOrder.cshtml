@@ -50,6 +50,7 @@
                     <th>Quantity</th>
                     <th>Status</th>
                     <th>IsUrgent</th>
+                    <th>Ignore Reason</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -111,11 +112,14 @@
                         }
                     },
                     { data: 'status', "width": "10%" },
+
                     {
                         data: 'isUrgent', "width": "10%", "render": function (data) {
                             return data === "Yes" ? `<span class="text-danger">${data}</span>` : data;
                         }
                     },
+                    { data: 'ignoreReason', "width": "20%" },
+
                     {
                         data: 'orderId', "width": "10%", "render": function (data, type, row) {
                             if (row.status == "Dispensed") {

@@ -1153,7 +1153,7 @@ namespace E_Prescribing.Controllers
                 Quantities = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Quantity.ToString())),
                 p.Status,
                 p.Urgent,
-
+                p.IgnoreReason,
                 p.PrescriptionId
             });
 

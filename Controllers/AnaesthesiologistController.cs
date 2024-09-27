@@ -889,7 +889,7 @@ namespace E_Prescribing.Controllers
             var result = orders.Select(o => new
             {
                 o.OrderId,
-                o.Date,
+                Date = o.Date.ToString("dd-MM-yyyy"),
                 Patient = o.Patient != null ? o.Patient.FullName : "N/A",
                 Anaesthesiologist = o.Anaesthesiologist.FullName,
                 MedicationOrders = o.MedicationOrders.Select(mo => new
@@ -898,6 +898,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
+                o.IgnoreReason,
                 o.IsUrgent
             });
 
@@ -1305,6 +1306,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
+                o.IgnoreReason,
                 o.IsUrgent
             });
 

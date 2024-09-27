@@ -57,11 +57,11 @@
                 <thead>
                     <tr>
                         <th>Order Number</th>
-@*                         <th>Anaesthesiologist</th>
- *@                        <th>Medication</th>
+                       <th>Medication</th>
                         <th>Quantity</th>
                         <th>Status</th>
                         <th>IsUrgent</th>
+                        <th>Ignore Reason</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -90,26 +90,26 @@
                     dataSrc: 'data'
                 },
                 "columns": [
-                    { data: 'orderId', "width": "10%" },
-                    // { data: 'anaesthesiologist', "width": "15%" },
+                    { data: 'orderId', "width": "5%" },
                     {
-                        data: 'medicationOrders', "width": "20%", "render": function (data) {
+                        data: 'medicationOrders', "width": "15%", "render": function (data) {
                             return data.map(order => order.name).join('<br>');
                         }
                     },
                     {
-                        data: 'medicationOrders', "width": "10%", "render": function (data) {
+                        data: 'medicationOrders', "width": "5%", "render": function (data) {
                             return data.map(order => order.quantity).join('<br>');
                         }
                     },
                     { data: 'status', "width": "10%" },
                     {
-                        data: 'isUrgent', "width": "10%", "render": function (data) {
+                        data: 'isUrgent', "width": "5%", "render": function (data) {
                             return data === "Yes" ? `<span class="text-danger">${data}</span>` : data;
                         }
                     },
+                    { data: 'ignoreReason', "width": "20%" },
                     {
-                        data: 'orderId', "width": "25%", "render": function (data, type, row) {
+                        data: 'orderId', "width": "15%", "render": function (data, type, row) {
                             let buttons = '';
 
                             if (row.status == "Dispensed") {

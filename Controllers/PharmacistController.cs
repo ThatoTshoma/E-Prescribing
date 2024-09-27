@@ -290,7 +290,7 @@ namespace E_Prescribing.Controllers
                 Quantities = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Quantity.ToString())),
                 p.Status,
                 p.Urgent,
-
+                p.IgnoreReason,
                 p.PrescriptionId
             });
 
@@ -486,7 +486,7 @@ namespace E_Prescribing.Controllers
                                        Quantities = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Quantity.ToString())),
                                        p.Status,
                                        p.Urgent,
-
+                                       p.IgnoreReason,
                                        p.PrescriptionId
                                    });
 
@@ -1271,6 +1271,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
+                o.IgnoreReason,
                 o.IsUrgent 
             });
 
@@ -1509,6 +1510,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
+                o.IgnoreReason,
                 o.IsUrgent
             });
 
