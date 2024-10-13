@@ -40,11 +40,10 @@
         $(document).ready(function () {
             loadDataTable();
         });
-
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/pharmacist/GetOrder',
+                    url: '@Url.Action("GetOrder", "Pharmacist")',  
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -68,19 +67,18 @@
                         }
                     },
                     { data: 'ignoreReason', "width": "20%" },
-
-
-              
                     {
                         data: 'orderId', "width": "10%", "render": function (data, type, row) {
                             if (row.status !== "Dispensed" && row.status !== "Rejected" && row.status !== "Received") {
-                                return `<a href="#" class="btn btn-primary mx-1 dispense-medication" data-order-id="${data}"> <i class="bi bi-pencil-square"></i> Dispense</a>`;
+                                return `<a href="@Url.Action("DispenseMedication", "Pharmacist")?orderId=${data}" class="btn btn-primary mx-1 dispense-medication" data-order-id="${data}"> <i class="bi bi-pencil-square"></i> Dispense</a>`;
                             }
                             return '';
                         }
                     }
                 ]
             });
+        
+
 
 
 
@@ -90,8 +88,9 @@
                 var orderId = $(this).data('order-id');
 
                 $.ajax({
-                    url: '/pharmacist/DispenseMedicationOrder',
-                    type: 'POST',
+                    url: '@Url.Action("DispenseMedicationOrder", "Pharmacist")',
+
+                type: 'POST',
                     data: { orderId: orderId },
                     success: function (response) {
                         if (response.interactionMessage) {
@@ -103,8 +102,8 @@
                         else if (response.errorMessage) {
                             handleAllergenAlert(response.errorMessage, orderId);
                         }
-                        else {
-                            window.location.href = `/pharmacist/DispenseMedicationOrder?orderId=${orderId}`;
+                       else {
+                            window.location.href = '@Url.Action("DispenseMedicationOrder", "Pharmacist")?orderId=' + orderId;
                         }
                     },
                     error: function () {
@@ -137,14 +136,15 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: '/pharmacist/DispenseMedicationOrder',
+                                url: '@Url.Action("DispenseMedicationOrder", "Pharmacist")', 
+
                                 type: 'POST',
                                 data: {
                                     orderId: orderId,
                                     ignoreReason: result.value
                                 },
                                 success: function () {
-                                    window.location.href = `/pharmacist/ListDispancedMedicationOrder`;
+                                    window.location.href = '@Url.Action("ListDispensedMedicationOrder", "Pharmacist")';
                                 },
                                 error: function () {
                                     toastr.error("Error while dispensing medication.");

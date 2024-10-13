@@ -46,7 +46,8 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getApprovedBooking',
+                    url: '@Url.Action("GetApprovedBooking", "Anaesthesiologist")',
+
                     dataSrc: 'data'
                 },
                 "columns": [

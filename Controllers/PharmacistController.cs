@@ -1146,7 +1146,7 @@ namespace E_Prescribing.Controllers
                 .Select(o => new
                 {
                     o.OrderId,
-                    o.Date,
+                    Date = o.Date.ToString("dd-MM-yyyy"),
                     Medications = string.Join("\n", o.PharmacistOrders.Select(po => po.Medication.Name)),
                     DosageForms = string.Join("\n", o.PharmacistOrders.Select(po => po.Medication.DosageForm.Name)),
                     Quantities = string.Join("\n", o.PharmacistOrders.Select(po => po.Quantity.ToString())),

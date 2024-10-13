@@ -78,7 +78,7 @@
         function loadDataTable(patientId) {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getPatientPrescription',
+                    url: '@Url.Action("GetPatientPrescription", "Anaesthesiologist")', 
                     data: { id: patientId },
                     dataSrc: 'data'
                 },
@@ -92,15 +92,14 @@
                         data: 'prescriptionId',
                         "render": function (data, type, row) {
                             var buttons = `<div class="btn-group" role="group">
-
-                             <a href="/anaesthesiologist/Prescription/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
-
-
-                            buttons += `</div>`;
+                    <a href="@Url.Action("Prescription", "Anaesthesiologist")/${data}" class="btn btn-primary mx-1">
+                        <i class="bi bi-eye-fill"></i> View</a>
+                </div>`;
                             return buttons;
                         },
                         "width": "10%"
                     }
+
                 ]
             });
         }

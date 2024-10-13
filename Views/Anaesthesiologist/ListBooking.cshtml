@@ -71,15 +71,14 @@
         var dataTable;
 
         $(document).ready(function () {
-            var patientId = @Html.Raw(ViewBag.PatientId);
+            var patientId = @Html.Raw(ViewBag.PatientId)
 
             loadDataTable(patientId);
         });
-
         function loadDataTable(patientId) {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getBooking',
+                    url: '@Url.Action("GetBooking", "Anaesthesiologist")',
                     data: { id: patientId },
                     dataSrc: 'data'
                 },
@@ -96,7 +95,6 @@
                         "width": "10%"
                     },
                     { data: 'session', "width": "15%" },
-
                     {
                         data: 'treatments',
                         render: function (data) {
@@ -105,17 +103,23 @@
                         "width": "15%"
                     },
                     {
-                        data: 'bookingId',
-                        "render": function (data) {
-                            return `<div class="btn-group" role="group">
-                                                                                        <a href="/anaesthesiologist/editBooking?bookingId=${data}" class="btn btn-primary mx-1"> <i class="bi bi-check2-circle"></i></i> Approve</a>
-                                                            </div>`;
+                        data: function (row) {
+                            if (!row.status) {  
+                                return `<div class="btn-group" role="group">
+                                            <a href="${'@Url.Action("EditBooking", "Anaesthesiologist")'}?bookingId=${row.bookingId}" class="btn btn-primary mx-1">
+                                                <i class="bi bi-check2-circle"></i> Approve
+                                            </a>
+                                        </div>`;
+                            }
+                            return '';  
                         },
                         "width": "30%"
                     }
                 ]
             });
         }
+
+
 
         function Delete(url) {
             Swal.fire({

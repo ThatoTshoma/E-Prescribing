@@ -125,7 +125,8 @@
 
                 if (selectedCityId) {
                     $.ajax({
-                        url: "/Nurse/LoadSuburbs",
+                        url: '@Url.Action("LoadSuburbs", "Nurse")',
+
                         method: "GET",
                         data: { cityId: selectedCityId },
                         success: function (data) {

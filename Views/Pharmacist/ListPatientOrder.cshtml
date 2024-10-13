@@ -79,7 +79,7 @@
 
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/pharmacist/getPatientOrder/' + patientId,
+                    url: '@Url.Action("GetPatientOrder", "Pharmacist")/' + patientId, 
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -120,7 +120,8 @@
                 var orderId = $(this).data('order-id');
 
                 $.ajax({
-                    url: '/pharmacist/DispenseMedicationOrder', 
+                    url: '@Url.Action("DispenseMedicationOrder", "Pharmacist")', 
+
                     type: 'POST',
                     data: { orderId: orderId },
                     success: function (response) {
@@ -133,9 +134,10 @@
                         else if (response.errorMessage) {
                             handleAllergenAlert(response.errorMessage, orderId);
                         }
-                        else {
-                            window.location.href = `/pharmacist/DispenseMedicationOrder?orderId=${orderId}`;
-                        }
+                      else {
+                        window.location.href = '@Url.Action("DispenseMedicationOrder", "Pharmacist")?orderId=' + orderId;
+                    }
+
                     },
                     error: function () {
                         toastr.error("Error checking medication conflicts.");
@@ -167,14 +169,17 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: '/pharmacist/DispenseMedicationOrder',
+                                url: '@Url.Action("DispenseMedicationOrder", "Pharmacist")', 
+
                                 type: 'POST',
                                 data: {
                                     orderId: orderId,
                                     ignoreReason: result.value
                                 },
                                 success: function () {
-                                    window.location.href = `/pharmacist/ListDispancedMedicationOrder`;
+
+                                    window.location.href = '@Url.Action("ListDispancedMedicationOrder", "Pharmacist")';
+
                                 },
                                 error: function () {
                                     toastr.error("Error while dispensing medication.");

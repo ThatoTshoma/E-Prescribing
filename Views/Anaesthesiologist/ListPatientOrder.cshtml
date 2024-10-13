@@ -86,7 +86,7 @@
 
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getPatientOrder/' + patientId,  
+                    url: '@Url.Action("GetPatientOrder", "Anaesthesiologist")/' + patientId, 
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -116,21 +116,17 @@
                                 buttons += `<a href="#" class="btn btn-success" onclick="recieveOrder(${data})"><i class="bi bi-check2-circle"></i> Recieve</a>`;
                             }
                             if (row.status == "Received") {
-
-                                buttons += ` <a href="/anaesthesiologist/ListMedicationToANote/${data}" class="btn btn-info"><i class="bi bi-file-earmark-medical"></i> Note</a>`;
-                                buttons += `<a href="/anaesthesiologist/ListNotedication/${data}" class="btn btn-info mx-1"> <i class="bi bi-list-check"></i> Medication Note</a>`;
-
-
+                                buttons += `<a href="@Url.Action("ListMedicationToANote", "Anaesthesiologist")/${data}" class="btn btn-info"><i class="bi bi-file-earmark-medical"></i> Note</a>`;
+                                buttons += `<a href="@Url.Action("ListNotedication", "Anaesthesiologist")/${data}" class="btn btn-info mx-1"><i class="bi bi-list-check"></i> Medication Note</a>`;
                             }
-
 
                             return buttons;
                         }
                     }
-
                 ]
             });
         }
+
 
         function recieveOrder(orderId) {
             Swal.fire({
@@ -141,7 +137,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/anaesthesiologist/ReceiveOrder',
+                        url: '@Url.Action("ReceiveOrder", "Anaesthesiologist")', 
+
                         type: 'POST',
                         data: {
                             orderId: orderId,

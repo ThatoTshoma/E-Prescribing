@@ -64,6 +64,13 @@
     <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        var getPatientPrescriptionUrl = '@Url.Action("GetPatientPrescription", "Nurse")';
+        var prescriptionUrl = '@Url.Action("Prescription", "Nurse")';
+        var listMedicationToAdministerUrl = '@Url.Action("ListMedicationToAdminister", "Nurse")';
+        var listAdministeredMedicationUrl = '@Url.Action("ListAdministeredMedication", "Nurse")';
+    </script>
+
 
     <script>
         var dataTable;
@@ -77,7 +84,7 @@
         function loadDataTable(patientId) {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/nurse/getPatientPrescription',
+                    url: getPatientPrescriptionUrl, // Use the URL from the script tag
                     data: { id: patientId },
                     dataSrc: 'data'
                 },
@@ -91,19 +98,15 @@
                         data: 'prescriptionId',
                         "render": function (data, type, row) {
                             var buttons = `<div class="btn-group" role="group">
-                      
-                                                    <a href="/nurse/Prescription/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
+                                <a href="${prescriptionUrl}/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
 
                             if (row.status === "Received") {
-                                buttons += `<a href="/nurse/ListMedicationToAdminister/${data}" class="btn btn-success mx-1"> <i class="bi bi-check-circle"></i> Administer</a>`;
-                                buttons += `<a href="/nurse/ListAdministeredMedication/${data}" class="btn btn-info mx-1"> <i class="bi bi-list-check"></i> Administered Medication</a>`;
-
+                                buttons += `<a href="${listMedicationToAdministerUrl}/${data}" class="btn btn-success mx-1"> <i class="bi bi-check-circle"></i> Administer</a>`;
+                                buttons += `<a href="${listAdministeredMedicationUrl}/${data}" class="btn btn-info mx-1"> <i class="bi bi-list-check"></i> Administered Medication</a>`;
                             }
 
-
                             if (row.status === "Dispensed") {
-                                buttons += `<a href="#" class="btn btn-success" onclick="recievePrescription(${data})"><i class="bi bi-check2-circle"></i>Recieve</a>`;
-
+                                buttons += `<a href="#" class="btn btn-success" onclick="recievePrescription(${data})"><i class="bi bi-check2-circle"></i>Receive</a>`;
                             }
 
                             buttons += `</div>`;
@@ -114,6 +117,7 @@
                 ]
             });
         }
+
 
 
 

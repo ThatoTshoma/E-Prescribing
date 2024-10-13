@@ -46,11 +46,10 @@
         $(document).ready(function () {
             loadDataTable();
         });
-
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    "url": '/pharmacist/getMedication',
+                    "url": '@Url.Action("GetMedication", "Pharmacist")',
                     "dataSrc": 'data'
                 },
                 "columns": [
@@ -75,19 +74,20 @@
                         "data": 'medicationId',
                         "render": function (data) {
                             return `<div class="w-75 btn-group" role="group">
-                                                        <a href="/pharmacist/updateMedication?medicationId=${data}" class="btn btn-primary mx-2">
-                                                    <i class="bi bi-pencil-square"></i> Edit
-                                                </a>
-                                                <a onClick=Delete('/pharmacist/deleteMedication/${data}') class="btn btn-danger mx-2">
-                                                    <i class="bi bi-trash-fill"></i> Delete
-                                                </a>
-                                            </div>`;
+                                        <a href="@Url.Action("UpdateMedication", "Pharmacist")?medicationId=${data}" class="btn btn-primary mx-2">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </a>
+                                        <a onClick=Delete('@Url.Action("DeleteMedication", "Pharmacist")/${data}') class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    </div>`;
                         },
                         "width": "25%"
                     }
                 ]
             });
         }
+
 
         function Delete(url) {
             Swal.fire({

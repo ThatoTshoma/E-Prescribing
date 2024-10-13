@@ -39,6 +39,13 @@
     <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+      
+
+    <script type="text/javascript">
+        var patientDetailsUrl = '@Url.Action("PatientDetails", "Surgeon")';
+        var deletePatientUrl = '@Url.Action("DeletePatient", "Surgeon")';
+    </script>
+
 
     <script>
         var dataTable;
@@ -50,7 +57,7 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/surgeon/getPatient',
+                    url: '@Url.Action("GetPatient", "Surgeon")',  
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -63,9 +70,11 @@
                         data: 'patientId',
                         "render": function (data) {
                             return `<div class="w-75 btn-group" role="group">
-                                       <a href="/surgeon/patientDetails?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-eye-fill"></i> More</a>
-                                                        <a onClick=Delete('/surgeon/deletePatient/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
-                                   </div>`;
+                                            <a href="${patientDetailsUrl}?id=${data}" class="btn btn-primary mx-2">
+                                                <i class="bi bi-eye-fill"></i> More</a>
+                                            <a onClick="Delete('${deletePatientUrl}/${data}')" class="btn btn-danger mx-2">
+                                                <i class="bi bi-trash-fill"></i> Delete</a>
+                                        </div>`;
                         },
                         "width": "25%"
                     }

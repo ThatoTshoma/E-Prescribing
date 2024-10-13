@@ -108,7 +108,8 @@
 
                 if (selectedCityId) {
                     $.ajax({
-                        url: "/Admin/LoadSuburbs",
+                        url: '@Url.Action("LoadSuburbs", "Admin")',
+
                         method: "GET",
                         data: { cityId: selectedCityId },
                         success: function (data) {

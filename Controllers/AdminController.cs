@@ -460,25 +460,19 @@ namespace E_Prescribing.Controllers
             _db.SaveChanges();
             return Json(new { success = true, message = "Delete Successful" });
         }
-        [HttpPost]
-        public IActionResult DeleteContraIndication(int[] ids)
+
+        [HttpDelete]
+        public IActionResult DeleteContraIndication(int id)
         {
-            if (ids == null || ids.Length == 0)
+            var contraindication = _db.ContraIndications.FirstOrDefault(m => m.ContraIndicationId == id);
+            if (contraindication == null)
             {
-                ModelState.AddModelError("", "No Contra-Indication selected for deletion.");
-                var contraIndication = _db.ContraIndications.ToList();
-                return View("ListContraIndication", contraIndication);
+                return Json(new { success = false, message = "Error while Deleting" });
             }
 
-            var contraIndicationToDelete = _db.ContraIndications.Where(t => ids.Contains(t.ContraIndicationId)).ToList();
-
-            if (contraIndicationToDelete.Any())
-            {
-                _db.ContraIndications.RemoveRange(contraIndicationToDelete);
-                _db.SaveChanges();
-            }
-
-            return RedirectToAction("ListContraIndication");
+            _db.ContraIndications.Remove(contraindication);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Delete Successful" });
         }
         public IActionResult AddOrUpdateConditionDiagnosis(int? conditionId)
         {
@@ -678,14 +672,14 @@ namespace E_Prescribing.Controllers
             var province = _db.Provinces.ToList();
             return View(province);
         }
-        [HttpGet]
+        [HttpGet("[action]")]
         public IActionResult GetProvince()
         {
             var province = _db.Provinces.ToList();
             return Json(new { data = province });
         }
 
-        [HttpDelete]
+        [HttpDelete("[action]")]
         public IActionResult DeleteProvince(int id)
         {
             var province = _db.Provinces.FirstOrDefault(m => m.ProvinceId == id);
@@ -882,7 +876,7 @@ namespace E_Prescribing.Controllers
             return View(ward);
         }
         [HttpGet]
-        public IActionResult GetWad()
+        public IActionResult GetWard()
         {
             var ward = _db.Wards.ToList();
             return Json(new { data = ward });

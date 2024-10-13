@@ -3,48 +3,12 @@
   "WorkspaceRootPath": "D:\\HomeSpace\\E_Prescribing\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\pharmacist\\listprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\pharmacist\\listprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\controllers\\surgeoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:controllers\\surgeoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\controllers\\pharmacistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:controllers\\pharmacistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\pharmacist\\listpatientorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\pharmacist\\listpatientorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\pharmacist\\listpatientprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\pharmacist\\listpatientprescription.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\pharmacist\\listorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\pharmacist\\listorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\anaesthesiologist\\listpatientorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\anaesthesiologist\\listpatientorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\anaesthesiologist\\listorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\anaesthesiologist\\listorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\nurse\\listalladministeredmedication.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\nurse\\listalladministeredmedication.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:controllers\\nursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\views\\surgeon\\listbookedpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:views\\surgeon\\listbookedpatient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|d:\\homespace\\e_prescribing\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A9637AA4-F03A-4524-BB94-9E3026E4A2FC}|E_Prescribing.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,142 +23,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ListPrescription.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListPrescription.cshtml",
-              "RelativeDocumentMoniker": "Views\\Pharmacist\\ListPrescription.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListPrescription.cshtml*",
-              "RelativeToolTip": "Views\\Pharmacist\\ListPrescription.cshtml*",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAAAGMAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T14:58:49.992Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ListPatientOrder.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListPatientOrder.cshtml",
-              "RelativeDocumentMoniker": "Views\\Pharmacist\\ListPatientOrder.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListPatientOrder.cshtml",
-              "RelativeToolTip": "Views\\Pharmacist\\ListPatientOrder.cshtml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAADgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T14:47:21.94Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ListPatientPrescription.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListPatientPrescription.cshtml",
-              "RelativeDocumentMoniker": "Views\\Pharmacist\\ListPatientPrescription.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListPatientPrescription.cshtml",
-              "RelativeToolTip": "Views\\Pharmacist\\ListPatientPrescription.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADcAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T14:45:09.927Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ListOrder.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListOrder.cshtml",
-              "RelativeDocumentMoniker": "Views\\Pharmacist\\ListOrder.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Pharmacist\\ListOrder.cshtml",
-              "RelativeToolTip": "Views\\Pharmacist\\ListOrder.cshtml",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAAEUAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T14:39:31.644Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ListOrder.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Anaesthesiologist\\ListOrder.cshtml",
-              "RelativeDocumentMoniker": "Views\\Anaesthesiologist\\ListOrder.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Anaesthesiologist\\ListOrder.cshtml",
-              "RelativeToolTip": "Views\\Anaesthesiologist\\ListOrder.cshtml",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAgwHkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-23T08:46:48.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ListPatientOrder.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Anaesthesiologist\\ListPatientOrder.cshtml",
-              "RelativeDocumentMoniker": "Views\\Anaesthesiologist\\ListPatientOrder.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Anaesthesiologist\\ListPatientOrder.cshtml",
-              "RelativeToolTip": "Views\\Anaesthesiologist\\ListPatientOrder.cshtml",
-              "ViewState": "AgIAAGMAAAAAAAAAAAAAAG8AAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T14:21:08.486Z",
+              "Title": "SurgeonController.cs",
+              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Controllers\\SurgeonController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SurgeonController.cs",
+              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Controllers\\SurgeonController.cs",
+              "RelativeToolTip": "Controllers\\SurgeonController.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAUwHAAAABiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T21:37:18.394Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PharmacistController.cs",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Controllers\\PharmacistController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PharmacistController.cs",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Controllers\\PharmacistController.cs",
-              "RelativeToolTip": "Controllers\\PharmacistController.cs",
-              "ViewState": "AgIAALoBAAAAAAAAAAAuwMcBAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T23:43:45.03Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-12T21:33:46.422Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ListBookedPatient.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Surgeon\\ListBookedPatient.cshtml",
-              "RelativeDocumentMoniker": "Views\\Surgeon\\ListBookedPatient.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Surgeon\\ListBookedPatient.cshtml",
-              "RelativeToolTip": "Views\\Surgeon\\ListBookedPatient.cshtml",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAgwFEAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-26T07:35:09.613Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "NurseController.cs",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Controllers\\NurseController.cs",
-              "RelativeDocumentMoniker": "Controllers\\NurseController.cs",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Controllers\\NurseController.cs",
-              "RelativeToolTip": "Controllers\\NurseController.cs",
-              "ViewState": "AgIAALwFAAAAAAAAAAAAAMcFAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T14:17:29.195Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ListAllAdministeredMedication.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Nurse\\ListAllAdministeredMedication.cshtml",
-              "RelativeDocumentMoniker": "Views\\Nurse\\ListAllAdministeredMedication.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Nurse\\ListAllAdministeredMedication.cshtml",
-              "RelativeToolTip": "Views\\Nurse\\ListAllAdministeredMedication.cshtml",
-              "ViewState": "AgIAADwAAAAAAAAAAAAUwEwAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-26T16:43:07.913Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\HomeSpace\\E_Prescribing\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\HomeSpace\\E_Prescribing\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-26T17:07:09.392Z"
             }
           ]
         }

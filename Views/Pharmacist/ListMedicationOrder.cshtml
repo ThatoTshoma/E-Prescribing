@@ -41,7 +41,7 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/pharmacist/GetMedicationOrder',
+                    url: '@Url.Action("GetMedicationOrder", "Pharmacist")',
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -54,7 +54,7 @@
                     {
                         data: null, "width": "10%", "render": function (data, type, row) {
                             if (row.status === 'Delivered') {
-                                return `<button class="btn btn-success mx-1" onclick="receiveOrder(${row.orderId})"><i class="bi bi-check2-circle"></i>Receive</button>`;
+                                return `<button class="btn btn-success mx-1" onclick="receiveOrder(${row.orderId})"><i class="bi bi-check2-circle"></i> Receive</button>`;
                             }
                             return '';
                         }
@@ -62,6 +62,7 @@
                 ]
             });
         }
+
         function receiveOrder(orderId) {
 
             Swal.fire({
@@ -72,7 +73,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/pharmacist/ReceiveOrder',
+                        url: '@Url.Action("ReceiveOrder", "Pharmacist")', 
+
                         type: 'POST',
                         data: {
                             orderId: orderId,

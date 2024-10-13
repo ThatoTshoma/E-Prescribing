@@ -48,23 +48,26 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/admin/getSuburb',
+                    url: '@Url.Action("GetSuburb", "Admin")', 
                     dataSrc: 'data'
                 },
                 "columns": [
-                    { data: 'name', "width": "25%" },
+                    { data: 'name', "width": "25%" }, 
                     { data: 'postalCode', "width": "15%" },
-                    { data: 'city.name', "width": "25%" },
-
+                    { data: 'city.name', "width": "25%" }, 
                     {
                         data: 'suburbId',
                         "render": function (data) {
                             return `<div class="w-75 btn-group" role="group">
-                                     <a href="/admin/addOrUpdateSuburb?suburbId=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
-                                     <a onClick=Delete('/admin/deleteSuburb/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
-                                     </div>`;
+                                             <a href="${'@Url.Action("AddOrUpdateSuburb", "Admin")'}?suburbId=${data}" class="btn btn-primary mx-2">
+                                                 <i class="bi bi-pencil-square"></i> Edit
+                                             </a>
+                                             <a onClick=Delete('${'@Url.Action("DeleteSuburb", "Admin")'}?id=${data}') class="btn btn-danger mx-2">
+                                                 <i class="bi bi-trash-fill"></i> Delete
+                                             </a>
+                                         </div>`;
                         },
-                        "width": "25%"
+                        "width": "25%" 
                     }
                 ]
             });

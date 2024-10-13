@@ -73,14 +73,13 @@
                 var endDate = $('#endDate').val();
                 loadDataTable(startDate, endDate);
             });
+
             $('#generateReportBtn').click(function () {
                 var startDate = $('#startDate').val();
                 var endDate = $('#endDate').val();
-
-                window.location.href = `/anaesthesiologist/GenerateReport?startDate=${startDate}&endDate=${endDate}`;
+                window.location.href = '@Url.Action("GenerateReport", "Anaesthesiologist")?startDate=' + startDate + '&endDate=' + endDate;
             });
         });
-
 
         function loadDataTable(startDate = '', endDate = '') {
             if ($.fn.dataTable.isDataTable('#tblData')) {
@@ -89,7 +88,7 @@
 
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/GetOrder',
+                    url: '@Url.Action("GetOrder", "Anaesthesiologist")', 
                     type: 'GET',
                     data: {
                         startDate: startDate,
@@ -141,7 +140,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/anaesthesiologist/ReceiveOrder',
+                        url: '@Url.Action("ReceiveOrder", "Anaesthesiologist")', 
                         type: 'POST',
                         data: {
                             orderId: orderId,
@@ -162,3 +161,4 @@
         }
     </script>
 }
+

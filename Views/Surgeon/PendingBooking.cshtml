@@ -47,7 +47,8 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/surgeon/getPendingBooking',
+                    url: '@Url.Action("GetPendingBooking", "Surgeon")',
+
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -55,8 +56,8 @@
                     { data: 'patient.fullName', "width": "15%" },
                     { data: 'fullName', "width": "15%" },
 
-                    { data: 'theatre', "width": "15%" },
-                    { data: 'ward', "width": "15%" },
+                    { data: 'theatre', "width": "10%" },
+                    { data: 'ward', "width": "10%" },
                     {
                         data: 'status',
                         render: function (data) {
@@ -64,14 +65,14 @@
                         },
                         "width": "10%"
                     },
-                    { data: 'session', "width": "15%" },
+                    { data: 'session', "width": "5%" },
 
                     {
                         data: 'treatments',
                         render: function (data) {
                             return data.join("<br>");
                         },
-                        "width": "15%"
+                        "width": "25%"
                     },
                     // {
                     //     data: 'bookingId',

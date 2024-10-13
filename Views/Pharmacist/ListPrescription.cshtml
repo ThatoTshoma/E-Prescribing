@@ -79,7 +79,7 @@
                 var startDate = $('#startDate').val();
                 var endDate = $('#endDate').val();
 
-                window.location.href = `/pharmacist/GenerateReport?startDate=${startDate}&endDate=${endDate}`;
+                window.location.href = `@Url.Action("GenerateReport", "Pharmacist")?startDate=${startDate}&endDate=${endDate}`;
             });
         });
 
@@ -91,7 +91,7 @@
 
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/pharmacist/GetPrescription',
+                    url: '@Url.Action("GetPrescription", "Pharmacist")',
                     type: 'GET',
                     data: {
                         startDate: startDate,
@@ -109,15 +109,15 @@
                     { data: 'urgent', "width": "5%" },
                     { data: 'ignoreReason', "width": "20%" },
 
-                    {
+                            {
                         data: 'prescriptionId',
                         "render": function (data, type, row) {
-                            let viewButton = `<a href="/pharmacist/Prescription/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
+                            let viewButton = `<a href="${'@Url.Action("Prescription", "Pharmacist")'}/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
                             let dispenseButton = row.status != "Dispensed" && row.status != "Rejected"
                                 ? `<a href="#" class="btn btn-primary mx-1 dispense-medication" data-prescription-id="${data}"> <i class="bi bi-pencil-square"></i> Dispense</a>`
                                 : '';
                             let rejectButton = row.status == "Prescribed"
-                                ? `<a href="/pharmacist/RejectPrescription?id=${data}" class="btn btn-danger mx-1"> <i class="bi bi-trash-fill"></i> Reject</a>`
+                                ? `<a href="${'@Url.Action("RejectPrescription", "Pharmacist")'}?id=${data}" class="btn btn-danger mx-1"> <i class="bi bi-trash-fill"></i> Reject</a>`
                                 : '';
 
                             return `<div class="btn-group" role="group">${viewButton}${dispenseButton}${rejectButton}</div>`;
@@ -132,7 +132,7 @@
                 var prescriptionId = $(this).data('prescription-id');
 
                 $.ajax({
-                    url: '/pharmacist/DispenseMedication',
+                    url: '@Url.Action("DispenseMedication", "Pharmacist")',
                     type: 'POST',
                     data: { prescriptionId: prescriptionId },
                     success: function (response) {
@@ -146,7 +146,7 @@
                             handleAllergenAlert(response.errorMessage, prescriptionId);
                         }
                         else {
-                            window.location.href = `/pharmacist/DispenseMedication?prescriptionId=${prescriptionId}`;
+                            window.location.href = `@Url.Action("DispenseMedication", "Pharmacist")?prescriptionId=${prescriptionId}`;
                         }
                     },
                     error: function () {
@@ -179,14 +179,15 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             $.ajax({
-                                url: '/pharmacist/DispenseMedication',
+                                url: '@Url.Action("DispenseMedication", "Pharmacist")',
+
                                 type: 'POST',
                                 data: {
                                     prescriptionId: prescriptionId,
                                     reasonForIgnoring: result.value
                                 },
                                 success: function () {
-                                    window.location.href = `/pharmacist/ListDispancedMedication`;
+                                    window.location.href = '@Url.Action("ListDispancedMedication", "Pharmacist")';
                                 },
                                 error: function () {
                                     toastr.error("Error while dispensing medication.");

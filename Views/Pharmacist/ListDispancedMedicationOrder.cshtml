@@ -44,7 +44,8 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/pharmacist/getDispancedMedicationOrder',
+                    url: '@Url.Action("GetDispancedMedicationOrder", "Pharmacist")',
+
                     dataSrc: 'data'
                 },
                 "columns": [

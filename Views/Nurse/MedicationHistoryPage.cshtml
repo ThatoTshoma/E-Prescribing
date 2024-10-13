@@ -323,7 +323,8 @@
 
                 if (selectedWardId) {
                     $.ajax({
-                        url: "/Nurse/LoadBed",
+                            url: '@Url.Action("LoadBed", "Nurse")',
+
                         method: "GET",
                         data: { wardId: selectedWardId },
                         success: function (data) {

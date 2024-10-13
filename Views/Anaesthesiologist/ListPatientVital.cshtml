@@ -94,7 +94,8 @@
         function loadDataTable(patientId) {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getVital',
+                    url: '@Url.Action("GetVital", "Anaesthesiologist")',
+
                     data: { id: patientId },
                     dataSrc: 'data'
                 },

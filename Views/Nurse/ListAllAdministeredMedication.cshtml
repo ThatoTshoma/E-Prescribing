@@ -69,11 +69,12 @@
                 var endDate = $('#endDate').val();
                 loadDataTable(startDate, endDate);
             });
+
             $('#generateReportBtn').click(function () {
                 var startDate = $('#startDate').val();
                 var endDate = $('#endDate').val();
-                window.location.href = `/nurse/GenerateReport?startDate=${startDate}&endDate=${endDate}`;
-            })
+                window.location.href = '@Url.Action("GenerateReport", "Nurse")' + `?startDate=${startDate}&endDate=${endDate}`;
+            });
         });
 
         function loadDataTable(startDate = '', endDate = '') {
@@ -83,7 +84,7 @@
 
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/nurse/GetListAllAdministeredMedication',
+                    url: '@Url.Action("GetListAllAdministeredMedication", "Nurse")',
                     type: 'GET',
                     data: {
                         startDate: startDate,
@@ -94,13 +95,14 @@
                 "columns": [
                     { data: 'date', "width": "10%" },
                     { data: 'prescription.patient.fullName', "width": "15%" },
-                    { data: 'medication.name', "width": "15%" },  
-                    { data: 'medication.dosageForm.name', "width": "15%" },  
+                    { data: 'medication.name', "width": "15%" },
+                    { data: 'medication.dosageForm.name', "width": "15%" },
                     { data: 'quantity', "width": "15%" },
-                    { data: 'timeAdministered', "width": "10%" } 
+                    { data: 'timeAdministered', "width": "10%" }
                 ]
             });
         }
     </script>
+
 
 }

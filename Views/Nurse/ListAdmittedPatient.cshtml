@@ -44,7 +44,7 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/nurse/getAdmittedPatient',
+                    url: '@Url.Action("GetAdmittedPatient", "Nurse")',
                     dataSrc: function (json) {
                         console.log("Data received from server:", json);
                         return json.data;
@@ -67,13 +67,16 @@
                         data: 'patientId',
                         "render": function (data, type, row) {
                             var dischargeButton = row.dischargeDate === null ?
-                                `<a href="/nurse/dischargePatient?id=${data}" class="btn btn-danger mx-2"><i class="bi bi-box-arrow-right"></i>Discharge</a>` : '';
+                                `<a href="@Url.Action("DischargePatient", "Nurse")?id=${data}" class="btn btn-danger mx-2">
+                                    <i class="bi bi-box-arrow-right"></i>Discharge</a>` : '';
                             var buttons = `
-                                        <div class="w-75 btn-group" role="group">
-                                            <a href="/nurse/updatePatient?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i>Update</a>
-                                            <a href="/nurse/patientDetails?id=${data}" class="btn btn-secondary mx-2"><i class="bi bi-eye-fill"></i>More</a>
-                                            ${dischargeButton}
-                                        </div>`;
+                                <div class="w-75 btn-group" role="group">
+                                    <a href="@Url.Action("UpdatePatient", "Nurse")?id=${data}" class="btn btn-primary mx-2">
+                                        <i class="bi bi-pencil-square"></i>Update</a>
+                                    <a href="@Url.Action("PatientDetails", "Nurse")?id=${data}" class="btn btn-secondary mx-2">
+                                        <i class="bi bi-eye-fill"></i>More</a>
+                                    ${dischargeButton}
+                                </div>`;
                             return buttons;
                         },
                         "width": "10%"
@@ -81,6 +84,7 @@
                 ]
             });
         }
+
 
         function Delete(url) {
             Swal.fire({

@@ -48,28 +48,30 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getVitalRange',
+                    url: '@Url.Action("GetVitalRange", "Anaesthesiologist")', 
                     dataSrc: 'data'
                 },
                 "columns": [
                     { data: 'name', "width": "20%" },
                     { data: 'minimum', "width": "10%" },
                     { data: 'maximum', "width": "10%" },
-
-
                     {
                         data: 'vitalId',
                         "render": function (data) {
                             return `<div class="w-75 btn-group" role="group">
-                                                                                     <a href="/anaesthesiologist/AddOrUpdateVital?vitalId=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
-                                                                              <a onClick=Delete('/anaesthesiologist/DeleteVitalRange/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
-                                               </div>`;
+                            <a href="@Url.Action("AddOrUpdateVital", "Anaesthesiologist")?vitalId=${data}" class="btn btn-primary mx-2">
+                                <i class="bi bi-pencil-square"></i> Edit</a>
+                            <a onClick=Delete('@Url.Action("DeleteVitalRange", "Anaesthesiologist")/${data}') class="btn btn-danger mx-2">
+                                <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>`;
                         },
                         "width": "20%"
                     }
+
                 ]
             });
         }
+
         function Delete(url) {
             Swal.fire({
                 title: 'Are you sure?',

@@ -41,17 +41,15 @@
 
             loadDataTable();
         });
-
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/pharmacist/getDispancedPrescription',
+                    url: '@Url.Action("GetDispancedPrescription", "Pharmacist")',
                     dataSrc: 'data'
                 },
                 "columns": [
                     { data: 'date', "width": "10%" },
                     { data: 'patient', "width": "25%" },
-
                     { data: 'medications', "width": "20%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'status', "width": "10%" },
@@ -59,12 +57,12 @@
                     {
                         data: 'prescriptionId',
                         "render": function (data, type, row) {
-                            let viewButton = `<a href="/pharmacist/Prescription/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
-                            let dispenseButton = row.status != "Dispensed" && row.status != "Rejected"
-                                ? `<a href="/pharmacist/DispenseMedication?prescriptionId=${data}" class="btn btn-primary mx-1"> <i class="bi bi-pencil-square"></i> Dispense</a>`
+                            let viewButton = `<a href="@Url.Action("Prescription", "Pharmacist")/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
+                            let dispenseButton = (row.status != "Dispensed" && row.status != "Rejected")
+                                ? `<a href="@Url.Action("DispenseMedication", "Pharmacist")?prescriptionId=${data}" class="btn btn-primary mx-1"> <i class="bi bi-pencil-square"></i> Dispense</a>`
                                 : '';
-                            let rejectButton = row.status == "Prescribed"
-                                ? `<a href="/pharmacist/RejectPrescription?id=${data}" class="btn btn-danger mx-1"> <i class="bi bi-trash-fill"></i> Reject</a>`
+                            let rejectButton = (row.status == "Prescribed")
+                                ? `<a href="@Url.Action("RejectPrescription", "Pharmacist")?id=${data}" class="btn btn-danger mx-1"> <i class="bi bi-trash-fill"></i> Reject</a>`
                                 : '';
 
                             return `<div class="btn-group" role="group">${viewButton}${dispenseButton}${rejectButton}</div>`;
@@ -74,6 +72,7 @@
                 ]
             });
         }
+
 
 
 

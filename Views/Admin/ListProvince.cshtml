@@ -46,8 +46,9 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/admin/getProvince',
-                    dataSrc: 'data'
+                    url: '@Url.Action("GetProvince", "Admin")',
+                    dataSrc: 'data',
+                    type: 'GET',
                 },
                 "columns": [
                     { data: 'name', "width": "25%" },
@@ -55,15 +56,20 @@
                         data: 'provinceId',
                         "render": function (data) {
                             return `<div class="w-75 btn-group" role="group">
-                                                     <a href="/admin/addOrUpdateProvince?provinceId=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
-                                              <a onClick=Delete('/admin/deleteProvince/${data}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
-                                       </div>`;
+                                            <a href="${'@Url.Action("AddOrUpdateProvince", "Admin")'}?provinceId=${data}" class="btn btn-primary mx-2">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </a>
+                                            <a onClick=Delete('${'@Url.Action("DeleteProvince", "Admin")'}?id=${data}') class="btn btn-danger mx-2">
+                                                <i class="bi bi-trash-fill"></i> Delete
+                                            </a>
+                                        </div>`;
                         },
                         "width": "25%"
                     }
                 ]
             });
         }
+
         function Delete(url) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -86,13 +92,13 @@
                                 toastr.error(data.message);
                             }
                         },
-                        error: function (err) {
+                        error: function () {
                             toastr.error("Error while deleting");
                         }
                     });
                 }
             });
         }
-
     </script>
+
 }

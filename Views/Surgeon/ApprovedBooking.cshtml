@@ -45,7 +45,8 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/surgeon/getApprovedBooking',
+                    url: '@Url.Action("GetApprovedBooking", "Surgeon")',
+
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -60,14 +61,14 @@
                         },
                         "width": "10%"
                     },
-                    { data: 'session', "width": "15%" },
+                    { data: 'session', "width": "5%" },
 
                     {
                         data: 'treatments',
                         render: function (data) {
                             return data.join("<br>");
                         },
-                        "width": "15%"
+                        "width": "25%"
                     },
 
                 ]

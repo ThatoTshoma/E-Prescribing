@@ -94,7 +94,7 @@
         $(document).ready(function () {
             $('#medicationTable').DataTable({
                 "ajax": {
-                    "url": '@Url.Action("getMedication", "surgeon", new { id = Model.Patient.PatientId })',
+                    "url": '@Url.Action("GetMedication", "Surgeon", new { id = Model.Patient.PatientId })',
                     "dataSrc": "data",
                     "error": function (jqXHR, textStatus, errorThrown) {
                         console.error("Error: ", textStatus, errorThrown);

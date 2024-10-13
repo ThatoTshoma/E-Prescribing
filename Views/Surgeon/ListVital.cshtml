@@ -76,7 +76,7 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '@Url.Action("getPatientVital", "surgeon", new { id = Model.Patient.PatientId })',
+                    url: '@Url.Action("GetPatientVital", "Surgeon", new { id = Model.Patient.PatientId })',
                     dataSrc: 'data'
                 },
                 "columns": [

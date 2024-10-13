@@ -48,7 +48,8 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '/anaesthesiologist/getPendingBooking',
+                    url: '@Url.Action("GetPendingBooking", "Anaesthesiologist")',
+
                     dataSrc: 'data'
                 },
                 "columns": [
@@ -56,7 +57,7 @@
                     { data: 'patient.fullName', "width": "15%" },
                     { data: 'surgeon', "width": "15%" },
                     { data: 'theatre', "width": "15%" },
-                    { data: 'ward', "width": "15%" }, 
+                    { data: 'ward', "width": "15%" },
                     {
                         data: 'status',
                         render: function (data) {
@@ -65,7 +66,6 @@
                         "width": "10%"
                     },
                     { data: 'session', "width": "15%" },
-
                     {
                         data: 'treatments',
                         render: function (data) {
@@ -77,14 +77,16 @@
                         data: 'bookingId',
                         "render": function (data) {
                             return `<div class="btn-group" role="group">
-                                                                                <a href="/anaesthesiologist/editBooking?bookingId=${data}" class="btn btn-primary mx-1"> <i class="bi bi-check2-circle"></i></i> Approve</a>
-                                                    </div>`;
+                                        <a href="@Url.Action("EditBooking", "Anaesthesiologist")?bookingId=${data}" class="btn btn-primary mx-1">
+                                            <i class="bi bi-check2-circle"></i> Approve</a>
+                                    </div>`;
                         },
                         "width": "30%"
                     }
                 ]
             });
         }
+
         function Approve(bookingId) {
             Swal.fire({
                 icon: "success",
