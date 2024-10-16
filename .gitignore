@@ -5,3 +5,11 @@
 /.vs/E_Prescribing/FileContentIndex/78fc5bf4-1be4-43a7-a342-cf0bb216d678.vsidx
 /.vs/E_Prescribing/FileContentIndex/024e2808-954e-44ca-a13e-774155dc181c.vsidx
 *.vsidx
+/.vs/ProjectEvaluation/e_prescribing.metadata.v9.bin
+/.vs/ProjectEvaluation/e_prescribing.projects.v9.bin
+/.vs/ProjectEvaluation/e_prescribing.strings.v9.bin
+/bin/Debug/net8.0/E_Prescribing.dll
+/bin/Debug/net8.0/E_Prescribing.exe
+/bin/Debug/net8.0/E_Prescribing.pdb
+/bin/Release/net8.0/win-x86/af/Humanizer.resources.dll
+/bin/Release/net8.0/win-x86/ar/Humanizer.resources.dll
