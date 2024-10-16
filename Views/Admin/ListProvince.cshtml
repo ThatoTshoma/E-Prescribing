@@ -46,7 +46,7 @@
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: '@Url.Action("GetProvince", "Admin")',
+                    url: '/admin/getProvince',
                     dataSrc: 'data',
                     type: 'GET',
                 },
