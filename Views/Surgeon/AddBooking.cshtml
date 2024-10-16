@@ -99,7 +99,7 @@
                         <button type="submit" class="btn btn-primary form-control">Add</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Admin" asp-action="ListActiveIngredient" class="btn btn-outline-primary border form-control">
+                            <a asp-controller="Surgeon" asp-action="ListBooking" asp-route-id="@Model.Booking.PatientId" class="btn btn-outline-primary border form-control">
                             Back to List
                         </a>
                     </div>

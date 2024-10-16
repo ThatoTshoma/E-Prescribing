@@ -48,70 +48,61 @@
                     { data: 'orderId', "width": "10%" },
                     { data: 'date', "width": "10%" },
                     { data: 'medications', "width": "20%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
-                    { data: 'dosageForms', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'dosageForms', "width": "15%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'status', "width": "10%" },
                     {
-                        data: null, "width": "10%", "render": function (data, type, row) {
-                            if (row.status === 'Delivered') {
-                                return `<button class="btn btn-success mx-1" onclick="receiveOrder(${row.orderId})"><i class="bi bi-check2-circle"></i> Receive</button>`;
+                        data: 'orderId',
+                        "render": function (data, type, row) {
+                            if (row.status === "Delivered") {
+                                return `<div class="w-75 btn-group" role="group">
+                                        <a onClick="ReceiveOrder('@Url.Action("ReceiveOrder", "Pharmacist")?orderId=${data}')" class="btn btn-success mx-2">
+                                    <i class="bi bi-basket-fill"></i> Receive
+                                </a>
+                                </div>`;
                             }
-                            return '';
-                        }
+                            return ''; 
+                        },
+                        "width": "15%"
                     }
+
+
                 ]
             });
         }
 
-        function receiveOrder(orderId) {
-
+        function ReceiveOrder(url) {
             Swal.fire({
                 icon: "success",
-                title: "Your order has been recieved",
+                title: "Your order has been received",
                 showConfirmButton: true,
                 confirmButtonText: 'Ok'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                        url: '@Url.Action("ReceiveOrder", "Pharmacist")', 
+                    var token = $('input[name="__RequestVerificationToken"]').val();
 
+                    $.ajax({
+                        url: url,
                         type: 'POST',
                         data: {
-                            orderId: orderId,
-                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                            __RequestVerificationToken: token 
                         },
                         success: function (data) {
                             if (data.success) {
                                 dataTable.ajax.reload();
-                                Swal.fire({
-                                    position: "top-end",
-                                    icon: "success",
-                                    title: "Order has been received",
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
+                                toastr.success(data.message);
                             } else {
-                                Swal.fire({
-                                    position: "top-end",
-                                    title: data.message,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                });
+                                toastr.error(data.message);
                             }
                         },
                         error: function (err) {
-                            Swal.fire({
-                                position: "top-end",
-                                icon: "error",
-                                title: "Error while receiving order",
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
+                            toastr.error("Error while receiving order");
                         }
                     });
                 }
             });
         }
+
 
 
     </script>

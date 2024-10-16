@@ -109,47 +109,59 @@
                     },
                     { data: 'ignoreReason', "width": "20%" },
                     {
-                        data: 'orderId', "width": "15%", "render": function (data, type, row) {
+                        data: 'orderId',
+                        "render": function (data, type, row) {
                             let buttons = '';
 
-                            if (row.status == "Dispensed") {
-                                buttons += `<a href="#" class="btn btn-success" onclick="recieveOrder(${data})"><i class="bi bi-check2-circle"></i> Recieve</a>`;
+                            if (row.status === "Dispensed") {
+                                buttons += `<div class="w-75 btn-group" role="group">
+                                    <a onClick="ReceiveOrder('@Url.Action("ReceiveOrder", "Anaesthesiologist")?orderId=${data}')" class="btn btn-success mx-2">
+                                        <i class="bi bi-basket-fill"></i> Receive
+                                    </a>
+                                </div>`;
                             }
-                            if (row.status == "Received") {
-                                buttons += `<a href="@Url.Action("ListMedicationToANote", "Anaesthesiologist")/${data}" class="btn btn-info"><i class="bi bi-file-earmark-medical"></i> Note</a>`;
-                                buttons += `<a href="@Url.Action("ListNotedication", "Anaesthesiologist")/${data}" class="btn btn-info mx-1"><i class="bi bi-list-check"></i> Medication Note</a>`;
+
+                            if (row.status === "Received") {
+                                buttons += `<a href="@Url.Action("ListMedicationToANote", "Anaesthesiologist")/${data}" class="btn btn-info">
+                                    <i class="bi bi-file-earmark-medical"></i> Add Note
+                                </a>`;
+                                buttons += `<a href="@Url.Action("ListNotedication", "Anaesthesiologist")/${data}" class="btn btn-info mx-1">
+                                    <i class="bi bi-list-check"></i> Medication Note
+                                </a>`;
                             }
 
                             return buttons;
-                        }
+                        },
+                        "width": "15%"
                     }
+
                 ]
             });
         }
 
 
-        function recieveOrder(orderId) {
+        function ReceiveOrder(url) {
             Swal.fire({
                 icon: "success",
-                title: "Order has been Recieved",
+                title: "Your order has been received",
                 showConfirmButton: true,
                 confirmButtonText: 'Ok'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    $.ajax({
-                        url: '@Url.Action("ReceiveOrder", "Anaesthesiologist")', 
+                    var token = $('input[name="__RequestVerificationToken"]').val();
 
+                    $.ajax({
+                        url: url,
                         type: 'POST',
                         data: {
-                            orderId: orderId,
-                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                            __RequestVerificationToken: token
                         },
                         success: function (data) {
                             if (data.success) {
                                 dataTable.ajax.reload();
                                 toastr.success(data.message);
                             } else {
-                                // toastr.error(data.message);
+                                toastr.error(data.message);
                             }
                         },
                         error: function (err) {

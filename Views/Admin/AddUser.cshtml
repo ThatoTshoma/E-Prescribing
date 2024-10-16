@@ -8,6 +8,12 @@
             </div>
         </div>
     </div>
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["error"]
+        </div>
+    }
     <div class="card-body p-4">
         <form method="post">
             <div class="border p-3">
@@ -126,24 +132,20 @@
                     <label asp-for="ApplicationUser.Email"></label>
                     <span asp-validation-for="ApplicationUser.Email" class="text-danger"></span>
                 </div>
-               @* <div class="form-floating mb-3">
-                    <input asp-for="ApplicationUser.UserName" class="form-control" aria-required="true" placeholder="Name" />
-                    <label asp-for="ApplicationUser.UserName"></label>
-                    <span asp-validation-for="ApplicationUser.UserName" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="ApplicationUser.Password" class="form-control" aria-required="true" placeholder="Name" />
-                    <label asp-for="ApplicationUser.Password"></label>
-                    <span asp-validation-for="ApplicationUser.Password" class="text-danger"></span>
-                </div>
-                <div class="form-floating mb-3">
-                    <input asp-for="ApplicationUser.ConfirmPassword" class="form-control" aria-required="true" placeholder="Name" />
-                    <label asp-for="ApplicationUser.ConfirmPassword"></label>
-                    <span asp-validation-for="ApplicationUser.ConfirmPassword" class="text-danger"></span>
-                </div>*@
-                    <div class="form-floating py-2 col-12">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+
+                    <div class="row pt-2">
+                        <div class="col-6 col-md-3">
+
+
+                            <button type="submit" class="btn btn-primary form-control">Add</button>
+
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <a asp-controller="Admin" asp-action="ListUser" class="btn btn-outline-primary border  form-control">
+                                Back to List
+                            </a>
+                        </div>
+                    </div>
             </div>
 
             </div>

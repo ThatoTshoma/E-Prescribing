@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("E_Prescribing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2684c657121c517c179c3e47c74d7e2b3980ddab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c8f4b2ba7ebb74f8ee6c9122cb2a3c650eb8c37")]
 [assembly: System.Reflection.AssemblyProductAttribute("E_Prescribing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("E_Prescribing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1124,28 +1124,3 @@ GO
 COMMIT;
 GO
 
-BEGIN TRANSACTION;
-GO
-
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241009114517_addPlease')
-BEGIN
-    ALTER TABLE [Prescriptions] ADD [IgnoreReason] nvarchar(max) NULL;
-END;
-GO
-
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241009114517_addPlease')
-BEGIN
-    ALTER TABLE [Orders] ADD [IgnoreReason] nvarchar(max) NULL;
-END;
-GO
-
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241009114517_addPlease')
-BEGIN
-    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20241009114517_addPlease', N'7.0.12');
-END;
-GO
-
-COMMIT;
-GO
-

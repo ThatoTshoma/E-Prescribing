@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 
 namespace E_Prescribing.Controllers
@@ -448,7 +449,7 @@ namespace E_Prescribing.Controllers
             return Json(new { data = contraIndication });
         }
         [HttpDelete]
-        public IActionResult DeleteAContraIndication(int id)
+        public IActionResult DeleteContraIndication(int id)
         {
             var contraIndications = _db.ContraIndications.FirstOrDefault(m => m.ContraIndicationId == id);
             if (contraIndications == null)
@@ -461,19 +462,6 @@ namespace E_Prescribing.Controllers
             return Json(new { success = true, message = "Delete Successful" });
         }
 
-        [HttpDelete]
-        public IActionResult DeleteContraIndication(int id)
-        {
-            var contraindication = _db.ContraIndications.FirstOrDefault(m => m.ContraIndicationId == id);
-            if (contraindication == null)
-            {
-                return Json(new { success = false, message = "Error while Deleting" });
-            }
-
-            _db.ContraIndications.Remove(contraindication);
-            _db.SaveChanges();
-            return Json(new { success = true, message = "Delete Successful" });
-        }
         public IActionResult AddOrUpdateConditionDiagnosis(int? conditionId)
         {
             if (conditionId == null)
@@ -672,14 +660,14 @@ namespace E_Prescribing.Controllers
             var province = _db.Provinces.ToList();
             return View(province);
         }
-        [HttpGet("[action]")]
+        [HttpGet]
         public IActionResult GetProvince()
         {
             var province = _db.Provinces.ToList();
             return Json(new { data = province });
         }
 
-        [HttpDelete("[action]")]
+        [HttpDelete]
         public IActionResult DeleteProvince(int id)
         {
             var province = _db.Provinces.FirstOrDefault(m => m.ProvinceId == id);
@@ -1018,6 +1006,12 @@ namespace E_Prescribing.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddUser(UserCollection model)
         {
+            var existingUser = await _userManager.FindByEmailAsync(model.ApplicationUser.Email);
+            if (existingUser != null)
+            {
+                TempData["error"] = "A user with this email already exists.";
+                return View(model);
+            }
             var generatedPassword = GenerateRandomPassword();
 
 
@@ -1029,13 +1023,38 @@ namespace E_Prescribing.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, generatedPassword);
+            string userFirstName;
+
+            if (model.ApplicationUser.UserRole == "Nurse")
+                userFirstName = model.Nurse.Name + " " + model.Nurse.Surname;
+            else if (model.ApplicationUser.UserRole == "Pharmacist")
+                userFirstName = model.Pharmacist.Name + " " + model.Pharmacist.Surname;
+            else if (model.ApplicationUser.UserRole == "Surgeon")
+                userFirstName = model.Surgeon.Name + " " + model.Surgeon.Surname;
+            else if (model.ApplicationUser.UserRole == "Anaesthesiologist")
+                userFirstName = model.Anaesthesiologist.Name + " " + model.Anaesthesiologist.Surname;
+            else
+                userFirstName = "User";
+
 
             if (result.Succeeded)
             {
                 await _userManager.AddToRoleAsync(user, user.UserRole);
 
-                _myEmailSender.SendEmail(user.Email, "Account Credentials", $"Username: {user.UserName}<br/>Password: {generatedPassword}");
-
+                _myEmailSender.SendEmail(user.Email,
+                            "User Credentials [GRP-04-21]",
+                            $@"
+                            <p>Dear {userFirstName},</p>
+                            <p>Welcome to E-Prescribing! We are excited to have you on board. Below are your login credentials:</p>
+                            <ul>
+                                <li><strong>Username:</strong> {user.UserName}</li>
+                                <li><strong>Password:</strong> {generatedPassword}</li>
+                            </ul>
+                            <p>If you encounter any issues, feel free to reach out to our support team at mycode1997@gmail.com.</p>
+                            <p>Kind regards,</p>
+                            <p>The E-Prescribing Admin</p>"
+                            
+                );
 
                 if (user.UserRole == "Nurse")
                 {
@@ -1097,20 +1116,6 @@ namespace E_Prescribing.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("ListUser");
 
-
-                //switch (user.UserRole)
-                //{
-                //    case "Nurse":
-                //        return RedirectToAction("ListNurse");
-                //    case "Pharmacist":
-                //        return RedirectToAction("ListPharmacist");
-                //    case "Surgeon":
-                //        return RedirectToAction("ListSurgeon");
-                //    case "Anaesthesiologist":
-                //        return RedirectToAction("ListAnaesthesiologist");
-                //    default:
-                //        return RedirectToAction("Index", "Admin");
-                //}
             }
             return View(model);
         }
@@ -1165,6 +1170,8 @@ namespace E_Prescribing.Controllers
 
             return new string(chars.ToArray());
         }
+
+
         public IActionResult ListNurse()
         {
             var nurse = _db.Nurses.ToList();
@@ -1346,6 +1353,7 @@ namespace E_Prescribing.Controllers
                     {
                         userList.Add(new UserViewModel
                         {
+                            UserId = user.Id,
                             UserName = user.UserName,
                             Email = user.Email,
                             UserRole = userRole,
@@ -1362,12 +1370,14 @@ namespace E_Prescribing.Controllers
                     {
                         userList.Add(new UserViewModel
                         {
+                            UserId = user.Id,
                             UserName = user.UserName,
                             Email = user.Email,
                             UserRole = userRole,
                             FullName = pharmacist.FullName,
                             ContactNumber = pharmacist.ContactNumber,
                             RegistrationNumber = pharmacist.RegistrationNumber
+
                         });
                     }
                 }
@@ -1378,6 +1388,7 @@ namespace E_Prescribing.Controllers
                     {
                         userList.Add(new UserViewModel
                         {
+                            UserId = user.Id,
                             UserName = user.UserName,
                             Email = user.Email,
                             UserRole = userRole,
@@ -1394,6 +1405,7 @@ namespace E_Prescribing.Controllers
                     {
                         userList.Add(new UserViewModel
                         {
+                            UserId = user.Id,
                             UserName = user.UserName,
                             Email = user.Email,
                             UserRole = userRole,
@@ -1407,61 +1419,101 @@ namespace E_Prescribing.Controllers
 
             return Json(new { data = userList });
         }
-        [HttpGet]
-        public async Task<IActionResult> AddOrUpdateUser(int? userId)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(int userId)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
+            //var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
 
-            var userRole = (await _userManager.GetRolesAsync(user)).FirstOrDefault();
-            var model = new UserViewModel
+
+            if (user == null)
             {
-               // UserId = user.Id,
-                UserName = user.UserName,
-                Email = user.Email,
-                UserRole = userRole
+                return Json(new { success = false, message = "Error: User not found" });
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (!result.Succeeded)
+            {
+                return Json(new { success = false, message = "Error while deleting the user" });
+            }
+
+            return Json(new { success = true, message = "User deleted successfully" });
+        }
+
+        public async Task<IActionResult> UpdateUser(int userId)
+        {
+            // Retrieve user and their role
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            // Create UserCollection model and populate based on user role
+            var model = new UserCollection
+            {
+                ApplicationUsers = new ApplicationUser
+                {
+                    Email = user.Email,
+                    UserRole = user.UserRole
+                }
             };
 
-            switch (userRole)
+            // Populate related role-specific model
+            switch (user.UserRole)
             {
                 case "Nurse":
                     var nurse = await _db.Nurses.FirstOrDefaultAsync(n => n.UserId == user.Id);
                     if (nurse != null)
                     {
-                        model.FullName = nurse.FullName;
-                        model.ContactNumber = nurse.ContactNumber;
-                        model.RegistrationNumber = nurse.RegistrationNumber;
+                        model.Nurse = new Nurse
+                        {
+                            Name = nurse.Name,
+                            Surname = nurse.Surname,
+                            ContactNumber = nurse.ContactNumber,
+                            RegistrationNumber = nurse.RegistrationNumber
+                        };
                     }
                     break;
                 case "Pharmacist":
                     var pharmacist = await _db.Pharmacists.FirstOrDefaultAsync(p => p.UserId == user.Id);
                     if (pharmacist != null)
                     {
-                        model.FullName = pharmacist.FullName;
-                        model.ContactNumber = pharmacist.ContactNumber;
-                        model.RegistrationNumber = pharmacist.RegistrationNumber;
+                        model.Pharmacist = new Pharmacist
+                        {
+                            Name = pharmacist.Name,
+                            Surname = pharmacist.Surname,
+                            ContactNumber = pharmacist.ContactNumber,
+                            RegistrationNumber = pharmacist.RegistrationNumber
+                        };
                     }
                     break;
                 case "Surgeon":
                     var surgeon = await _db.Surgeons.FirstOrDefaultAsync(s => s.UserId == user.Id);
                     if (surgeon != null)
                     {
-                        model.FullName = surgeon.FullName;
-                        model.ContactNumber = surgeon.ContactNumber;
-                        model.RegistrationNumber = surgeon.RegistrationNumber;
+                        model.Surgeon = new Surgeon
+                        {
+                            Name = surgeon.Name,
+                            Surname = surgeon.Surname,
+                            ContactNumber = surgeon.ContactNumber,
+                            RegistrationNumber = surgeon.RegistrationNumber
+                        };
                     }
                     break;
                 case "Anaesthesiologist":
                     var anaesthesiologist = await _db.Anaesthesiologists.FirstOrDefaultAsync(a => a.UserId == user.Id);
                     if (anaesthesiologist != null)
                     {
-                        model.FullName = anaesthesiologist.FullName;
-                        model.ContactNumber = anaesthesiologist.ContactNumber;
-                        model.RegistrationNumber = anaesthesiologist.RegistrationNumber;
+                        model.Anaesthesiologist = new Anaesthesiologist
+                        {
+                            Name = anaesthesiologist.Name,
+                            Surname = anaesthesiologist.Surname,
+                            ContactNumber = anaesthesiologist.ContactNumber,
+                            RegistrationNumber = anaesthesiologist.RegistrationNumber
+                        };
                     }
                     break;
             }
@@ -1470,20 +1522,151 @@ namespace E_Prescribing.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddOrUpdateUser(UserViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateUser(int id, UserCollection model)
         {
-            if (!ModelState.IsValid)
+            // Retrieve user
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
             {
-                return View(model);
+                return NotFound();
             }
 
-            var user = await _userManager.FindByIdAsync(model.UserId.ToString());
-            //if (user == null)
-            //{
-            //    return NotFound();
-            //}
+            // Update user details
+            user.Email = model.ApplicationUser.Email;
 
-            user.UserName = model.UserName;
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                // Update related role-specific information
+                switch (user.UserRole)
+                {
+                    case "Nurse":
+                        var nurse = await _db.Nurses.FirstOrDefaultAsync(n => n.UserId == user.Id);
+                        if (nurse != null)
+                        {
+                            nurse.Name = model.Nurse.Name;
+                            nurse.Surname = model.Nurse.Surname;
+                            nurse.ContactNumber = model.Nurse.ContactNumber;
+                            nurse.RegistrationNumber = model.Nurse.RegistrationNumber;
+                            _db.Nurses.Update(nurse);
+                        }
+                        break;
+                    case "Pharmacist":
+                        var pharmacist = await _db.Pharmacists.FirstOrDefaultAsync(p => p.UserId == user.Id);
+                        if (pharmacist != null)
+                        {
+                            pharmacist.Name = model.Pharmacist.Name;
+                            pharmacist.Surname = model.Pharmacist.Surname;
+                            pharmacist.ContactNumber = model.Pharmacist.ContactNumber;
+                            pharmacist.RegistrationNumber = model.Pharmacist.RegistrationNumber;
+                            _db.Pharmacists.Update(pharmacist);
+                        }
+                        break;
+                    case "Surgeon":
+                        var surgeon = await _db.Surgeons.FirstOrDefaultAsync(s => s.UserId == user.Id);
+                        if (surgeon != null)
+                        {
+                            surgeon.Name = model.Surgeon.Name;
+                            surgeon.Surname = model.Surgeon.Surname;
+                            surgeon.ContactNumber = model.Surgeon.ContactNumber;
+                            surgeon.RegistrationNumber = model.Surgeon.RegistrationNumber;
+                            _db.Surgeons.Update(surgeon);
+                        }
+                        break;
+                    case "Anaesthesiologist":
+                        var anaesthesiologist = await _db.Anaesthesiologists.FirstOrDefaultAsync(a => a.UserId == user.Id);
+                        if (anaesthesiologist != null)
+                        {
+                            anaesthesiologist.Name = model.Anaesthesiologist.Name;
+                            anaesthesiologist.Surname = model.Anaesthesiologist.Surname;
+                            anaesthesiologist.ContactNumber = model.Anaesthesiologist.ContactNumber;
+                            anaesthesiologist.RegistrationNumber = model.Anaesthesiologist.RegistrationNumber;
+                            _db.Anaesthesiologists.Update(anaesthesiologist);
+                        }
+                        break;
+                }
+
+                await _db.SaveChangesAsync();
+                return RedirectToAction("ListUser");
+            }
+
+            return View(model);
+        }
+        public async Task<IActionResult> AddOrUpdateUser(int userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            var email = user.Email;
+            var userName = email.Substring(0, email.IndexOf('@')); // Extract the domain name from the email
+
+            var model = new UserViewModel
+            {
+                UserId = user.Id,
+                UserName = userName,  // Set UserName to the domain name
+                Email = user.Email,
+                UserRole = string.Join(", ", await _userManager.GetRolesAsync(user))
+            };
+
+            if (model.UserRole.Contains("Nurse"))
+            {
+                var nurse = await _db.Nurses.FirstOrDefaultAsync(n => n.UserId == user.Id);
+                if (nurse != null)
+                {
+                    model.Name = nurse.Name;
+                    model.Surname = nurse.Surname;
+                    model.ContactNumber = nurse.ContactNumber;
+                    model.RegistrationNumber = nurse.RegistrationNumber;
+                }
+            }
+            else if (model.UserRole.Contains("Pharmacist"))
+            {
+                var pharmacist = await _db.Pharmacists.FirstOrDefaultAsync(p => p.UserId == user.Id);
+                if (pharmacist != null)
+                {
+                    model.Name = pharmacist.Name;
+                    model.Surname = pharmacist.Surname;
+                    model.ContactNumber = pharmacist.ContactNumber;
+                    model.RegistrationNumber = pharmacist.RegistrationNumber;
+                }
+            }
+            else if (model.UserRole.Contains("Surgeon"))
+            {
+                var surgeon = await _db.Surgeons.FirstOrDefaultAsync(s => s.UserId == user.Id);
+                if (surgeon != null)
+                {
+                    model.Name = surgeon.Name;
+                    model.Surname = surgeon.Surname;
+                    model.ContactNumber = surgeon.ContactNumber;
+                    model.RegistrationNumber = surgeon.RegistrationNumber;
+                }
+            }
+            else if (model.UserRole.Contains("Anaesthesiologist"))
+            {
+                var anaesthesiologist = await _db.Anaesthesiologists.FirstOrDefaultAsync(a => a.UserId == user.Id);
+                if (anaesthesiologist != null)
+                {
+                    model.Name = anaesthesiologist.Name;
+                    model.Surname = anaesthesiologist.Surname;
+                    model.ContactNumber = anaesthesiologist.ContactNumber;
+                    model.RegistrationNumber = anaesthesiologist.RegistrationNumber;
+                }
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddOrUpdateUser(UserViewModel model)
+        {
+            var user = await _userManager.FindByIdAsync(model.UserId.ToString());
+
+            var email = model.Email;
+            var userName = email.Substring(0, email.IndexOf('@')); 
+
+            user.UserName = userName;  
             user.Email = model.Email;
 
             var result = await _userManager.UpdateAsync(user);
@@ -1504,43 +1687,55 @@ namespace E_Prescribing.Controllers
                     var nurse = await _db.Nurses.FirstOrDefaultAsync(n => n.UserId == user.Id);
                     if (nurse != null)
                     {
-                        nurse.FullName = model.FullName;
+                        nurse.Name = model.Name;
+                        nurse.Surname = model.Surname;
                         nurse.ContactNumber = model.ContactNumber;
                         nurse.RegistrationNumber = model.RegistrationNumber;
+                        nurse.FullName = $"{model.Name} {model.Surname}";
+
                     }
                     break;
                 case "Pharmacist":
                     var pharmacist = await _db.Pharmacists.FirstOrDefaultAsync(p => p.UserId == user.Id);
                     if (pharmacist != null)
                     {
-                        pharmacist.FullName = model.FullName;
+                        pharmacist.Name = model.Name;
+                        pharmacist.Surname = model.Surname;
                         pharmacist.ContactNumber = model.ContactNumber;
                         pharmacist.RegistrationNumber = model.RegistrationNumber;
+                        pharmacist.FullName = $"{model.Name} {model.Surname}";
+
                     }
                     break;
                 case "Surgeon":
                     var surgeon = await _db.Surgeons.FirstOrDefaultAsync(s => s.UserId == user.Id);
                     if (surgeon != null)
                     {
-                        surgeon.FullName = model.FullName;
+                        surgeon.Name = model.Name;
+                        surgeon.Surname = model.Surname;
                         surgeon.ContactNumber = model.ContactNumber;
                         surgeon.RegistrationNumber = model.RegistrationNumber;
+                        surgeon.FullName = $"{model.Name} {model.Surname}";
+
                     }
                     break;
                 case "Anaesthesiologist":
                     var anaesthesiologist = await _db.Anaesthesiologists.FirstOrDefaultAsync(a => a.UserId == user.Id);
                     if (anaesthesiologist != null)
                     {
-                        anaesthesiologist.FullName = model.FullName;
+                        anaesthesiologist.Name = model.Name;
+                        anaesthesiologist.Surname = model.Surname;
                         anaesthesiologist.ContactNumber = model.ContactNumber;
                         anaesthesiologist.RegistrationNumber = model.RegistrationNumber;
+                        anaesthesiologist.FullName = $"{model.Name} {model.Surname}";
+
                     }
                     break;
             }
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("ViewAllUsers");
+            return RedirectToAction("ListUser");
         }
 
 

@@ -800,12 +800,10 @@ namespace E_Prescribing.Controllers
             return RedirectToAction("ListMedication");
         }
 
-        public IActionResult UpdateMedication(int medicationId)
+        public async Task<IActionResult> UpdateMedication(int medicationId)
         {
-            var medication = _db.Medications
-                                .Include(m => m.MedicationIngredients)
-                                .FirstOrDefault(m => m.MedicationId == medicationId);
-
+            var medication = await _db.Medications.Include(m => m.MedicationIngredients)
+                                                  .FirstOrDefaultAsync(m => m.MedicationId == medicationId);
             if (medication == null)
             {
                 return NotFound();
@@ -816,37 +814,30 @@ namespace E_Prescribing.Controllers
                 Medication = medication,
                 MedicationIngredient = new MedicationIngredient
                 {
-                    SelectedIngredient = medication.MedicationIngredients.Select(mi => mi.ActiveIngredientId).ToList(),
+                    SelectedIngredient = medication.MedicationIngredients.Select(mi => mi.ActiveIngredientId).ToList()
                 },
                 Strengths = medication.MedicationIngredients.ToDictionary(mi => mi.ActiveIngredientId, mi => mi.ActiveIngredientStrength)
             };
 
-            ViewBag.DosageFormList = new SelectList(_db.DosageForms, "DosageId", "Name", medication.DosageFormId);
-            ViewBag.IngredientList = new SelectList(_db.ActiveIngredients, "IngredientId", "Name");
+            ViewBag.DosageFormList = new SelectList(_db.DosageForms.OrderBy(d => d.Name), "DosageId", "Name", medication.DosageFormId);
+            ViewBag.IngredientList = new SelectList(_db.ActiveIngredients.OrderBy(a => a.Name), "IngredientId", "Name");
 
             return View(model);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateMedication(int medicationId, MedicationCollection model)
+        public async Task<IActionResult> UpdateMedication(MedicationCollection model)
         {
-            if (medicationId != model.Medication.MedicationId)
-            {
-                return BadRequest();
-            }
+            ViewBag.DosageFormList = new SelectList(_db.DosageForms.OrderBy(d => d.Name), "DosageId", "Name", model.Medication.DosageFormId);
+            ViewBag.IngredientList = new SelectList(_db.ActiveIngredients.OrderBy(a => a.Name), "IngredientId", "Name");
 
-            if (!ModelState.IsValid)
+            if (model.MedicationIngredient.SelectedIngredient == null || !model.MedicationIngredient.SelectedIngredient.Any())
             {
-                ViewBag.DosageFormList = new SelectList(_db.DosageForms, "DosageId", "Name", model.Medication.DosageFormId);
-                ViewBag.IngredientList = new SelectList(_db.ActiveIngredients, "IngredientId", "Name");
+                TempData["error"] = $"Active Ingredient for {model.Medication.Name} is required";
                 return View(model);
             }
 
-            var medication = _db.Medications
-                                .Include(m => m.MedicationIngredients)
-                                .FirstOrDefault(m => m.MedicationId == medicationId);
-
+            var medication = await _db.Medications.FindAsync(model.Medication.MedicationId);
             if (medication == null)
             {
                 return NotFound();
@@ -854,31 +845,42 @@ namespace E_Prescribing.Controllers
 
             medication.Name = model.Medication.Name;
             medication.DosageFormId = model.Medication.DosageFormId;
+            medication.Schedule = model.Medication.Schedule;
+            medication.ReOrderLevel = model.Medication.ReOrderLevel;
+            _db.Update(medication);
 
-            var existingIngredients = medication.MedicationIngredients.ToList();
-            _db.MedicationIngredients.RemoveRange(existingIngredients);
+            var existingIngredients = _db.MedicationIngredients
+                                         .Where(mi => mi.MedicationId == medication.MedicationId)
+                                         .ToList();
 
-            if (model.MedicationIngredient.SelectedIngredient != null)
+            foreach (var selectedIngredient in model.MedicationIngredient.SelectedIngredient)
             {
-                foreach (var selectedIngredient in model.MedicationIngredient.SelectedIngredient)
+                var existingIngredient = existingIngredients
+                                         .FirstOrDefault(mi => mi.ActiveIngredientId == selectedIngredient);
+
+                if (existingIngredient != null)
                 {
-                    if (model.Strengths.TryGetValue(selectedIngredient, out var strength))
+                    existingIngredient.ActiveIngredientStrength = model.Strengths[selectedIngredient];
+                    _db.Update(existingIngredient);
+                }
+                else
+                {
+                    var newIngredient = new MedicationIngredient
                     {
-                        var medicationIngredient = new MedicationIngredient
-                        {
-                            ActiveIngredientId = selectedIngredient,
-                            MedicationId = medication.MedicationId,
-                            ActiveIngredientStrength = strength,
-                        };
-                        _db.Add(medicationIngredient);
-                    }
+                        ActiveIngredientId = selectedIngredient,
+                        MedicationId = model.Medication.MedicationId,
+                        ActiveIngredientStrength = model.Strengths[selectedIngredient],
+                    };
+                    _db.Add(newIngredient);
                 }
             }
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("ListMedication", "Pharmacist");
+            TempData["success"] = "Medication updated successfully";
+            return RedirectToAction("ListMedication");
         }
+
 
 
         public async Task<IActionResult> ListMedication()
@@ -1192,7 +1194,7 @@ namespace E_Prescribing.Controllers
 
             await _db.SaveChangesAsync();
 
-            return RedirectToAction("ListMedicationOrder");
+            return Json(new { success = true, message = "Order recieved successfully" });
         }
 
 

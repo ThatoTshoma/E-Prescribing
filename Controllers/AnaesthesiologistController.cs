@@ -711,7 +711,7 @@ namespace E_Prescribing.Controllers
                 order.Status = "Received";
                 await _db.SaveChangesAsync();
             }
-            return RedirectToAction("ListOrder");
+            return Json(new { success = true, message = "Order recieved successfully" });
         }
         [HttpGet]
         public async Task<IActionResult> GenerateReport(DateTime? startDate, DateTime? endDate)

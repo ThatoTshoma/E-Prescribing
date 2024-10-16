@@ -57,7 +57,7 @@ namespace E_Prescribing.Controllers
                 prescription.Status = "Received";
                 await _db.SaveChangesAsync();
             }
-            return RedirectToAction("ListPatientPrescription", new {id = prescription.PatientId});
+            return Json(new { success = true, message = "Prescription recieved successfully" });
         }
         public IActionResult MedicationHistoryPage(int id)
         {

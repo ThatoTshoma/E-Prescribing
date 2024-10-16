@@ -110,7 +110,7 @@ namespace E_Prescribing.Controllers
                                                  "Kind regards,<br>" +
                                                  $"{surgeon.FullName}";
 
-                    _emailSender.SendEmail(patient.EmailAddress, "Booking Notification [GRP-04-21]", patientEmailMessage);
+                    _emailSender.SendEmail(patient.EmailAddress, "Booking Notification", patientEmailMessage);
 
                     string anaesthesiologistEmailMessage = $"Dear {anaesthesiologist.FullName},<br><br>" +
                                                            "You have a new booking scheduled for patient " +
@@ -175,7 +175,7 @@ namespace E_Prescribing.Controllers
                 Date = b.Date.ToString("dd-MM-yyy"),
                 b.Status,
                 b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.DisplayText).ToList()
+                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
             });
 
             return Json(new { data = result });
@@ -223,7 +223,7 @@ namespace E_Prescribing.Controllers
                 Date = b.Date.ToString("dd-MM-yyy"),
                 b.Status,
                 b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.DisplayText).ToList()
+                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
             });
 
             return Json(new { data = result });
@@ -268,19 +268,19 @@ namespace E_Prescribing.Controllers
                 Date = b.Date.ToString("dd-MM-yyy"), 
                 b.Status,
                 b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.DisplayText).ToList()
+                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
             });
 
             return Json(new { data = result });
         }
-        public IActionResult EditBooking(int bookingId)
+        public IActionResult EditBooking(int id)
         {
             var booking = _db.Bookings
                 .Include(b => b.Patient)
                 .Include(b => b.Anaesthesiologist)
                 .Include(b => b.Theatre)
                 .Include(b => b.PatientTreatments)
-                .SingleOrDefault(b => b.BookingId == bookingId);
+                .SingleOrDefault(b => b.BookingId == id);
 
             if (booking == null)
             {
@@ -696,7 +696,7 @@ namespace E_Prescribing.Controllers
                 Date = b.Date.ToString("dd-MM-yyy"),
                 b.Status,
                 b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.DisplayText).ToList()
+                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
             });
 
             return Json(new { data = result });

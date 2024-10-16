@@ -84,74 +84,83 @@
         function loadDataTable(patientId) {
             dataTable = $('#tblData').DataTable({
                 "ajax": {
-                    url: getPatientPrescriptionUrl, // Use the URL from the script tag
+                    url: getPatientPrescriptionUrl, 
                     data: { id: patientId },
                     dataSrc: 'data'
                 },
                 "columns": [
                     { data: 'date', "width": "10%" },
-                    { data: 'medications', "width": "20%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
-                    { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'medications', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
+                    { data: 'quantities', "width": "5%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'status', "width": "10%" },
-                    { data: 'urgent', "width": "10%" },
+                    { data: 'urgent', "width": "5%" },
+
                     {
                         data: 'prescriptionId',
                         "render": function (data, type, row) {
-                            var buttons = `<div class="btn-group" role="group">
-                                <a href="${prescriptionUrl}/${data}" class="btn btn-primary mx-1"> <i class="bi bi-eye-fill"></i> View</a>`;
+                            let buttons = '';
 
-                            if (row.status === "Received") {
-                                buttons += `<a href="${listMedicationToAdministerUrl}/${data}" class="btn btn-success mx-1"> <i class="bi bi-check-circle"></i> Administer</a>`;
-                                buttons += `<a href="${listAdministeredMedicationUrl}/${data}" class="btn btn-info mx-1"> <i class="bi bi-list-check"></i> Administered Medication</a>`;
-                            }
+                            buttons += `<div class="btn-group" role="group">
+                                     <a href="@Url.Action("Prescription", "Nurse")/${data}" class="btn btn-primary mx-1">
+                                    <i class="bi bi-eye-fill"></i> View
+                                </a>
+                            </div>`;
 
                             if (row.status === "Dispensed") {
-                                buttons += `<a href="#" class="btn btn-success" onclick="recievePrescription(${data})"><i class="bi bi-check2-circle"></i>Receive</a>`;
+                                buttons += `<div class="w-75 btn-group" role="group">
+                                    <a onClick="ReceivePrescription('@Url.Action("ReceivePrescription", "Nurse")?prescriptionId=${data}')" class="btn btn-success mx-2">
+                                        <i class="bi bi-basket-fill"></i> Receive
+                                    </a>
+                                </div>`;
                             }
 
-                            buttons += `</div>`;
+                            if (row.status === "Received") {
+                                buttons += `<a href="@Url.Action("ListMedicationToAdminister", "Nurse")/${data}" class="btn btn-info">
+                                    <i class="bi bi-check-circle"></i> Administer
+                                </a>`;
+                                buttons += `<a href="@Url.Action("ListAdministeredMedication", "Nurse")/${data}" class="btn btn-info mx-1">
+                                    <i class="bi bi-list-check"></i> View Administered
+                                </a>`;
+                            }
+
                             return buttons;
                         },
-                        "width": "20%"
+                        "width": "30%"
                     }
+
                 ]
             });
         }
-
-
-
-
-
-        function recievePrescription(prescriptionId) {
+        function ReceivePrescription(url) {
             Swal.fire({
                 icon: "success",
-                title: "Prescription has been Received",
+                title: "Prescription has been received",
                 showConfirmButton: true,
                 confirmButtonText: 'Ok'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    var token = $('input[name="__RequestVerificationToken"]').val();
+
                     $.ajax({
-                        url: '/nurse/ReceivePrescription',
+                        url: url,
                         type: 'POST',
                         data: {
-                            prescriptionId: prescriptionId,  
-                            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                            __RequestVerificationToken: token
                         },
                         success: function (data) {
                             if (data.success) {
                                 dataTable.ajax.reload();
                                 toastr.success(data.message);
                             } else {
-                               // toastr.error(data.message);
+                                toastr.error(data.message);
                             }
                         },
                         error: function (err) {
-                            toastr.error("Error while receiving prescription");
+                            toastr.error("Error while receiving order");
                         }
                     });
                 }
             });
         }
-
     </script>
 }
