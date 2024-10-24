@@ -226,12 +226,12 @@
 
             <div class="form-step" id="step-5">
                 <h2>Step 5: Admit Patient</h2>
-                <input asp-for="Patient.PatientId" type="hidden" />
+                <input asp-for="Booking.BookingId" type="hidden" />
 
                 <div class="form-control-lg">
-                    <label asp-for="Patient.AdmissionDate">Admission Date</label>
-                    <input asp-for="Patient.AdmissionDate" type="date" class="form-control" />
-                    <span asp-validation-for="Patient.AdmissionDate" class="text-danger"></span>
+                    <label asp-for="Booking.AdmissionDate">Admission Date</label>
+                    <input asp-for="Booking.AdmissionDate" type="datetime-local" class="form-control" />
+                    <span asp-validation-for="Booking.AdmissionDate" class="text-danger"></span>
                 </div>
             </div>
 

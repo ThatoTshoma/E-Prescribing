@@ -50,16 +50,10 @@
             <div class="border p-3">
                 <div asp-validation-summary="All" class="text-danger"></div>
 
-                <div class="form-floating py-2 col-12">
-                    <label>Ward</label>
-                    <select for="Ward" asp-items=@(new SelectList(Model.Wards.OrderBy(w =>w.WardNumber), "WardId", "WardNumber")) class="form-control" id="Ward">
-                        <option value="">Select Ward</option>
-                    </select>
-                </div>
 
                 <div class="form-floating py-2 col-12">
                     <label asp-for="Booking.TheatreId"></label>
-                    <select asp-for="Booking.TheatreId" class="form-control" id="Theatre">
+                        <select asp-for="Booking.TheatreId" asp-items=@(new SelectList(Model.Theatres.OrderBy(w =>w.Name), "TheatreId", "Name")) class="form-control">
                         <option value="">Select Theatre</option>
                     </select>
                     <span asp-validation-for="Booking.TheatreId" class="text-danger"></span>

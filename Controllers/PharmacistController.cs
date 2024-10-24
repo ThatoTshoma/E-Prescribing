@@ -328,7 +328,6 @@ namespace E_Prescribing.Controllers
 
             var prescriptions = await prescriptionQuery.ToListAsync();
 
-           // var totalUniquePatients = prescriptions.Select(o => o.Patient.PatientId).Distinct().Count();
             var totalScriptsDispensed = prescriptions.Where(p => p.Status == "Dispensed").Count();
             var totalScriptsRejected = prescriptions.Where(p => p.Status == "Rejected").Count();
 
@@ -575,7 +574,13 @@ namespace E_Prescribing.Controllers
 
                     foreach (var medicationPrescription in prescription.MedicationPrescriptions)
                     {
+
+
                         var medicationId = medicationPrescription.MedicationId;
+                        var medication = _db.Medications
+                                .Where(m => m.MedicationId == medicationId)
+                                .Select(m => new { m.Name })
+                                .FirstOrDefault();
                         var activeIngredients = await _db.MedicationIngredients
                                                          .Where(mi => mi.MedicationId == medicationId)
                                                          .Select(mi => new { mi.ActiveIngredientId, mi.ActiveIngredient.Name })
@@ -585,7 +590,7 @@ namespace E_Prescribing.Controllers
 
                         var medicationAllergenConflicts = activeIngredients
                             .Where(ai => patientAllergies.Contains(ai.ActiveIngredientId))
-                            .Select(ai => ai.Name)
+                            .Select(ai => $"{ai.Name} ({medication.Name})")
                             .ToList();
 
                         if (medicationAllergenConflicts.Any())
@@ -596,7 +601,7 @@ namespace E_Prescribing.Controllers
                         var medicationContraindications = await _db.ContraIndications
                             .Where(ci => activeIngredients.Select(ai => ai.ActiveIngredientId).Contains(ci.ActiveIngredientId)
                                 && patientConditions.Contains(ci.ConditionDiagnosisId))
-                            .Select(ci => ci.ActiveIngredient.Name)
+                            .Select(ci => $"{ci.ActiveIngredient.Name} ({medication.Name})")
                             .ToListAsync();
 
                         if (medicationContraindications.Any())
@@ -604,6 +609,44 @@ namespace E_Prescribing.Controllers
                             contraindications.AddRange(medicationContraindications);
                         }
                     }
+                    var currentPatientMedications = _db.PatientMedications
+                            .Where(pm => pm.PatientId == patientId)
+                            .SelectMany(pm => _db.MedicationIngredients
+                                .Where(mi => mi.MedicationId == pm.MedicationId)
+                                .Select(mi => mi.ActiveIngredientId))
+                            .Distinct()
+                            .ToList();
+                    foreach (var currentIngredientId in currentPatientMedications)
+                    {
+                        foreach (var newIngredientId in activeIngredientsInPrescription)
+                        {
+                            if (currentIngredientId != newIngredientId)
+                            {
+                                var interaction = _db.MedicationInteractions
+                                    .FirstOrDefault(mi =>
+                                        (mi.ActiveIngredient1Id == currentIngredientId && mi.ActiveIngredient2Id == newIngredientId) ||
+                                        (mi.ActiveIngredient1Id == newIngredientId && mi.ActiveIngredient2Id == currentIngredientId));
+
+                                if (interaction != null)
+                                {
+                                    var currentMedicationName = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == currentIngredientId)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    var newMedicationName = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == newIngredientId)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    interactionWarnings.Add($"{interaction.Description} ({currentMedicationName} and {newMedicationName})");
+                                }
+                            }
+                        }
+                    }
+
+
+                    var processedInteractions = new HashSet<(int, int)>();
 
                     foreach (var ingredientId1 in activeIngredientsInPrescription)
                     {
@@ -611,19 +654,35 @@ namespace E_Prescribing.Controllers
                         {
                             if (ingredientId1 != ingredientId2)
                             {
-                                var interaction = await _db.MedicationInteractions
-                                    .FirstOrDefaultAsync(mi =>
-                                        (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
-                                        (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+                                var interactionKey = (Math.Min(ingredientId1, ingredientId2), Math.Max(ingredientId1, ingredientId2));
 
-                                if (interaction != null)
+                                if (!processedInteractions.Contains(interactionKey))
                                 {
-                                    interactionWarnings.Add($"{interaction.Description}");
+                                    var interaction = _db.MedicationInteractions
+                                        .FirstOrDefault(mi =>
+                                            (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
+                                            (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+
+                                    if (interaction != null)
+                                    {
+                                        var medication1 = _db.MedicationIngredients
+                                            .Where(mi => mi.ActiveIngredientId == ingredientId1)
+                                            .Select(mi => mi.Medication.Name)
+                                            .FirstOrDefault();
+
+                                        var medication2 = _db.MedicationIngredients
+                                            .Where(mi => mi.ActiveIngredientId == ingredientId2)
+                                            .Select(mi => mi.Medication.Name)
+                                            .FirstOrDefault();
+
+                                        interactionWarnings.Add($"{interaction.Description} ({medication1} and {medication2})");
+
+                                        processedInteractions.Add(interactionKey);
+                                    }
                                 }
                             }
                         }
                     }
-
                     if (conflictingAllergens.Any() && string.IsNullOrEmpty(reasonForIgnoring))
                     {
                         return Json(new
@@ -1313,6 +1372,11 @@ namespace E_Prescribing.Controllers
                     foreach (var medicationOrder in order.MedicationOrders)
                     {
                         var medicationId = medicationOrder.MedicationId;
+                        var medication = _db.Medications
+                          .Where(m => m.MedicationId == medicationId)
+                          .Select(m => new { m.Name })
+                          .FirstOrDefault();
+
                         var activeIngredients = await _db.MedicationIngredients
                                                          .Where(mi => mi.MedicationId == medicationId)
                                                          .Select(mi => new { mi.ActiveIngredientId, mi.ActiveIngredient.Name })
@@ -1322,7 +1386,7 @@ namespace E_Prescribing.Controllers
 
                         var medicationAllergenConflicts = activeIngredients
                             .Where(ai => patientAllergies.Contains(ai.ActiveIngredientId))
-                            .Select(ai => ai.Name)
+                            .Select(ai => $"{ai.Name} ({medication.Name})")
                             .ToList();
 
                         if (medicationAllergenConflicts.Any())
@@ -1333,7 +1397,7 @@ namespace E_Prescribing.Controllers
                         var medicationContraindications = await _db.ContraIndications
                             .Where(ci => activeIngredients.Select(ai => ai.ActiveIngredientId).Contains(ci.ActiveIngredientId)
                                 && patientConditions.Contains(ci.ConditionDiagnosisId))
-                            .Select(ci => ci.ActiveIngredient.Name)
+                            .Select(ci => $"{ci.ActiveIngredient.Name} ({medication.Name})")
                             .ToListAsync();
 
                         if (medicationContraindications.Any())
@@ -1342,20 +1406,77 @@ namespace E_Prescribing.Controllers
                         }
                     }
 
+                    var currentPatientMedications = _db.PatientMedications
+                        .Where(pm => pm.PatientId == patientId)
+                        .SelectMany(pm => _db.MedicationIngredients
+                            .Where(mi => mi.MedicationId == pm.MedicationId)
+                            .Select(mi => mi.ActiveIngredientId))
+                        .Distinct()
+                        .ToList();
+
+                    foreach (var currentIngredientId in currentPatientMedications)
+                    {
+                        foreach (var newIngredientId in activeIngredientsInOrder)
+                        {
+                            if (currentIngredientId != newIngredientId)
+                            {
+                                var interaction = _db.MedicationInteractions
+                                    .FirstOrDefault(mi =>
+                                        (mi.ActiveIngredient1Id == currentIngredientId && mi.ActiveIngredient2Id == newIngredientId) ||
+                                        (mi.ActiveIngredient1Id == newIngredientId && mi.ActiveIngredient2Id == currentIngredientId));
+
+                                if (interaction != null)
+                                {
+                                    var currentMedicationName = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == currentIngredientId)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    var newMedicationName = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == newIngredientId)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    interactionWarnings.Add($"{interaction.Description} ({currentMedicationName} and {newMedicationName})");
+                                }
+                            }
+                        }
+                    }
+
+
+                    var processedInteractions = new HashSet<(int, int)>();
+
                     foreach (var ingredientId1 in activeIngredientsInOrder)
                     {
                         foreach (var ingredientId2 in activeIngredientsInOrder)
                         {
                             if (ingredientId1 != ingredientId2)
                             {
-                                var interaction = await _db.MedicationInteractions
-                                    .FirstOrDefaultAsync(mi =>
-                                        (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
-                                        (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+                                var interactionKey = (Math.Min(ingredientId1, ingredientId2), Math.Max(ingredientId1, ingredientId2));
 
-                                if (interaction != null)
+                                if (!processedInteractions.Contains(interactionKey))
                                 {
-                                    interactionWarnings.Add($"{interaction.Description}");
+                                    var interaction = _db.MedicationInteractions
+                                        .FirstOrDefault(mi =>
+                                            (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
+                                            (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+
+                                    if (interaction != null)
+                                    {
+                                        var medication1 = _db.MedicationIngredients
+                                            .Where(mi => mi.ActiveIngredientId == ingredientId1)
+                                            .Select(mi => mi.Medication.Name)
+                                            .FirstOrDefault();
+
+                                        var medication2 = _db.MedicationIngredients
+                                            .Where(mi => mi.ActiveIngredientId == ingredientId2)
+                                            .Select(mi => mi.Medication.Name)
+                                            .FirstOrDefault();
+
+                                        interactionWarnings.Add($"{interaction.Description} ({medication1} and {medication2})");
+
+                                        processedInteractions.Add(interactionKey);
+                                    }
                                 }
                             }
                         }

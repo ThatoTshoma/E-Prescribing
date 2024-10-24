@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Text;
+using System.Linq;
 using System.Security.Claims;
 
 
@@ -311,7 +312,7 @@ namespace E_Prescribing.Controllers
         //    return Json(new { data = booking });
         //}
 
-        public IActionResult PendingBooking(int id)
+        public IActionResult PendingBooking()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var anaesthesiologists = _db.Anaesthesiologists.SingleOrDefault(c => c.UserId.ToString() == userId);
@@ -325,40 +326,62 @@ namespace E_Prescribing.Controllers
                 .Where(b => b.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId  && b.Status == false)
                 .ToList();
 
-            ViewBag.PatientId = id;
 
             return View(bookings);
         }
         [HttpGet]
-        public IActionResult GetPendingBooking(int id)
+        public IActionResult GetPendingBooking()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var anaesthesiologists = _db.Anaesthesiologists.SingleOrDefault(c => c.UserId.ToString() == userId);
             var bookings = _db.Bookings
                 .Include(b => b.Patient)
                 .Include(b => b.Surgeon)
+                .Include(b => b.Nurse)
                 .Include(b => b.Theatre)
                     .ThenInclude(t => t.Ward)
                 .Include(b => b.Anaesthesiologist)
                 .Include(b => b.PatientTreatments)
-                .ThenInclude(pt => pt.Treatment)
-                .Where(b => b.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId  && b.Status == false)
+                    .ThenInclude(pt => pt.Treatment)
+                .Where(b => b.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId && b.Status == false)
                 .ToList();
 
-            var result = bookings.Select(b => new {
-                b.BookingId,
-                Surgeon = b.Surgeon.FullName, 
-                b.Patient,
-                Theatre = b.Theatre.Name,
-                Ward = b.Theatre.Ward.WardNumber,
-                Date = b.Date.ToString("dd-MM-yyy"),
-                b.Status,
-                b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
-            });
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+                    bookingId = b.BookingId,
+                    surgeon = new
+                    {
+                        name = b.Surgeon.FullName
+                    },
+                    patient = new
+                    {
+                        name = b.Patient.FullName,
+                        patientId = b.Patient.PatientId
+                    },
+                    theatre = new
+                    {
+                        name = b.Theatre.Name
+                    },
+                    ward = new
+                    {
+                        number = b.Theatre.Ward.WardNumber
+                    },
+                    date = b.Date.ToString("dd-MM-yyyy"),
+                    status = b.Status,
+                    session = b.Session,
+                    treatments = b.PatientTreatments.Select(pt => new
+                    {
+                        name = pt.Treatment.DisplayText
+                    }).ToArray()
+                }).ToArray()
+            };
 
-            return Json(new { data = result });
+            return Json(viewModel);
         }
+
+
         public IActionResult ApprovedBooking(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -393,20 +416,40 @@ namespace E_Prescribing.Controllers
                 .Where(b => b.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId && b.Status == true)
                 .ToList();
 
-            var result = bookings.Select(b => new {
-                b.BookingId,
-                Surgeon = b.Surgeon.FullName,
-                b.Anaesthesiologist.FullName,
-                b.Patient,
-                Theatre = b.Theatre.Name,
-                Ward = b.Theatre.Ward.WardNumber,
-                Date = b.Date.ToString("dd-MM-yyy"),
-                b.Status,
-                b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
-            });
 
-            return Json(new { data = result });
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+                    bookingId = b.BookingId,
+                    surgeon = new
+                    {
+                        name = b.Surgeon.FullName
+                    },
+                    patient = new
+                    {
+                        name = b.Patient.FullName,
+                        patientId = b.Patient.PatientId
+                    },
+                    theatre = new
+                    {
+                        name = b.Theatre.Name
+                    },
+                    ward = new
+                    {
+                        number = b.Theatre.Ward.WardNumber
+                    },
+                    date = b.Date.ToString("dd-MM-yyyy"),
+                    status = b.Status,
+                    session = b.Session,
+                    treatments = b.PatientTreatments.Select(pt => new
+                    {
+                        name = pt.Treatment.DisplayText
+                    }).ToArray()
+                }).ToArray()
+            };
+
+            return Json(viewModel);
         }
 
         public IActionResult ListBooking(int id)
@@ -488,8 +531,7 @@ namespace E_Prescribing.Controllers
             if (model.Booking.Date >= DateTime.Now.Date || model.Booking.Date <= DateTime.Now.Date)
             {
                 var appointment = _db.Bookings.Single(c => c.BookingId == bookingId);
-               // appointment.PatientId = model.Booking.PatientId;
-                appointment.Date = model.Booking.Date;
+
                 appointment.Status = model.Booking.Status;
                 _db.SaveChanges();
                 if (model.Booking.Status == true)
@@ -570,9 +612,9 @@ namespace E_Prescribing.Controllers
             var anaesthesiologist = _db.Anaesthesiologists.SingleOrDefault(c => c.UserId.ToString() == userId);
 
             var patientAllergies = _db.PatientAllergies
-                                     .Where(a => a.PatientId == patientId)
-                                     .Select(a => a.ActiveIngredientId)
-                                     .ToList();
+                                      .Where(a => a.PatientId == patientId)
+                                      .Select(a => a.ActiveIngredientId)
+                                      .ToList();
 
             var patientConditions = _db.PatientConditions
                                        .Where(pc => pc.PatientId == patientId)
@@ -592,6 +634,11 @@ namespace E_Prescribing.Controllers
                     var quantity = quantities[medicationId];
                     if (quantity > 0)
                     {
+                        var medication = _db.Medications
+                               .Where(m => m.MedicationId == medicationId)
+                               .Select(m => new { m.Name })
+                               .FirstOrDefault();
+
                         var activeIngredients = _db.MedicationIngredients
                                                    .Where(mi => mi.MedicationId == medicationId)
                                                    .Select(mi => new { mi.ActiveIngredientId, mi.ActiveIngredient.Name })
@@ -601,7 +648,7 @@ namespace E_Prescribing.Controllers
 
                         var medicationAllergenConflicts = activeIngredients
                             .Where(ai => patientAllergies.Contains(ai.ActiveIngredientId))
-                            .Select(ai => ai.Name)
+                            .Select(ai => $"{ai.Name} ({medication.Name})")
                             .ToList();
 
                         if (medicationAllergenConflicts.Any())
@@ -612,7 +659,7 @@ namespace E_Prescribing.Controllers
                         var medicationContraindications = _db.ContraIndications
                             .Where(ci => activeIngredients.Select(ai => ai.ActiveIngredientId).Contains(ci.ActiveIngredientId)
                                 && patientConditions.Contains(ci.ConditionDiagnosisId))
-                            .Select(ci => ci.ActiveIngredient.Name)
+                            .Select(ci => $"{ci.ActiveIngredient.Name} ({medication.Name})")
                             .ToList();
 
                         if (medicationContraindications.Any())
@@ -622,20 +669,77 @@ namespace E_Prescribing.Controllers
                     }
                 }
 
+                var currentPatientMedications = _db.PatientMedications
+                    .Where(pm => pm.PatientId == patientId)
+                    .SelectMany(pm => _db.MedicationIngredients
+                        .Where(mi => mi.MedicationId == pm.MedicationId)
+                        .Select(mi => mi.ActiveIngredientId))
+                    .Distinct()
+                    .ToList();
+
+                foreach (var currentIngredientId in currentPatientMedications)
+                {
+                    foreach (var newIngredientId in activeIngredientsInOrder)
+                    {
+                        if (currentIngredientId != newIngredientId)
+                        {
+                            var interaction = _db.MedicationInteractions
+                                .FirstOrDefault(mi =>
+                                    (mi.ActiveIngredient1Id == currentIngredientId && mi.ActiveIngredient2Id == newIngredientId) ||
+                                    (mi.ActiveIngredient1Id == newIngredientId && mi.ActiveIngredient2Id == currentIngredientId));
+
+                            if (interaction != null)
+                            {
+                                var currentMedicationName = _db.MedicationIngredients
+                                    .Where(mi => mi.ActiveIngredientId == currentIngredientId)
+                                    .Select(mi => mi.Medication.Name)
+                                    .FirstOrDefault();
+
+                                var newMedicationName = _db.MedicationIngredients
+                                    .Where(mi => mi.ActiveIngredientId == newIngredientId)
+                                    .Select(mi => mi.Medication.Name)
+                                    .FirstOrDefault();
+
+                                interactionWarnings.Add($"{interaction.Description} ({currentMedicationName} and {newMedicationName})");
+                            }
+                        }
+                    }
+                }
+
+
+                var processedInteractions = new HashSet<(int, int)>();
+
                 foreach (var ingredientId1 in activeIngredientsInOrder)
                 {
                     foreach (var ingredientId2 in activeIngredientsInOrder)
                     {
                         if (ingredientId1 != ingredientId2)
                         {
-                            var interaction = _db.MedicationInteractions
-                                .FirstOrDefault(mi =>
-                                    (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
-                                    (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+                            var interactionKey = (Math.Min(ingredientId1, ingredientId2), Math.Max(ingredientId1, ingredientId2));
 
-                            if (interaction != null)
+                            if (!processedInteractions.Contains(interactionKey))
                             {
-                                interactionWarnings.Add($"{interaction.Description}");
+                                var interaction = _db.MedicationInteractions
+                                    .FirstOrDefault(mi =>
+                                        (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
+                                        (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+
+                                if (interaction != null)
+                                {
+                                    var medication1 = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == ingredientId1)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    var medication2 = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == ingredientId2)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    interactionWarnings.Add($"{interaction.Description} ({medication1} and {medication2})");
+
+                                    processedInteractions.Add(interactionKey);
+                                }
                             }
                         }
                     }
@@ -666,6 +770,7 @@ namespace E_Prescribing.Controllers
                 });
             }
 
+            // Save the order
             var order = new Order()
             {
                 AnaesthesiologistId = anaesthesiologist.AnaesthesiologistId,
@@ -679,6 +784,7 @@ namespace E_Prescribing.Controllers
             await _db.Orders.AddAsync(order);
             await _db.SaveChangesAsync();
 
+            // Save medication orders
             foreach (var medicationId in quantities.Keys)
             {
                 var quantity = quantities[medicationId];
@@ -699,6 +805,7 @@ namespace E_Prescribing.Controllers
             TempData["success"] = "Order added successfully";
             return RedirectToAction("ListPatientOrder", new { id = patientId });
         }
+
 
 
         [HttpPost]
@@ -1225,6 +1332,8 @@ namespace E_Prescribing.Controllers
                     bloodglucoselevel = v.BloodGlucoseLevel,
                     heartrate = v.HeartRate,
                     oxygensaturation = v.OxygenSaturation,
+                    bloodpressureSystolic = v.BloodpressureSystolic,
+                    bMI = v.BMI,
                     bloodoxegenlevel = v.BloodOxegenLevel
                 }).ToList(),
                 vitalNames = selectedVitals.Select(v => v.Name.ToLower()).ToList()

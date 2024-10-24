@@ -1124,3 +1124,97 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021085439_addV')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20241021085439_addV', N'7.0.12');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021092449_addB')
+BEGIN
+    ALTER TABLE [Bookings] ADD [AdmissionDtae] datetime2 NULL;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021092449_addB')
+BEGIN
+    ALTER TABLE [Bookings] ADD [DischergeDate] datetime2 NULL;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021092449_addB')
+BEGIN
+    ALTER TABLE [Bookings] ADD [NurseId] int NULL;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021092449_addB')
+BEGIN
+    CREATE INDEX [IX_Bookings_NurseId] ON [Bookings] ([NurseId]);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021092449_addB')
+BEGIN
+    ALTER TABLE [Bookings] ADD CONSTRAINT [FK_Bookings_Nurses_NurseId] FOREIGN KEY ([NurseId]) REFERENCES [Nurses] ([NurseId]);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021092449_addB')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20241021092449_addB', N'7.0.12');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021101345_addl')
+BEGIN
+    EXEC sp_rename N'[Bookings].[AdmissionDtae]', N'AdmissionDate', N'COLUMN';
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021101345_addl')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20241021101345_addl', N'7.0.12');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021101648_addple')
+BEGIN
+    EXEC sp_rename N'[Bookings].[DischergeDate]', N'DischargeDate', N'COLUMN';
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20241021101648_addple')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20241021101648_addple', N'7.0.12');
+END;
+GO
+
+COMMIT;
+GO
+

@@ -57,7 +57,6 @@
                         <th>Date</th>
                         <th>Anaesthesiologist</th>
                         <th>Theatre</th>
-                        <th>Ward</th> 
                         <th>Status</th>
                         <th>Session</th>
                         <th>Treatments</th>
@@ -93,7 +92,6 @@
                     { data: 'date', "width": "15%" },
                     { data: 'fullName', "width": "15%" },
                     { data: 'theatre', "width": "15%" },
-                    { data: 'ward', "width": "15%" },
                     {
                         data: 'status',
                         render: function (data) {
@@ -101,14 +99,14 @@
                         },
                         "width": "10%"
                     },
-                    { data: 'session', "width": "15%" },
+                    { data: 'session', "width": "5%" },
 
                     {
                         data: 'treatments',
                         render: function (data) {
                             return data.join("<br>");
                         },
-                        "width": "15%"
+                        "width": "20%"
                     },
                     {
                         data: 'bookingId',

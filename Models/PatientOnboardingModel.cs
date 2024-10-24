@@ -10,7 +10,8 @@ namespace E_Prescribing.Models
         public PatientCondition PatientCondition { get; set; }
         public PatientBed PatientBed { get; set; }
        // public DateTime? AdmissionDate { get; set; }
-        public Patient Patient { get; set; }
+        public Booking Booking { get; set; }
+
 
         public List<Patient> Patients { get; set; }
         public int CurrentStep { get; set; }

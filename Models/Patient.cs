@@ -45,6 +45,7 @@ namespace E_Prescribing.Models
         public List<PatientAllergy> PatientAllergies { get; set; }
         public List<VitalRange> VitalsRanges { get; set; }
         public List<PatientMedication> PatientMedications { get; set; }
+        public List<Booking> Booking { get; set; }
 
 
 

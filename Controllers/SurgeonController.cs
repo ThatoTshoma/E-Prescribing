@@ -48,9 +48,10 @@ namespace E_Prescribing.Controllers
             {
                 Booking = new Booking { PatientId = id },
                 Patients = _db.Patients.ToList(),
-                Wards = _db.Wards.ToList(),
                 Anaesthesiologists = _db.Anaesthesiologists.ToList(),
+                Theatres = _db.Theatres.ToList(),
                 Treatments = _db.Treatments.ToList() 
+
             };
 
             return View(collection);
@@ -65,7 +66,7 @@ namespace E_Prescribing.Controllers
             {
                 Booking = model.Booking,
                 Patients = _db.Patients.ToList(),
-                Wards = _db.Wards.ToList(),
+                Theatres = _db.Theatres.ToList(),
                 Anaesthesiologists = _db.Anaesthesiologists.ToList(),
                 Treatments = _db.Treatments.ToList()
             };
@@ -110,7 +111,7 @@ namespace E_Prescribing.Controllers
                                                  "Kind regards,<br>" +
                                                  $"{surgeon.FullName}";
 
-                    _emailSender.SendEmail(patient.EmailAddress, "Booking Notification", patientEmailMessage);
+                    _emailSender.SendEmail(patient.EmailAddress, "Booking Notification [GRP-04-21]", patientEmailMessage);
 
                     string anaesthesiologistEmailMessage = $"Dear {anaesthesiologist.FullName},<br><br>" +
                                                            "You have a new booking scheduled for patient " +
@@ -166,19 +167,38 @@ namespace E_Prescribing.Controllers
                 .Where(b => b.SurgeonId == surgeon.SurgeonId && b.Status == false)
                 .ToList();
 
-            var result = bookings.Select(b => new {
-                b.BookingId,
-                b.Anaesthesiologist.FullName,
-                b.Patient,
-                Theatre = b.Theatre.Name,
-                Ward = b.Theatre.Ward.WardNumber,
-                Date = b.Date.ToString("dd-MM-yyy"),
-                b.Status,
-                b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
-            });
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+                    bookingId = b.BookingId,
+                    anaesthesiologist = new
+                    {
+                        name = b.Anaesthesiologist.FullName
+                    },
+                    patient = new
+                    {
+                        name = b.Patient.FullName,
+                    },
+                    theatre = new
+                    {
+                        name = b.Theatre.Name
+                    },
+                    ward = new
+                    {
+                        number = b.Theatre.Ward.WardNumber
+                    },
+                    date = b.Date.ToString("dd-MM-yyyy"),
+                    status = b.Status,
+                    session = b.Session,
+                    treatments = b.PatientTreatments.Select(pt => new
+                    {
+                        name = pt.Treatment.DisplayText
+                    }).ToArray()
+                }).ToArray()
+            };
 
-            return Json(new { data = result });
+            return Json(viewModel);
         }
 
         public IActionResult ApprovedBooking(int id)
@@ -213,20 +233,38 @@ namespace E_Prescribing.Controllers
                 .Where(b => b.SurgeonId == surgeon.SurgeonId && b.Status == true)
                 .ToList();
 
-            var result = bookings.Select(b => new {
-                b.BookingId,
-                b.Anaesthesiologist.FullName,
-                b.Patient,
-                b.Surgeon,
-                Theatre = b.Theatre.Name,
-                Ward = b.Theatre.Ward.WardNumber,
-                Date = b.Date.ToString("dd-MM-yyy"),
-                b.Status,
-                b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
-            });
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+                    bookingId = b.BookingId,
+                    anaesthesiologist = new
+                    {
+                        name = b.Anaesthesiologist.FullName
+                    },
+                    patient = new
+                    {
+                        name = b.Patient.FullName,
+                    },
+                    theatre = new
+                    {
+                        name = b.Theatre.Name
+                    },
+                    ward = new
+                    {
+                        number = b.Theatre.Ward.WardNumber
+                    },
+                    date = b.Date.ToString("dd-MM-yyyy"),
+                    status = b.Status,
+                    session = b.Session,
+                    treatments = b.PatientTreatments.Select(pt => new
+                    {
+                        name = pt.Treatment.DisplayText
+                    }).ToArray()
+                }).ToArray()
+            };
 
-            return Json(new { data = result });
+            return Json(viewModel);
         }
 
         public IActionResult ListBooking(int id)
@@ -268,7 +306,7 @@ namespace E_Prescribing.Controllers
                 Date = b.Date.ToString("dd-MM-yyy"), 
                 b.Status,
                 b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
+                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.DisplayText).ToList()
             });
 
             return Json(new { data = result });
@@ -668,14 +706,16 @@ namespace E_Prescribing.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var surgeon = _db.Surgeons.SingleOrDefault(c => c.UserId.ToString() == userId);
+
             var bookingsQuery = _db.Bookings
                 .Include(b => b.Patient)
                 .Include(b => b.Theatre)
                     .ThenInclude(t => t.Ward)
                 .Include(b => b.Anaesthesiologist)
                 .Include(b => b.PatientTreatments)
-                .ThenInclude(pt => pt.Treatment)
+                    .ThenInclude(pt => pt.Treatment)
                 .Where(b => b.SurgeonId == surgeon.SurgeonId);
+
             if (startDate.HasValue)
             {
                 bookingsQuery = bookingsQuery.Where(o => o.Date >= startDate.Value);
@@ -684,43 +724,44 @@ namespace E_Prescribing.Controllers
             {
                 bookingsQuery = bookingsQuery.Where(o => o.Date <= endDate.Value);
             }
-            var bookings =  bookingsQuery.ToList();
 
+            var bookings = bookingsQuery.ToList();
 
-            var result = bookings.Select(b => new {
-                b.BookingId,
-                b.Anaesthesiologist.FullName,
-                b.Patient,
-                Theatre = b.Theatre.Name,
-                Ward = b.Theatre.Ward.WardNumber,
-                Date = b.Date.ToString("dd-MM-yyy"),
-                b.Status,
-                b.Session,
-                Treatments = b.PatientTreatments.Select(pt => pt.Treatment.Code).ToList()
-            });
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+                    bookingId = b.BookingId,
+                    anaesthesiologist = new
+                    {
+                        name = b.Anaesthesiologist.FullName
+                    },
+                    patient = new
+                    {
+                        name = b.Patient.FullName,
+                    },
+                    theatre = new
+                    {
+                        name = b.Theatre.Name
+                    },
+                    ward = new
+                    {
+                        number = b.Theatre.Ward.WardNumber
+                    },
+                    date = b.Date.ToString("dd-MM-yyyy"), 
+                    status = b.Status,
+                    session = b.Session,
+                    treatments = b.PatientTreatments.Select(pt => new
+                    {
+                        name = pt.Treatment.DisplayText
+                    }).ToArray() 
+                }).ToArray()
+            };
 
-            return Json(new { data = result });
+            return Json(viewModel);
         }
-        //public IActionResult PatientDetails(int? id)
-        //{
 
 
-        //    var patient = _db.Patients
-        //        .Include(s => s.Suburb)
-        //        .Include(p => p.PatientConditions)
-        //            .ThenInclude(pc => pc.Condition)
-        //        .Include(p => p.PatientVitals)
-        //            .ThenInclude(p => p.Vital)
-        //        .Include(p => p.PatientAllergies)
-        //            .ThenInclude(p => p.ActiveIngredient)
-        //        .Include(p => p.VitalsRanges)
-        //        .FirstOrDefault(m => m.PatientId == id);
-
-
-
-        //    //ViewBag.PatientId = id;
-        //    return View(patient);
-        //}
         public async Task<IActionResult> PatientDetails(int? id)
         {
             if (id == null)
@@ -845,6 +886,11 @@ namespace E_Prescribing.Controllers
                     var quantity = quantities[medicationId];
                     if (quantity > 0)
                     {
+                        var medication = _db.Medications
+                                   .Where(m => m.MedicationId == medicationId)
+                                   .Select(m => new { m.Name })
+                                   .FirstOrDefault();
+
                         var activeIngredients = _db.MedicationIngredients
                                                    .Where(ma => ma.MedicationId == medicationId)
                                                    .Select(ma => new { ma.ActiveIngredientId, ma.ActiveIngredient.Name })
@@ -854,7 +900,7 @@ namespace E_Prescribing.Controllers
 
                         var medicationAllergenConflicts = activeIngredients
                             .Where(ai => patientAllergies.Contains(ai.ActiveIngredientId))
-                            .Select(ai => ai.Name)
+                            .Select(ai => $"{ai.Name} ({medication.Name})")  
                             .ToList();
 
                         if (medicationAllergenConflicts.Any())
@@ -864,7 +910,7 @@ namespace E_Prescribing.Controllers
                         var medicationContraindications = _db.ContraIndications
                             .Where(ci => activeIngredients.Select(ai => ai.ActiveIngredientId).Contains(ci.ActiveIngredientId)
                                 && patientConditions.Contains(ci.ConditionDiagnosisId))
-                            .Select(ci => ci.ActiveIngredient.Name)
+                            .Select(ci => $"{ci.ActiveIngredient.Name} ({medication.Name})")
                             .ToList();
 
                         if (medicationContraindications.Any())
@@ -874,24 +920,82 @@ namespace E_Prescribing.Controllers
                     }
                 }
 
+                var currentPatientMedications = _db.PatientMedications
+                    .Where(pm => pm.PatientId == patientId)
+                    .SelectMany(pm => _db.MedicationIngredients
+                        .Where(mi => mi.MedicationId == pm.MedicationId)
+                        .Select(mi => mi.ActiveIngredientId))
+                    .Distinct()
+                    .ToList();
+
+                foreach (var currentIngredientId in currentPatientMedications)
+                {
+                    foreach (var newIngredientId in activeIngredientsInPrescription)
+                    {
+                        if (currentIngredientId != newIngredientId)
+                        {
+                            var interaction = _db.MedicationInteractions
+                                .FirstOrDefault(mi =>
+                                    (mi.ActiveIngredient1Id == currentIngredientId && mi.ActiveIngredient2Id == newIngredientId) ||
+                                    (mi.ActiveIngredient1Id == newIngredientId && mi.ActiveIngredient2Id == currentIngredientId));
+
+                            if (interaction != null)
+                            {
+                                var currentMedicationName = _db.MedicationIngredients
+                                    .Where(mi => mi.ActiveIngredientId == currentIngredientId)
+                                    .Select(mi => mi.Medication.Name)
+                                    .FirstOrDefault();
+
+                                var newMedicationName = _db.MedicationIngredients
+                                    .Where(mi => mi.ActiveIngredientId == newIngredientId)
+                                    .Select(mi => mi.Medication.Name)
+                                    .FirstOrDefault();
+
+                                interactionWarnings.Add($"{interaction.Description} ({currentMedicationName} and {newMedicationName})");
+                            }
+                        }
+                    }
+                }
+
+
+                var processedInteractions = new HashSet<(int, int)>();
+
                 foreach (var ingredientId1 in activeIngredientsInPrescription)
                 {
                     foreach (var ingredientId2 in activeIngredientsInPrescription)
                     {
                         if (ingredientId1 != ingredientId2)
                         {
-                            var interaction = _db.MedicationInteractions
-                                .FirstOrDefault(mi =>
-                                    (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
-                                    (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+                            var interactionKey = (Math.Min(ingredientId1, ingredientId2), Math.Max(ingredientId1, ingredientId2));
 
-                            if (interaction != null)
+                            if (!processedInteractions.Contains(interactionKey))
                             {
-                                interactionWarnings.Add($"{interaction.Description}");
+                                var interaction = _db.MedicationInteractions
+                                    .FirstOrDefault(mi =>
+                                        (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
+                                        (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
+
+                                if (interaction != null)
+                                {
+                                    var medication1 = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == ingredientId1)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    var medication2 = _db.MedicationIngredients
+                                        .Where(mi => mi.ActiveIngredientId == ingredientId2)
+                                        .Select(mi => mi.Medication.Name)
+                                        .FirstOrDefault();
+
+                                    interactionWarnings.Add($"{interaction.Description} ({medication1} and {medication2})");
+
+                                    processedInteractions.Add(interactionKey);
+                                }
                             }
                         }
                     }
                 }
+
             }
 
             if (conflictingAllergens.Any() && string.IsNullOrEmpty(reasonForIgnoring))

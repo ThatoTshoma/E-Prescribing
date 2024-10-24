@@ -18,7 +18,6 @@
                     <th>Date</th>
                     <th>Patient</th>
                     <th>Theatre</th>
-                    <th>Ward</th>
                     <th>Status</th>
                     <th>Session</th>
                     <th>Treatments</th>
@@ -51,9 +50,8 @@
                 },
                 "columns": [
                     { data: 'date', "width": "15%" },
-                    { data: 'patient.fullName', "width": "15%" },
-                    { data: 'theatre', "width": "15%" },
-                    { data: 'ward', "width": "15%" },
+                    { data: 'patient.name', "width": "15%" },
+                    { data: 'theatre.name', "width": "15%" },
                     {
                         data: 'status',
                         render: function (data) {
@@ -62,11 +60,10 @@
                         "width": "10%"
                     },
                     { data: 'session', "width": "5%" },
-
                     {
                         data: 'treatments',
                         render: function (data) {
-                            return data.join("<br>");
+                            return data.map(t => t.name).join("<br>");
                         },
                         "width": "25%"
                     },
@@ -83,7 +80,8 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/anaesthesiologist/EditBooking',
+                        url: '@Url.Action("EditBooking", "Surgeon")',
+
                         type: 'POST',
                         data: {
                             bookingId: bookingId,

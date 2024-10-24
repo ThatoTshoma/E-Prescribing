@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Patient>
+﻿@model IEnumerable<Booking>
 
 <div class="card shadow border-0 my-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -16,7 +16,6 @@
                 <tr>
                     <th>Patient Name</th>
                     <th>ID Number</th>
-                    <th>Date Of Birth</th>
                     <th>Contact Number</th>
                     <th>Email Address</th>
                     <th>Admission Date</th>
@@ -55,32 +54,36 @@
                     }
                 },
                 "columns": [
-                    { data: 'fullName', "width": "25%" },
-                    { data: 'idNumber', "width": "25%" },
-                    { data: 'dateOfBirth', "width": "25%" },
-                    { data: 'contactNumber', "width": "15%" },
-                    { data: 'emailAddress', "width": "20%" },
+                    { data: 'patient.name', "width": "25%" },
+                    { data: 'patient.idNumber', "width": "25%" },
+                    { data: 'patient.contactNumber', "width": "15%" },
+                    { data: 'patient.email', "width": "20%" },
                     { data: 'admissionDate', "width": "15%" },
                     { data: 'dischargeDate', "width": "15%" },
 
                     {
-                        data: 'patientId',
+                        data: 'bookingId', 
+                        data: 'patient.patientId', 
                         "render": function (data, type, row) {
                             var dischargeButton = row.dischargeDate === null ?
-                                `<a href="@Url.Action("DischargePatient", "Nurse")?id=${data}" class="btn btn-danger mx-2">
-                                    <i class="bi bi-box-arrow-right"></i>Discharge</a>` : '';
+                                `<a href="@Url.Action("DischargePatient", "Nurse")?id=${row.bookingId}" class="btn btn-danger mx-2">
+                                <i class="bi bi-box-arrow-right"></i>Discharge</a>` : '';
+
                             var buttons = `
                                 <div class="w-75 btn-group" role="group">
-                                    <a href="@Url.Action("UpdatePatient", "Nurse")?id=${data}" class="btn btn-primary mx-2">
-                                        <i class="bi bi-pencil-square"></i>Update</a>
-                                    <a href="@Url.Action("PatientDetails", "Nurse")?id=${data}" class="btn btn-secondary mx-2">
-                                        <i class="bi bi-eye-fill"></i>More</a>
+                                            <a href="@Url.Action("UpdatePatient", "Nurse")?id=${row.patient.patientId}" class="btn btn-primary mx-2">
+                                        <i class="bi bi-pencil-square"></i>Update
+                                    </a>
+                                    <a href="@Url.Action("PatientDetails", "Nurse")?id=${row.patient.patientId}" class="btn btn-secondary mx-2">
+                                        <i class="bi bi-eye-fill"></i>More
+                                    </a>
                                     ${dischargeButton}
                                 </div>`;
                             return buttons;
                         },
                         "width": "10%"
                     }
+
                 ]
             });
         }

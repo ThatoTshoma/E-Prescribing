@@ -19,7 +19,6 @@
                     <th>Patient</th>
                     <th>Anaesthesiologist</th>
                     <th>Theatre</th>
-                    <th>Ward</th>
                     <th>Status</th>
                     <th>Session</th>
                     <th>Treatments</th>
@@ -53,11 +52,10 @@
                 },
                 "columns": [
                     { data: 'date', "width": "15%" },
-                    { data: 'patient.fullName', "width": "15%" },
-                    { data: 'fullName', "width": "15%" },
+                    { data: 'patient.name', "width": "15%" },
+                    { data: 'anaesthesiologist.name', "width": "15%" },
 
-                    { data: 'theatre', "width": "10%" },
-                    { data: 'ward', "width": "10%" },
+                    { data: 'theatre.name', "width": "10%" },
                     {
                         data: 'status',
                         render: function (data) {
@@ -66,11 +64,10 @@
                         "width": "10%"
                     },
                     { data: 'session', "width": "5%" },
-
                     {
                         data: 'treatments',
                         render: function (data) {
-                            return data.join("<br>");
+                            return data.map(t => t.name).join("<br>");
                         },
                         "width": "25%"
                     },

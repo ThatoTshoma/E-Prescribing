@@ -17,6 +17,8 @@ namespace E_Prescribing.Models
         public string? BloodOxegenLevel { get; set; }
         public string? OxygenSaturation { get; set; }
         public string? HeartRate { get; set; }
+        public string? BloodpressureSystolic {  get; set; }
+        public string? BMI {  get; set; }
         public DateTime Time {  get; set; }
         public Patient Patient { get; set; }
         [Display(Name = "Patient Name")]

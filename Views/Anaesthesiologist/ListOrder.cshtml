@@ -101,7 +101,7 @@
                     { data: 'orderId', "width": "10%" },
                     { data: 'patient', "width": "15%" },
                     {
-                        data: 'medicationOrders', "width": "20%", "render": function (data) {
+                        data: 'medicationOrders', "width": "15%", "render": function (data) {
                             return data.map(order => order.name).join('<br>');
                         }
                     },
@@ -110,7 +110,7 @@
                             return data.map(order => order.quantity).join('<br>');
                         }
                     },
-                    { data: 'status', "width": "10%" },
+                    { data: 'status', "width": "5%" },
 
                     {
                         data: 'isUrgent', "width": "10%", "render": function (data) {
@@ -137,13 +137,13 @@
                                             <i class="bi bi-file-earmark-medical"></i> Add Note
                                         </a>`;
                                 buttons += `<a href="@Url.Action("ListNotedication", "Anaesthesiologist")/${data}" class="btn btn-info mx-1">
-                                            <i class="bi bi-list-check"></i> Medication Note
+                                            <i class="bi bi-list-check"></i> View Note
                                         </a>`;
                             }
 
                             return buttons;
                         },
-                        "width": "15%"
+                        "width": "20%"
                     }
                 ]
             });

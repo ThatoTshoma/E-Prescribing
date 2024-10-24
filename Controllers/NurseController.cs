@@ -61,7 +61,7 @@ namespace E_Prescribing.Controllers
         }
         public IActionResult MedicationHistoryPage(int id)
         {
-            ViewBag.MedicationList = new SelectList(_db.Medications.OrderBy(c =>c.Name), "MedicationId", "Name");
+            ViewBag.MedicationList = new SelectList(_db.Medications.OrderBy(c => c.Name), "MedicationId", "Name");
             ViewBag.ActiveIngredientList = new SelectList(_db.ActiveIngredients.OrderBy(a => a.Name), "IngredientId", "Name");
             ViewBag.ConditionList = new SelectList(_db.ConditionDiagnoses.OrderBy(c => c.Name), "ConditionId", "Name");
             ViewBag.WardList = new SelectList(_db.Wards.OrderBy(c => c.WardNumber), "WardId", "WardNumber");
@@ -82,6 +82,7 @@ namespace E_Prescribing.Controllers
         public IActionResult MedicationHistoryPage(PatientOnboardingModel model)
         {
             var patient = _db.Patients.FirstOrDefault(p => p.PatientId == model.PatientAllergy.PatientId);
+           // var patient = _db.Bookings.FirstOrDefault(p => p.PatientId == model.PatientAllergy.PatientId);
 
             if (patient != null)
             {
@@ -151,16 +152,23 @@ namespace E_Prescribing.Controllers
                             break;
 
                         case 5:
-                            if (model.Patient.AdmissionDate.HasValue)
+                            if (model.Booking.AdmissionDate.HasValue)
                             {
                                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                                 var nurse = _db.Nurses.SingleOrDefault(c => c.UserId.ToString() == userId);
-                                patient.AdmissionDate = model.Patient.AdmissionDate.Value;
-                                patient.NurseId = nurse?.NurseId;
 
-                                _db.Patients.Update(patient);
+                                var booking = _db.Bookings.Where(b => b.PatientId == patient.PatientId && b.Status == true).OrderByDescending(b => b.Date).FirstOrDefault(); 
+
+                                if (booking != null)
+                                {
+                                    booking.AdmissionDate = model.Booking.AdmissionDate.Value;
+                                    booking.NurseId = nurse?.NurseId; 
+
+                                    _db.Bookings.Update(booking); 
+                                }
                             }
                             break;
+
                     }
 
                     _db.SaveChanges();
@@ -233,11 +241,11 @@ namespace E_Prescribing.Controllers
 
         public IActionResult AddPatient()
         {
-       
-            ViewBag.CityList = new SelectList(_db.Cities.OrderBy(c =>c.Name), "CityId", "Name");
+
+            ViewBag.CityList = new SelectList(_db.Cities.OrderBy(c => c.Name), "CityId", "Name");
             ViewBag.BedList = new SelectList(_db.Beds, "BedId", "BedNumber");
             return View();
-        
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -280,7 +288,7 @@ namespace E_Prescribing.Controllers
             var patient = _db.Patients.Find(id);
             if (patient == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
             ViewBag.CityList = new SelectList(_db.Cities.OrderBy(c => c.Name), "CityId", "Name");
@@ -295,17 +303,17 @@ namespace E_Prescribing.Controllers
         {
             if (id != model.PatientId)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
 
             var patient = _db.Patients.Find(id);
             if (patient == null)
             {
-                return NotFound(); 
+                return NotFound();
             }
 
-     
+
             patient.ContactNumber = model.ContactNumber;
             patient.EmailAddress = model.EmailAddress;
             patient.AddressLine1 = model.AddressLine1;
@@ -364,9 +372,9 @@ namespace E_Prescribing.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var nurse = _db.Nurses.SingleOrDefault(c => c.UserId.ToString() == userId);
 
-            var query = _db.Patients
+            var query = _db.Bookings
                            .Where(p => p.NurseId == nurse.NurseId)
-                           .Include(p => p.Suburb) 
+                           .Include(p => p.Patient)
                            .ToList();
 
 
@@ -378,48 +386,69 @@ namespace E_Prescribing.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var nurse = _db.Nurses.SingleOrDefault(c => c.UserId.ToString() == userId);
 
-            var query = _db.Patients
-                           .Include(p => p.Suburb)
-                           .Where(p => p.NurseId == nurse.NurseId)
-                           .ToList();
+            var bookings = _db.Bookings
+                          .Where(p => p.NurseId == nurse.NurseId)
+                          .Include(p => p.Patient)
+                          .ToList();
 
 
-            return Json(new { data = query });
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+         
+                    patient = new
+                    {
+                        patientId = b.PatientId,
+                        name = b.Patient.FullName,
+                        idNumber = b.Patient.IdNumber,
+                        dateOfBirth = b.Patient.DateOfBirth,
+                        contactNumber =b.Patient.ContactNumber,
+                        email = b.Patient.EmailAddress
+                    },
+                    bookingId = b.BookingId,
+                    admissionDate = b.AdmissionDate?.ToString("dd-MM-yyyy"),
+                    dischargeDate = b.DischargeDate?.ToString("dd-MM-yyyy"),
+          
+                }).ToArray()
+            };
+
+            return Json(viewModel);
         }
-
+        [HttpGet]
         public IActionResult DischargePatient(int id)
         {
-            var patient = _db.Patients.Find(id);
-            if (patient == null)
+            var booking = _db.Bookings.Find(id);
+            if (booking == null)
             {
                 return NotFound();
             }
 
 
-
-            return View(patient);
+            ViewBag.PatientId = id;
+            return View(booking);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult DischargePatient(int id, Patient model)
+        public IActionResult DischargePatient(int id, Booking model)
         {
-            if (id != model.PatientId)
+            if (id != model.BookingId)
             {
                 return NotFound();
             }
 
 
-            var patient = _db.Patients.Find(id);
-            if (patient == null)
+            var booking = _db.Bookings.Find(id);
+            if (booking == null)
             {
                 return NotFound();
             }
 
 
-            patient.DischargeDate = model.DischargeDate;
+            booking.DischargeDate = model.DischargeDate;
 
-            _db.Patients.Update(patient);
+            _db.Bookings.Update(booking);
             _db.SaveChanges();
 
             return RedirectToAction("ListAdmittedPatient");
@@ -488,6 +517,8 @@ namespace E_Prescribing.Controllers
                     BloodOxegenLevel = model.VitalInputs.ContainsKey("BloodOxegenLevel") ? model.VitalInputs["BloodOxegenLevel"] : string.Empty,
                     OxygenSaturation = model.VitalInputs.ContainsKey("OxygenSaturation") ? model.VitalInputs["OxygenSaturation"] : string.Empty,
                     HeartRate = model.VitalInputs.ContainsKey("HeartRate") ? model.VitalInputs["HeartRate"] : string.Empty,
+                    BloodpressureSystolic = model.VitalInputs.ContainsKey("BloodpressureSystolic") ? model.VitalInputs["BloodpressureSystolic"] : string.Empty,
+                    BMI = model.VitalInputs.ContainsKey("BMI") ? model.VitalInputs["BMI"] : string.Empty,
                     Time = model.Vital.Time
                 };
 
@@ -699,58 +730,51 @@ namespace E_Prescribing.Controllers
         }
         public IActionResult ListPatient(string idNumber = null, DateTime? bookingDate = null)
         {
-            var query = _db.Bookings
+            var bookings = _db.Bookings
                            .Where(b => b.Status == true)
                            .Include(b => b.Anaesthesiologist)
                            .Include(b => b.Patient)
                            .ThenInclude(p => p.Suburb)
-                           .Select(b => new PatientBookingDate
-                           {
-                               Patient = b.Patient,
-                               Anaesthesiologist = b.Anaesthesiologist,
-                               BookingDate = b.Date
-                           });
+                           .ToList();
+            return View(bookings);
 
-            if (!string.IsNullOrEmpty(idNumber))
-            {
-                query = query.Where(pb => pb.Patient.IdNumber.Contains(idNumber));
-            }
-
-            if (bookingDate.HasValue)
-            {
-                query = query.Where(pb => pb.BookingDate.Date == bookingDate.Value.Date);
-            }
-
-            var patientBookings = query
-                                  .Distinct()
-                                  .ToList();
-
-            return View(patientBookings);
         }
         [HttpGet]
         public IActionResult GetPatient()
         {
-            var query = _db.Bookings
+            var bookings = _db.Bookings
                            .Where(b => b.Status == true)
                            .Include(b => b.Anaesthesiologist)
                            .Include(b => b.Patient)
                            .ThenInclude(p => p.Suburb)
-                           .Select(b => new PatientBookingDate
-                           {
-                               Patient = b.Patient,
-                               Anaesthesiologist = b.Anaesthesiologist,
-                               BookingDate = b.Date,
-                               Status = b.Status ? "Approved" : "Pending"
+                           .ToList();
 
+            var viewModel = new
+            {
+                data = bookings.Select(b => new
+                {
+                    anaesthesiologist = new
+                    {
+                        name = b.Anaesthesiologist.FullName
+                    },
+                    patient = new
+                    {
+                        patientId = b.PatientId,
+                        name = b.Patient.FullName,
+                        idNumber = b.Patient.IdNumber,
+                        dateOfBirth = b.Patient.DateOfBirth,
+                        contactNumber = b.Patient.ContactNumber,
+                        email = b.Patient.EmailAddress
+                    },
+                    status = b.Status ? "Approved" : "Pending",
+                    date = b.Date.ToString("dd-MM-yyyy"),
+                    bookingId = b.BookingId,
+                    admissionDate = b.AdmissionDate?.ToString("dd-MM-yyyy"),
 
+                }).ToArray()
+            };
 
-                           });
-
-
-            var patientBookings = query
-                                  .Distinct()
-                                  .ToList();
-            return Json(new { data = patientBookings });
+            return Json(viewModel);
         }
 
 
@@ -772,6 +796,8 @@ namespace E_Prescribing.Controllers
                     .Include(p => p.PatientAllergies)
                     .ThenInclude(p => p.ActiveIngredient)
                     .Include(p => p.VitalsRanges)
+                            .Include(p => p.Booking) 
+
                 .FirstOrDefaultAsync(m => m.PatientId == id);
 
             if (patient == null)
