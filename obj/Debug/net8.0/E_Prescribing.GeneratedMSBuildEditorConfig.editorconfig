@@ -222,6 +222,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hZXN0aGVzaW9sb2dpc3RcTGlzdEJvb2tpbmcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/HomeSpace/E_Prescribing/Views/Anaesthesiologist/ListIgnoreReason.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hZXN0aGVzaW9sb2dpc3RcTGlzdElnbm9yZVJlYXNvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/HomeSpace/E_Prescribing/Views/Anaesthesiologist/ListMedication.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hZXN0aGVzaW9sb2dpc3RcTGlzdE1lZGljYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -328,10 +332,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/HomeSpace/E_Prescribing/Views/Nurse/AddVital.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTnVyc2VcQWRkVml0YWwuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/HomeSpace/E_Prescribing/Views/Nurse/AdmitPatient.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTnVyc2VcQWRtaXRQYXRpZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/HomeSpace/E_Prescribing/Views/Nurse/AssignBed.cshtml]
@@ -472,6 +472,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/HomeSpace/E_Prescribing/Views/Pharmacist/ListDispancedMedicationOrder.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhhcm1hY2lzdFxMaXN0RGlzcGFuY2VkTWVkaWNhdGlvbk9yZGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HomeSpace/E_Prescribing/Views/Pharmacist/ListIgnoreReason.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhhcm1hY2lzdFxMaXN0SWdub3JlUmVhc29uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HomeSpace/E_Prescribing/Views/Pharmacist/ListIgnoreReasonPrescription.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhhcm1hY2lzdFxMaXN0SWdub3JlUmVhc29uUHJlc2NyaXB0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/HomeSpace/E_Prescribing/Views/Pharmacist/ListMedication.cshtml]
@@ -632,6 +640,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/HomeSpace/E_Prescribing/Views/Surgeon/ListBooking.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VyZ2VvblxMaXN0Qm9va2luZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/HomeSpace/E_Prescribing/Views/Surgeon/ListIgnoreReason.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3VyZ2VvblxMaXN0SWdub3JlUmVhc29uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/HomeSpace/E_Prescribing/Views/Surgeon/ListMedication.cshtml]

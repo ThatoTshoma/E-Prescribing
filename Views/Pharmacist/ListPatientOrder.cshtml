@@ -54,7 +54,6 @@
                         <th>Quantity</th>
                         <th>Status</th>
                         <th>IsUrgent</th>
-                        <th>Ignore Reason</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -91,7 +90,7 @@
                         }
                     },
                     {
-                        data: 'medicationOrders', "width": "10%", "render": function (data) {
+                        data: 'medicationOrders', "width": "5%", "render": function (data) {
                             return data.map(order => order.quantity).join('<br>');
                         }
                     },
@@ -101,14 +100,23 @@
                             return data === "Yes" ? `<span class="text-danger">${data}</span>` : data;
                         }
                     },
-                    { data: 'ignoreReason', "width": "20%" },
 
                     {
-                        data: 'orderId', "width": "10%", "render": function (data, type, row) {
+                        data: 'orderId',
+                        "width": "25%",
+                        "render": function (data, type, row) {
+
+                            let buttons = '';
+
                             if (row.status !== "Dispensed" && row.status !== "Rejected" && row.status !== "Received") {
-                                return `<a href="#" class="btn btn-primary mx-1 dispense-medication" data-order-id="${data}"> <i class="bi bi-pencil-square"></i> Dispense</a>`;
+                                buttons += `<a href="#" class="btn btn-primary mx-1 dispense-medication" data-order-id="${data}"> <i class="bi bi-pencil-square"></i> Dispense</a>`;
                             }
-                            return '';
+                            if (row.ignoreReason != "") {
+                                buttons += `<a href="@Url.Action("ListIgnoreReason", "Pharmacist")/${data}" class="btn btn-warning mx-1">
+                                        <i class="bi bi-exclamation-circle-fill"></i> Ignored Reason
+                                    </a>`;
+                            }
+                            return buttons;
                         }
                     }
                 ]

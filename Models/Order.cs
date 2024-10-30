@@ -10,7 +10,6 @@ namespace E_Prescribing.Models
         [Display(Name = "Is Urgent?")]
         public string IsUrgent { get; set; }
         public string Status { get; set; }
-        public string? IgnoreReason { get; set; }
         public Anaesthesiologist Anaesthesiologist { get; set; }
         [Display(Name = "Anaesthesiologist")]
         public int AnaesthesiologistId { get; set; }
@@ -22,6 +21,7 @@ namespace E_Prescribing.Models
         public int? PharmacistId { get; set; }
         public List<MedicationOrder> MedicationOrders { get; set; }
         public List<PrescribedMedication> PrescribedMedications { get; set; }
+        public List<IgnoreOderReason> IgnoreOderReasons { get; set; }
 
 
 

@@ -24,10 +24,7 @@ namespace E_Prescribing.Models
         public string Gender { get; set; }
         [Display(Name= "Date Of Birth")]
         public DateTime DateOfBirth { get;set; }
-        [Display(Name = "Addmission Date")]
-        public DateTime? AdmissionDate { get;set; }
-        [Display(Name = "Discharge Date")]
-        public DateTime? DischargeDate { get;set; }
+
         [Display(Name = "Address Line 1")]
         public string? AddressLine1 { get;set; }
         [Display(Name = "Address Line 2")]

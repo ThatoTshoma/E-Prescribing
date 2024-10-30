@@ -270,8 +270,7 @@ namespace E_Prescribing.Controllers
             patient.AddressLine1 = model.AddressLine1;
             patient.AddressLine2 = model.AddressLine2;
             patient.SuburbId = model.SuburbId;
-            patient.AdmissionDate = DateTime.Now;
-            patient.DischargeDate = null;
+
 
             ViewBag.CityList = new SelectList(_db.Cities.OrderBy(c => c.Name), "CityId", "Name");
             ViewBag.BedList = new SelectList(_db.Beds, "BedId", "BedNumber");
@@ -326,47 +325,7 @@ namespace E_Prescribing.Controllers
 
             return RedirectToAction("ListAdmittedPatient");
         }
-        [HttpGet]
-        public IActionResult AdmitPatient(int? id)
-        {
-            var patient = _db.Patients.Find(id);
-            if (patient == null)
-            {
-                return NotFound();
-            }
-
-
-
-            return View(patient);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AdmitPatient(int id, Patient model)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var nurse = _db.Nurses.SingleOrDefault(c => c.UserId.ToString() == userId);
-            if (id != model.PatientId)
-            {
-                return NotFound();
-            }
-
-
-            var patient = _db.Patients.Find(id);
-            if (patient == null)
-            {
-                return NotFound();
-            }
-
-
-            patient.AdmissionDate = model.AdmissionDate;
-            patient.NurseId = nurse.NurseId;
-
-            _db.Patients.Update(patient);
-            _db.SaveChanges();
-
-            return RedirectToAction("ListPatient");
-        }
+       
         public IActionResult ListAdmittedPatient(string idNumber = null, DateTime? bookingDate = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

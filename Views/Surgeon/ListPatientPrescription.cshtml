@@ -61,7 +61,6 @@
                         <th>Quantity</th>
                         <th>Status</th>
                         <th>Urgent?</th>
-                        <th>Ignore Reason</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -97,19 +96,24 @@
                     { data: 'quantities', "width": "10%", "render": function (data) { return data.replace(/\n/g, '<br>'); } },
                     { data: 'status', "width": "10%" },
                     { data: 'urgent', "width": "10%" },
-                    { data: 'ignoreReason', "width": "20%" },
                     {
                         data: 'prescriptionId',
-                        "render": function (data) {
+                        "render": function (data, type, row) {
+                            let ignoreButton = row.ignoreReason != "" ?
+                                `<a href="@Url.Action("ListIgnoreReason", "Surgeon")/${data}" class="btn btn-warning mx-1">
+                        <i class="bi bi-exclamation-circle-fill"></i> Ignored Reasons</a>` : '';
+
                             return `<div class="btn-group" role="group">
-                                        <a onClick=Delete('@Url.Action("DeletePatientPrescription", "Surgeon")/${data}') class="btn btn-danger mx-1">
-                                            <i class="bi bi-trash-fill"></i> Delete</a>
-                                        <a href="@Url.Action("Prescription", "Surgeon")/${data}" class="btn btn-primary mx-1">
-                                            <i class="bi bi-eye-fill"></i> View</a>
-                                    </div>`;
+                            ${ignoreButton}
+                            <a onClick=Delete('@Url.Action("DeletePatientPrescription", "Surgeon")/${data}') class="btn btn-danger mx-1">
+                                <i class="bi bi-trash-fill"></i> Delete</a>
+                            <a href="@Url.Action("Prescription", "Surgeon")/${data}" class="btn btn-primary mx-1">
+                                <i class="bi bi-eye-fill"></i> View</a>
+                        </div>`;
                         },
                         "width": "20%"
                     }
+
                 ]
             });
         }

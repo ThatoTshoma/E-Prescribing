@@ -23,7 +23,7 @@ namespace E_Prescribing.Models
         public Nurse Nurse { get; set; }
         [Display(Name = "Nurse")]
         public int? NurseId { get; set; }
-        public string? IgnoreReason { get; set; } 
+
 
 
 
@@ -34,6 +34,7 @@ namespace E_Prescribing.Models
         public List<PrescribedMedication> PrescribedMedications { get; set; }
         public List<AdministeredMedication> AdministeredMedications { get; set; }
         public List<RejectedPrescription> RejectedPrescriptions { get; set; }
+        public List<IgnorePrescriptionReason> IgnorePrescriptions { get; set; }
 
 
 

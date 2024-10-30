@@ -4,6 +4,7 @@ using E_Prescribing.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Prescribing.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241029143325_addIgnore")]
+    partial class addIgnore
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -429,38 +432,6 @@ namespace E_Prescribing.Migrations
                     b.ToTable("Hospitals");
                 });
 
-            modelBuilder.Entity("E_Prescribing.Models.IgnoreOderReason", b =>
-                {
-                    b.Property<int>("IgnoreOderReasonId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IgnoreOderReasonId"));
-
-                    b.Property<int?>("AnaesthesiologistId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PharmacistId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IgnoreOderReasonId");
-
-                    b.HasIndex("AnaesthesiologistId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("PharmacistId");
-
-                    b.ToTable("IgnoreOderReasons");
-                });
-
             modelBuilder.Entity("E_Prescribing.Models.IgnorePrescriptionReason", b =>
                 {
                     b.Property<int>("IgnorePrescriptionReasonId")
@@ -717,6 +688,9 @@ namespace E_Prescribing.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("IgnoreReason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IsUrgent")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -781,10 +755,16 @@ namespace E_Prescribing.Migrations
                     b.Property<string>("AddressLine2")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("AdmissionDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ContactNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DischargeDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EmailAddress")
@@ -1082,6 +1062,9 @@ namespace E_Prescribing.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("IgnoreReason")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Note")
                         .IsRequired()
@@ -1662,29 +1645,6 @@ namespace E_Prescribing.Migrations
                     b.Navigation("Suburb");
                 });
 
-            modelBuilder.Entity("E_Prescribing.Models.IgnoreOderReason", b =>
-                {
-                    b.HasOne("E_Prescribing.Models.Anaesthesiologist", "Anaesthesiologist")
-                        .WithMany()
-                        .HasForeignKey("AnaesthesiologistId");
-
-                    b.HasOne("E_Prescribing.Models.Order", "Order")
-                        .WithMany("IgnoreOderReasons")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Prescribing.Models.Pharmacist", "Pharmacist")
-                        .WithMany()
-                        .HasForeignKey("PharmacistId");
-
-                    b.Navigation("Anaesthesiologist");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Pharmacist");
-                });
-
             modelBuilder.Entity("E_Prescribing.Models.IgnorePrescriptionReason", b =>
                 {
                     b.HasOne("E_Prescribing.Models.Pharmacist", "Pharmacist")
@@ -2210,8 +2170,6 @@ namespace E_Prescribing.Migrations
 
             modelBuilder.Entity("E_Prescribing.Models.Order", b =>
                 {
-                    b.Navigation("IgnoreOderReasons");
-
                     b.Navigation("MedicationOrders");
 
                     b.Navigation("PrescribedMedications");

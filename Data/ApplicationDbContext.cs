@@ -61,7 +61,8 @@ namespace E_Prescribing.Data
         public DbSet<RejectedPrescription> RejectedPrescriptions { get;set; }
         public DbSet<Vital>Vitals { get; set; }
         public DbSet<Province> Provinces { get; set; }
-
+        public DbSet<IgnorePrescriptionReason> IgnorePrescriptionsReasons { get; set; }
+        public DbSet<IgnoreOderReason> IgnoreOderReasons { get;set;}
 
     }
 }

@@ -770,21 +770,29 @@ namespace E_Prescribing.Controllers
                 });
             }
 
-            // Save the order
             var order = new Order()
             {
                 AnaesthesiologistId = anaesthesiologist.AnaesthesiologistId,
                 Date = DateTime.Now,
                 IsUrgent = isUrgent,
                 Status = "Ordered",
-                PatientId = patientId,
-                IgnoreReason = reasonForIgnoring
+                PatientId = patientId
             };
 
             await _db.Orders.AddAsync(order);
             await _db.SaveChangesAsync();
 
-            // Save medication orders
+            if (!string.IsNullOrEmpty(reasonForIgnoring))
+            {
+                var ignoreReason = new IgnoreOderReason
+                {
+                    Reason = reasonForIgnoring,
+                    OrderId = order.OrderId,
+                    AnaesthesiologistId = anaesthesiologist?.AnaesthesiologistId
+                };
+                _db.IgnoreOderReasons.Add(ignoreReason);
+            }
+
             foreach (var medicationId in quantities.Keys)
             {
                 var quantity = quantities[medicationId];
@@ -806,7 +814,18 @@ namespace E_Prescribing.Controllers
             return RedirectToAction("ListPatientOrder", new { id = patientId });
         }
 
-
+        public IActionResult ListIgnoreReason(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var anaesthesiologists = _db.Anaesthesiologists.SingleOrDefault(c => c.UserId.ToString() == userId);
+            var order = _db.Orders
+                                   .Include(p => p.IgnoreOderReasons)
+                                   .Include(p => p.Patient)
+                                   .Include(p => p.Anaesthesiologist)
+                                   .Where(p => p.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId && p.OrderId == id)
+                                   .ToList();
+            return View(order);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -979,9 +998,9 @@ namespace E_Prescribing.Controllers
                 .ThenInclude(mo => mo.Medication)
                 .Include(o => o.Anaesthesiologist)
                 .Include(o => o.Patient)
+                .Include(p => p.IgnoreOderReasons)
                 .Where(c => c.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId);
 
-            // Apply date filtering if provided
             if (startDate.HasValue)
             {
                 ordersQuery = ordersQuery.Where(o => o.Date >= startDate.Value);
@@ -1005,7 +1024,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
-                o.IgnoreReason,
+                IgnoreReason = o.IgnoreOderReasons.Select(mp => mp.Reason),
                 o.IsUrgent
             });
 
@@ -1401,6 +1420,7 @@ namespace E_Prescribing.Controllers
                                   .ThenInclude(mo => mo.Medication)
                                   .Include(o => o.Anaesthesiologist)
                                   .Include(o => o.Patient)
+                                  .Include(p => p.IgnoreOderReasons)
                                   .Where(c => c.AnaesthesiologistId == anaesthesiologists.AnaesthesiologistId && c.PatientId == id)
                                   .ToListAsync();
 
@@ -1415,7 +1435,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
-                o.IgnoreReason,
+                IgnoreReason = o.IgnoreOderReasons.Select(mp => mp.Reason),
                 o.IsUrgent
             });
 

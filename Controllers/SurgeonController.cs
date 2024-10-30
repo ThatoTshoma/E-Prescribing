@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 using System.Security.Claims;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace E_Prescribing.Controllers
 {
@@ -464,8 +465,6 @@ namespace E_Prescribing.Controllers
             patient.AddressLine1 = null;
             patient.AddressLine2 = null;
             patient.SuburbId = null;
-            patient.AdmissionDate = null;
-            patient.DischargeDate = null;
 
             _db.Patients.Add(patient);
             TempData["success"] = "Patient added successfully";
@@ -858,7 +857,7 @@ namespace E_Prescribing.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ProcessPrescription(Dictionary<int, int> quantities,int patientId,string isUrgent,string note,Dictionary<int, string> instructions,string reasonForIgnoring = null)
+        public async Task<IActionResult> ProcessPrescription(Dictionary<int, int> quantities, int patientId,string isUrgent, string note,Dictionary<int, string> instructions,string reasonForIgnoring = null)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var surgeon = _db.Surgeons.SingleOrDefault(c => c.UserId.ToString() == userId);
@@ -876,7 +875,6 @@ namespace E_Prescribing.Controllers
             var conflictingAllergens = new List<string>();
             var contraindications = new List<string>();
             var interactionWarnings = new List<string>();
-
             var activeIngredientsInPrescription = new List<int>();
 
             if (quantities != null && quantities.Any())
@@ -887,9 +885,9 @@ namespace E_Prescribing.Controllers
                     if (quantity > 0)
                     {
                         var medication = _db.Medications
-                                   .Where(m => m.MedicationId == medicationId)
-                                   .Select(m => new { m.Name })
-                                   .FirstOrDefault();
+                                            .Where(m => m.MedicationId == medicationId)
+                                            .Select(m => new { m.Name })
+                                            .FirstOrDefault();
 
                         var activeIngredients = _db.MedicationIngredients
                                                    .Where(ma => ma.MedicationId == medicationId)
@@ -900,7 +898,7 @@ namespace E_Prescribing.Controllers
 
                         var medicationAllergenConflicts = activeIngredients
                             .Where(ai => patientAllergies.Contains(ai.ActiveIngredientId))
-                            .Select(ai => $"{ai.Name} ({medication.Name})")  
+                            .Select(ai => $"{ai.Name} ({medication.Name})")
                             .ToList();
 
                         if (medicationAllergenConflicts.Any())
@@ -956,53 +954,13 @@ namespace E_Prescribing.Controllers
                         }
                     }
                 }
-
-
-                var processedInteractions = new HashSet<(int, int)>();
-
-                foreach (var ingredientId1 in activeIngredientsInPrescription)
-                {
-                    foreach (var ingredientId2 in activeIngredientsInPrescription)
-                    {
-                        if (ingredientId1 != ingredientId2)
-                        {
-                            var interactionKey = (Math.Min(ingredientId1, ingredientId2), Math.Max(ingredientId1, ingredientId2));
-
-                            if (!processedInteractions.Contains(interactionKey))
-                            {
-                                var interaction = _db.MedicationInteractions
-                                    .FirstOrDefault(mi =>
-                                        (mi.ActiveIngredient1Id == ingredientId1 && mi.ActiveIngredient2Id == ingredientId2) ||
-                                        (mi.ActiveIngredient1Id == ingredientId2 && mi.ActiveIngredient2Id == ingredientId1));
-
-                                if (interaction != null)
-                                {
-                                    var medication1 = _db.MedicationIngredients
-                                        .Where(mi => mi.ActiveIngredientId == ingredientId1)
-                                        .Select(mi => mi.Medication.Name)
-                                        .FirstOrDefault();
-
-                                    var medication2 = _db.MedicationIngredients
-                                        .Where(mi => mi.ActiveIngredientId == ingredientId2)
-                                        .Select(mi => mi.Medication.Name)
-                                        .FirstOrDefault();
-
-                                    interactionWarnings.Add($"{interaction.Description} ({medication1} and {medication2})");
-
-                                    processedInteractions.Add(interactionKey);
-                                }
-                            }
-                        }
-                    }
-                }
-
             }
 
             if (conflictingAllergens.Any() && string.IsNullOrEmpty(reasonForIgnoring))
             {
                 return Json(new
                 {
-                    errorMessage = $"The prescribed medications contain Active Ingredients the patient is allergic to: {string.Join(", ", conflictingAllergens.Distinct())}"
+                    errorMessage = $"The medications contain active ingredients that the patient is allergic to: {string.Join(", ", conflictingAllergens.Distinct())}"
                 });
             }
 
@@ -1010,7 +968,7 @@ namespace E_Prescribing.Controllers
             {
                 return Json(new
                 {
-                    errorMessage = $"The prescribed medications have Contraindications for the patient’s diagnosed conditions: {string.Join(", ", contraindications.Distinct())}"
+                    errorMessage = $"The medications have contraindications for the patient’s diagnosed conditions: {string.Join(", ", contraindications.Distinct())}"
                 });
             }
 
@@ -1018,7 +976,7 @@ namespace E_Prescribing.Controllers
             {
                 return Json(new
                 {
-                    errorMessage = $"{string.Join("; ", interactionWarnings.Distinct())}"
+                    errorMessage = $"There are medication interactions: {string.Join("; ", interactionWarnings.Distinct())}"
                 });
             }
 
@@ -1030,12 +988,22 @@ namespace E_Prescribing.Controllers
                 Urgent = isUrgent,
                 Status = "Prescribed",
                 Note = note,
-                PatientId = patientId,
-                IgnoreReason = reasonForIgnoring 
+                PatientId = patientId
             };
 
             await _db.Prescriptions.AddAsync(prescription);
             await _db.SaveChangesAsync();
+
+            if (!string.IsNullOrEmpty(reasonForIgnoring))
+            {
+                var ignoreReason = new IgnorePrescriptionReason
+                {
+                    Reason = reasonForIgnoring,
+                    PrescriptionId = prescription.PrescriptionId,
+                    SurgeonId = surgeon?.SurgeonId
+                };
+                _db.IgnorePrescriptionsReasons.Add(ignoreReason);
+            }
 
             foreach (var medicationId in quantities.Keys)
             {
@@ -1049,7 +1017,6 @@ namespace E_Prescribing.Controllers
                         Instructions = instructions.ContainsKey(medicationId) ? instructions[medicationId] : null,
                         Quantity = quantity
                     };
-
                     _db.Add(prescribedMedication);
                 }
             }
@@ -1058,8 +1025,6 @@ namespace E_Prescribing.Controllers
             TempData["success"] = "Prescription added successfully";
             return RedirectToAction("ListPatientPrescription", new { id = patientId });
         }
-
-
 
 
         public IActionResult ViewMedicationHistory(int id)
@@ -1241,28 +1206,75 @@ namespace E_Prescribing.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var surgeon = _db.Surgeons.SingleOrDefault(c => c.UserId.ToString() == userId);
+
             var prescriptions = _db.Prescriptions
                                   .Include(p => p.MedicationPrescriptions)
                                   .ThenInclude(mp => mp.Medication)
                                   .Include(p => p.Patient)
                                   .Include(p => p.Nurse)
                                   .Include(p => p.Pharmacist)
+                                  .Include(p => p.IgnorePrescriptions)  
                                   .Where(p => p.PatientId == id && p.SurgeonId == surgeon.SurgeonId)
                                   .ToList();
 
             var result = prescriptions.Select(p => new
             {
-                Date = p.Date.ToString("dd-MM-yyyy"), 
+                Date = p.Date.ToString("dd-MM-yyyy"),
                 Medications = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Medication.Name)),
                 Quantities = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Quantity.ToString())),
                 p.Status,
                 p.Urgent,
-                p.IgnoreReason,
+                IgnoreReason = p.IgnorePrescriptions.Select(mp => mp.Reason), 
                 p.PrescriptionId
             });
 
             return Json(new { data = result });
         }
+
+        public IActionResult ListIgnoreReason(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var surgeon = _db.Surgeons.SingleOrDefault(c => c.UserId.ToString() == userId);
+            var prescriptions = _db.Prescriptions
+                                   .Include(p => p.IgnorePrescriptions)
+                                   .Include(p => p.Patient)
+                                   .Include(p => p.Surgeon)
+                                   .Where(p => p.SurgeonId == surgeon.SurgeonId &&  p.PrescriptionId == id )
+                                   .ToList();
+            return View(prescriptions);
+        }
+        [HttpGet]
+        public IActionResult GetListIgnoreReason()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var pharmacist = _db.Pharmacists.SingleOrDefault(c => c.UserId.ToString() == userId);
+
+            if (pharmacist == null)
+            {
+                return Json(new { data = new List<object>() });
+            }
+
+            var prescriptions = _db.Prescriptions
+                                  .Include(p => p.IgnorePrescriptions)
+                                  .Include(p => p.Patient)
+                                  .Include(p => p.Surgeon)
+                                  .Where(p => p.PharmacistId == pharmacist.PharmacistId && p.Status == "Prescribed")
+                                  .ToList();
+
+            var result = prescriptions.Select(p => new
+            {
+                Date = p.Date.ToString("dd-MM-yyyy"),
+                Patient = p.Patient?.FullName,
+                IgnoreReason = p.IgnorePrescriptions
+                       .Where(ip => ip.PharmacistId == pharmacist.PharmacistId)
+                       .Select(ip => ip.Reason)
+                       .FirstOrDefault(),
+                p.PrescriptionId
+            });
+
+            return Json(new { data = result });
+        }
+
 
 
 

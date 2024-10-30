@@ -270,6 +270,17 @@ namespace E_Prescribing.Controllers
             ViewBag.PatientId = id;
             return View(prescription);
         }
+        public IActionResult ListIgnoreReasonPrescription(int id)
+        {
+
+            var prescriptions = _db.Prescriptions
+                                   .Include(p => p.IgnorePrescriptions)
+                                   .Include(p => p.Patient)
+                                   .Include(p => p.Surgeon)
+                                   .Where(p => p.PrescriptionId == id)
+                                   .ToList();
+            return View(prescriptions);
+        }
         [HttpGet]
         public IActionResult GetPatientPrescription(int id)
         {
@@ -280,6 +291,7 @@ namespace E_Prescribing.Controllers
                                   .Include(p => p.Patient)
                                   .Include(p => p.Nurse)
                                   .Include(p => p.Pharmacist)
+                                  .Include(p => p.IgnorePrescriptions)
                                   .Where(p => p.PatientId == id)
                                   .ToList();
 
@@ -290,7 +302,7 @@ namespace E_Prescribing.Controllers
                 Quantities = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Quantity.ToString())),
                 p.Status,
                 p.Urgent,
-                p.IgnoreReason,
+                IgnoreReason = p.IgnorePrescriptions.Select(mp => mp.Reason),
                 p.PrescriptionId
             });
 
@@ -475,6 +487,7 @@ namespace E_Prescribing.Controllers
                                   .Include(p => p.Nurse)
                                   .Include(p => p.Pharmacist)
                                   .Include(p => p.Surgeon)
+                                  .Include(p => p.IgnorePrescriptions)
                                   .Where(am => (!startDate.HasValue || am.Date >= startDate.Value)
                                     && (!endDate.HasValue || am.Date <= endDate.Value))
                                    .Select(p => new
@@ -485,7 +498,7 @@ namespace E_Prescribing.Controllers
                                        Quantities = string.Join("\n", p.MedicationPrescriptions.Select(mp => mp.Quantity.ToString())),
                                        p.Status,
                                        p.Urgent,
-                                       p.IgnoreReason,
+                                       IgnoreReason = p.IgnorePrescriptions.Select(mp => mp.Reason),
                                        p.PrescriptionId
                                    });
 
@@ -709,7 +722,19 @@ namespace E_Prescribing.Controllers
 
                     prescription.PharmacistId = pharmacist.PharmacistId;
                     prescription.Status = "Dispensed";
-                    prescription.IgnoreReason = reasonForIgnoring;
+
+
+
+                    if (!string.IsNullOrEmpty(reasonForIgnoring))
+                    {
+                        var ignoreReason = new IgnorePrescriptionReason
+                        {
+                            Reason = reasonForIgnoring,
+                            PrescriptionId = prescription.PrescriptionId,
+                            PharmacistId = pharmacist?.PharmacistId
+                        };
+                        _db.IgnorePrescriptionsReasons.Add(ignoreReason);
+                    }
 
 
                     foreach (var medicationPrescription in prescription.MedicationPrescriptions)
@@ -1319,6 +1344,7 @@ namespace E_Prescribing.Controllers
                                       .ThenInclude(mo => mo.Medication)
                                   .Include(o => o.Anaesthesiologist)
                                   .Include(o => o.Patient)
+                                   .Include(p => p.IgnoreOderReasons)
                                   .ToListAsync();
 
             var result = orders.Select(o => new
@@ -1332,11 +1358,22 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
-                o.IgnoreReason,
+                IgnoreReason = o.IgnoreOderReasons.Select(mp => mp.Reason),
                 o.IsUrgent 
             });
 
             return Json(new { data = result });
+        }
+        public IActionResult ListIgnoreReason(int id)
+        {
+
+            var order = _db.Orders
+                                   .Include(p => p.IgnoreOderReasons)
+                                   .Include(p => p.Patient)
+                                   .Include(p => p.Anaesthesiologist)
+                                   .Where(p =>  p.OrderId == id)
+                                   .ToList();
+            return View(order);
         }
         public async Task<IActionResult> DispenseMedicationOrder(int orderId, string ignoreReason = null)
         {
@@ -1508,7 +1545,17 @@ namespace E_Prescribing.Controllers
 
                     order.PharmacistId = pharmacist.PharmacistId;
                     order.Status = "Dispensed";
-                    order.IgnoreReason = ignoreReason;
+
+                    if (!string.IsNullOrEmpty(ignoreReason))
+                    {
+                        var ignoreReasons = new IgnoreOderReason
+                        {
+                            Reason = ignoreReason,
+                            OrderId = order.OrderId,
+                            PharmacistId = pharmacist?.PharmacistId
+                        };
+                        _db.IgnoreOderReasons.Add(ignoreReasons);
+                    }
 
                     foreach (var medicationOrder in order.MedicationOrders)
                     {
@@ -1619,6 +1666,7 @@ namespace E_Prescribing.Controllers
                                   .ThenInclude(mo => mo.Medication)
                                   .Include(o => o.Anaesthesiologist)
                                   .Include(o => o.Patient)
+                                  .Include(p => p.IgnoreOderReasons)
                                   .Where(c => c.PatientId == id)
                                   .ToListAsync();
 
@@ -1633,7 +1681,7 @@ namespace E_Prescribing.Controllers
                     mo.Quantity
                 }),
                 o.Status,
-                o.IgnoreReason,
+                IgnoreReason = o.IgnoreOderReasons.Select(mp => mp.Reason),
                 o.IsUrgent
             });
 
