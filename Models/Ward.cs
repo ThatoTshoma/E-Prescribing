@@ -12,5 +12,7 @@ namespace E_Prescribing.Models
         [ValidateNever]
         public Hospital Hospital { get; set; }
         public int? HospitalId { get; set; }
+
+        public List<Theatre> Theatres { get; set; }
     }
 }

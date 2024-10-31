@@ -61,16 +61,25 @@ namespace E_Prescribing.Controllers
         }
         public IActionResult MedicationHistoryPage(int id)
         {
+            var booking = _db.Bookings
+                              .Where(b => b.BookingId == id && b.Status == true && b.DischargeDate ==null)
+                              .OrderByDescending(b => b.Date)
+                              .FirstOrDefault();
+
+            ViewBag.WardList = booking != null
+                ? new SelectList(_db.Wards.Where(w => w.Theatres.Any(t => t.TheatreId == booking.TheatreId)).OrderBy(w => w.WardNumber), "WardId", "WardNumber")
+                : new SelectList(_db.Wards.OrderBy(c => c.WardNumber), "WardId", "WardNumber");
+
             ViewBag.MedicationList = new SelectList(_db.Medications.OrderBy(c => c.Name), "MedicationId", "Name");
             ViewBag.ActiveIngredientList = new SelectList(_db.ActiveIngredients.OrderBy(a => a.Name), "IngredientId", "Name");
             ViewBag.ConditionList = new SelectList(_db.ConditionDiagnoses.OrderBy(c => c.Name), "ConditionId", "Name");
-            ViewBag.WardList = new SelectList(_db.Wards.OrderBy(c => c.WardNumber), "WardId", "WardNumber");
 
             var collection = new PatientOnboardingModel
             {
                 PatientAllergy = new PatientAllergy { PatientId = id },
                 PatientMedication = new PatientMedication { PatientId = id },
                 PatientCondition = new PatientCondition { PatientId = id },
+                Booking = new Booking { PatientId = id },
                 Patients = _db.Patients.ToList(),
                 CurrentStep = 1
             };
@@ -81,10 +90,14 @@ namespace E_Prescribing.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult MedicationHistoryPage(PatientOnboardingModel model)
         {
-            var patient = _db.Patients.FirstOrDefault(p => p.PatientId == model.PatientAllergy.PatientId);
-           // var patient = _db.Bookings.FirstOrDefault(p => p.PatientId == model.PatientAllergy.PatientId);
+            var booking = _db.Bookings
+                  .Where(b => b.BookingId == model.PatientAllergy.PatientId && b.Status == true && b.DischargeDate == null)
+                  .OrderByDescending(b => b.Date)
+                  .FirstOrDefault();
+       
 
-            if (patient != null)
+
+            if (booking != null)
             {
                 for (int step = model.CurrentStep; step <= 5; step++)
                 {
@@ -98,7 +111,7 @@ namespace E_Prescribing.Controllers
                                     var patientBed = new PatientBed
                                     {
                                         BedId = selectedBedId,
-                                        PatientId = patient.PatientId
+                                        PatientId = booking.PatientId
                                     };
 
                                     _db.PatientBeds.Add(patientBed);
@@ -114,7 +127,7 @@ namespace E_Prescribing.Controllers
                                     var patientAllergy = new PatientAllergy
                                     {
                                         ActiveIngredientId = selectedActiveIngredientId,
-                                        PatientId = patient.PatientId
+                                        PatientId = booking.PatientId
                                     };
                                     _db.PatientAllergies.Add(patientAllergy);
                                 }
@@ -129,7 +142,7 @@ namespace E_Prescribing.Controllers
                                     var patientMedication = new PatientMedication
                                     {
                                         MedicationId = selectedMedicationId,
-                                        PatientId = patient.PatientId
+                                        PatientId = booking.PatientId
                                     };
                                     _db.PatientMedications.Add(patientMedication);
                                 }
@@ -144,7 +157,7 @@ namespace E_Prescribing.Controllers
                                     var patientCondition = new PatientCondition
                                     {
                                         ConditionId = selectedConditionId,
-                                        PatientId = patient.PatientId
+                                        PatientId = booking.PatientId
                                     };
                                     _db.PatientConditions.Add(patientCondition);
                                 }
@@ -156,8 +169,6 @@ namespace E_Prescribing.Controllers
                             {
                                 var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                                 var nurse = _db.Nurses.SingleOrDefault(c => c.UserId.ToString() == userId);
-
-                                var booking = _db.Bookings.Where(b => b.PatientId == patient.PatientId && b.Status == true).OrderByDescending(b => b.Date).FirstOrDefault(); 
 
                                 if (booking != null)
                                 {
@@ -174,7 +185,7 @@ namespace E_Prescribing.Controllers
                     _db.SaveChanges();
                 }
 
-                return RedirectToAction("PatientDetails", new { id = patient.PatientId });
+                return RedirectToAction("PatientDetails", new { id = booking.PatientId });
             }
             else
             {
@@ -184,8 +195,9 @@ namespace E_Prescribing.Controllers
             ViewBag.MedicationList = new SelectList(_db.Medications.OrderBy(c => c.Name), "MedicationId", "Name");
             ViewBag.ActiveIngredientList = new SelectList(_db.ActiveIngredients.OrderBy(a => a.Name), "IngredientId", "Name");
             ViewBag.ConditionList = new SelectList(_db.ConditionDiagnoses.OrderBy(c => c.Name), "ConditionId", "Name");
-            ViewBag.WardList = new SelectList(_db.Wards.OrderBy(c => c.WardNumber), "WardId", "WardNumber");
-
+            ViewBag.WardList = booking != null
+                ? new SelectList(_db.Wards.Where(w => w.Theatres.Any(t => t.TheatreId == booking.TheatreId)).OrderBy(w => w.WardNumber), "WardId", "WardNumber")
+                : new SelectList(_db.Wards.OrderBy(c => c.WardNumber), "WardId", "WardNumber");
             model.Patients = _db.Patients.ToList();
             return View(model);
         }
@@ -772,92 +784,8 @@ namespace E_Prescribing.Controllers
             var beds = _db.Beds.Where(s => s.WardId == wardId).Select(s => new { bedId = s.BedId, bedNumber = s.BedNumber }).ToList();
             return Json(beds);
         }
-        //public IActionResult MedicationHistoryPage(int id)
-        //{
-        //    ViewBag.WardList = new SelectList(_db.Wards, "WardId", "WardNumber");
 
-        //    var collection = new PatientBedCollection
-        //    {
-        //        PatientBed = new PatientBed { PatientId = id },
-        //        Patients = _db.Patients.ToList(),
-        //    };
-        //    return View(collection);
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult MedicationHistoryPage(PatientBedCollection model)
-        //{
 
-        //    var patient = _db.Patients.FirstOrDefault(p => p.PatientId == model.PatientBed.PatientId);
-
-        //    if (patient != null)
-        //    {
-        //        foreach (var selectedBedId in model.PatientBed.SelectedBeds)
-        //        {
-        //            var patientBed = new PatientBed
-        //            {
-        //                BedId = selectedBedId,
-        //                PatientId = patient.PatientId
-        //            };
-
-        //            _db.PatientBeds.Add(patientBed);
-        //        }
-
-        //        _db.SaveChanges();
-
-        //        return RedirectToAction("ViewChro");
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError(string.Empty, "Selected patient not found.");
-        //    }
-        //    ViewBag.WardList = new SelectList(_db.Wards, "WardId", "WardNumber");
-        //    model.Patients = _db.Patients.ToList();
-        //    return View(model);
-        //}
-        //public IActionResult AssignBed(int id)
-        //{
-        //    ViewBag.WardList = new SelectList(_db.Wards, "WardId", "WardNumber");
-
-        //    var collection = new PatientBedCollection
-        //    {
-        //        PatientBed = new PatientBed { PatientId = id },
-        //        Patients = _db.Patients.ToList(),
-        //    };
-        //    return View(collection);
-        //}
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult AssignBed(PatientBedCollection model)
-        //{
-
-        //    var patient = _db.Patients.FirstOrDefault(p => p.PatientId == model.PatientBed.PatientId);
-
-        //    if (patient != null)
-        //    {
-        //        foreach (var selectedBedId in model.PatientBed.SelectedBeds)
-        //        {
-        //            var patientBed = new PatientBed
-        //            {
-        //                BedId = selectedBedId,
-        //                PatientId = patient.PatientId
-        //            };
-
-        //            _db.PatientBeds.Add(patientBed);
-        //        }
-
-        //        _db.SaveChanges();
-
-        //        return RedirectToAction("ViewChro");
-        //    }
-        //    else
-        //    {
-        //        ModelState.AddModelError(string.Empty, "Selected patient not found.");
-        //    }
-        //    ViewBag.WardList = new SelectList(_db.Wards, "WardId", "WardNumber");
-        //    model.Patients = _db.Patients.ToList();
-        //    return View(model);
-        //}
         public IActionResult ListPatientBed(int id)
         {
             var patientBeds = _db.PatientBeds.Include(pb => pb.Bed)

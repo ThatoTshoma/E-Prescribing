@@ -138,10 +138,11 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Add Medical History</h2>
+                <h2 class="text-white py-2">Admit Patient</h2>
             </div>
         </div>
     </div>
+
     <div class="card-body p-4">
         <div class="row pb-3">
             <div class="col-6">
@@ -170,17 +171,18 @@
 <form id="recruitmentForm" asp-action="MedicationHistoryPage" method="post">
     <input type="hidden" id="currentStep" name="CurrentStep" value="@Model.CurrentStep" />
 
+
     <div class="form-step active" id="step-1">
         <h2>Step 1: Assign Bed</h2>
         <input asp-for="PatientBed.PatientId" type="hidden" />
 
-        <div class="form-control-lg">
-            <label>Ward</label>
+                <div class="form-group">
+                    <label>Ward</label>
             <select for="Ward" asp-items="@ViewBag.WardList" class="form-control" id="Ward">
                 <option disabled selected value="">Select Ward</option>
             </select>
         </div>
-                <div class="form-control-lg">
+                <div class="form-group">
                     <label asp-for="PatientBed.BedId"></label>
             <select asp-for="PatientBed.SelectedBeds" class="form-control" id="Bed">
             </select>
@@ -192,7 +194,7 @@
         <h2>Step 2: Allergies</h2>
         <input asp-for="PatientAllergy.PatientId" type="hidden" />
 
-                <div class="form-control-lg">
+                <div class="form-group">
                     <label asp-for="PatientAllergy.ActiveIngredientId"></label>
             <select asp-for="PatientAllergy.SelectedActiveIngredient" asp-items="@ViewBag.ActiveIngredientList" class="form-control" id="Ingredient" multiple>
             </select>
@@ -204,7 +206,7 @@
         <h2>Step 3: Current Medication</h2>
         <input asp-for="PatientMedication.PatientId" type="hidden" />
 
-                <div class="form-control-lg">
+                <div class="form-group">
                     <label asp-for="PatientMedication.MedicationId"></label>
             <select asp-for="PatientMedication.SelectedMedication" asp-items="@ViewBag.MedicationList" class="form-control" id="Medication" multiple>
             </select>
@@ -216,7 +218,7 @@
         <h2>Step 4: Chronic Condition</h2>
         <input asp-for="PatientCondition.PatientId" type="hidden" />
 
-                <div class="form-control-lg">
+                <div class="form-group">
                     <label asp-for="PatientCondition.ConditionId"></label>
             <select asp-for="PatientCondition.SelectedCondition" asp-items="@ViewBag.ConditionList" class="form-control" id="Condition" multiple>
             </select>
@@ -228,18 +230,16 @@
                 <h2>Step 5: Admit Patient</h2>
                 <input asp-for="Booking.BookingId" type="hidden" />
 
-                <div class="form-control-lg">
+                <div class="form-group">
                     <label asp-for="Booking.AdmissionDate">Admission Date</label>
-                    <input asp-for="Booking.AdmissionDate" type="datetime-local" class="form-control" />
+                    <input asp-for="Booking.AdmissionDate" type="datetime-local" class="form-control" style="width: 50%;" />
                     <span asp-validation-for="Booking.AdmissionDate" class="text-danger"></span>
                 </div>
             </div>
 
 
-
-
-    <div class="form-buttons">
-        <button type="button" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
+            <div class="form-buttons text-center mt-4">
+                <button type="button" class="btn btn-danger" onclick="cancelForm()">Cancel</button>
                 <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
                 <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
